@@ -1,4 +1,4 @@
-# sayurinaja
+# SayurinAja! Mobile App
 
 BBB Intern ASE PROJECT , Aplikasi ini bertujuan untuk memberikan kemudahan bagi para petani dalam berkomunikasi serta bertransaksi dalam skala yang lebih luas
 
