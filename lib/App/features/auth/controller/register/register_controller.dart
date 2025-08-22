@@ -1,0 +1,66 @@
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:sayurinaja/App/features/auth/models/register_request.dart';
+import 'package:sayurinaja/App/core/network/user_service.dart';
+import 'package:sayurinaja/App/features/auth/models/user_response.dart';
+
+class RegisterController extends GetxController {
+  final emailController = TextEditingController();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  final UserService _userService = UserService();
+
+  var isLoading = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    emailController.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
+    super.onClose();
+  }
+
+  void register() async {
+    if (emailController.text.isEmpty ||
+        usernameController.text.isEmpty ||
+        passwordController.text.isEmpty) {
+      Get.snackbar( // ERROR MESSAGE
+        'Error',
+        "Semua field harus diisi",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.8),
+        colorText: Colors.white,
+        duration: Duration(seconds: 2)
+      );
+      return;
+    }
+
+    isLoading.value = true;
+
+    try {
+      final request = RegisterRequest(
+        email: emailController.text.trim(),
+        username: usernameController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      UserResponse response = await _userService.registerAPI(request);
+
+      if (response.status == "success") {
+        Get.snackbar("Sukses", "Akun berhasil dibuat!");
+      } else {
+        Get.snackbar("Gagal", response.status);
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+}
