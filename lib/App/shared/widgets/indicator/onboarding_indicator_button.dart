@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sayurinaja/App/core/theme/colors.dart';
 
 class OnboardingIndicatorButton extends StatelessWidget {
   final String text;
@@ -17,7 +18,7 @@ class OnboardingIndicatorButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF3EA35D),
+        backgroundColor: AppColors.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32),
         ),
@@ -27,7 +28,7 @@ class OnboardingIndicatorButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          color: Colors.white,
+          color: AppColors.white,
           fontSize: textSize.toDouble(),
           fontWeight: FontWeight.bold
         ),

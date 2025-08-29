@@ -5,14 +5,11 @@ import 'package:sayurinaja/App/shared/section/auth/social_auth_section.dart';
 import 'package:sayurinaja/App/features/auth/controller/login/login_controller.dart';
 import 'package:sayurinaja/App/shared/widgets/input/custom_input_auth.dart';
 
-
-class LoginPage extends StatelessWidget {
+class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<LoginController>();
-
     return Scaffold(
       backgroundColor: Colors.grey[200],
       extendBodyBehindAppBar: true,
@@ -68,15 +65,15 @@ class LoginPage extends StatelessWidget {
 
                   // Email
                   CustomInputAuth(
-                      hintText: "Email",
-                      controller: controller.emailController
+                    hintText: "Email",
+                    controller: controller.emailController,
                   ),
                   SizedBox(height: 15.h),
 
                   // Password
                   CustomInputAuth(
-                      hintText: "Kata sandi",
-                      controller: controller.passwordController,
+                    hintText: "Kata sandi",
+                    controller: controller.passwordController,
                     obscureText: true,
                   ),
                   SizedBox(height: 20.h),
@@ -89,9 +86,7 @@ class LoginPage extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: controller.isLoading.value
                             ? null
-                            : () {
-                          controller.login();
-                        },
+                            : () => controller.login(),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                           shape: RoundedRectangleBorder(
@@ -99,7 +94,7 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         child: controller.isLoading.value
-                            ? CircularProgressIndicator(
+                            ? const CircularProgressIndicator(
                           color: Colors.white,
                         )
                             : Text(
@@ -119,7 +114,7 @@ class LoginPage extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {},
-                      child: Text(
+                      child: const Text(
                         "Lupa kata sandi?",
                         style: TextStyle(color: Colors.black),
                       ),
@@ -132,16 +127,18 @@ class LoginPage extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                          child: Divider(color: Colors.grey, thickness: 1)),
+                        child: Divider(color: Colors.grey, thickness: 1),
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.w),
-                        child: Text(
+                        child: const Text(
                           "atau masuk dengan",
                           style: TextStyle(color: Colors.grey),
                         ),
                       ),
                       Expanded(
-                          child: Divider(color: Colors.grey, thickness: 1)),
+                        child: Divider(color: Colors.grey, thickness: 1),
+                      ),
                     ],
                   ),
                   SizedBox(height: 20.h),
@@ -152,7 +149,7 @@ class LoginPage extends StatelessWidget {
                     alignment: Alignment.center,
                     child: TextButton(
                       onPressed: () {},
-                      child: Text(
+                      child: const Text(
                         "Belum mempunyai akun? Daftar!",
                         style: TextStyle(color: Colors.black),
                       ),

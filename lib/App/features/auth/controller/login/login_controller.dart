@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:sayurinaja/App/features/auth/models/login_request.dart';
+import 'package:sayurinaja/App/shared/models/auth/login_request.dart';
 import 'package:sayurinaja/App/core/network/user_service.dart';
-import 'package:sayurinaja/App/features/auth/models/user_response.dart';
+import 'package:sayurinaja/App/shared/models/auth/user_response.dart';
 import 'package:sayurinaja/App/routes/app_pages.dart';
 
 
@@ -29,6 +29,7 @@ class LoginController extends GetxController {
       Get.snackbar(
         'Error',
         'Email dan password harus diisi',
+        icon: Icon(Icons.error_outline),
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red.withOpacity(0.8),
         colorText: Colors.white,

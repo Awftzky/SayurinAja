@@ -1,5 +1,3 @@
-
-
 class UserResponse {
   final String status;
 
