@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:sayurinaja/App/features/auth/models/register_request.dart';
+import 'package:sayurinaja/App/shared/models/auth/register_request.dart';
 import 'package:sayurinaja/App/core/network/user_service.dart';
-import 'package:sayurinaja/App/features/auth/models/user_response.dart';
+import 'package:sayurinaja/App/shared/models/auth/user_response.dart';
 
 class RegisterController extends GetxController {
   final emailController = TextEditingController();
@@ -33,7 +33,8 @@ class RegisterController extends GetxController {
       Get.snackbar( // ERROR MESSAGE
         'Error',
         "Semua field harus diisi",
-        snackPosition: SnackPosition.BOTTOM,
+          icon: Icon(Icons.error_outline),
+          snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red.withOpacity(0.8),
         colorText: Colors.white,
         duration: Duration(seconds: 2)

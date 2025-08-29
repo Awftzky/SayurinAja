@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:sayurinaja/App/features/auth/models/login_request.dart';
-import 'package:sayurinaja/App/features/auth/models/register_request.dart';
-import 'package:sayurinaja/App/features/auth/models/user_response.dart';
+import 'package:sayurinaja/App/shared/models/auth/login_request.dart';
+import 'package:sayurinaja/App/shared/models/auth/register_request.dart';
+import 'package:sayurinaja/App/shared/models/auth/user_response.dart';
 
 class UserService {
   final String baseUrl = "localhost:8000";
 
-  // REGISTER COKK
+  // REGISTER COK
   Future<UserResponse> registerAPI(RegisterRequest request) async {
     try {
       final response = await http.post(

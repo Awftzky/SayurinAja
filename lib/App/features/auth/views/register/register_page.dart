@@ -4,12 +4,11 @@ import 'package:get/get.dart';
 import 'package:sayurinaja/App/features/auth/controller/register/register_controller.dart';
 import 'package:sayurinaja/App/shared/widgets/input/custom_input_auth.dart';
 import 'package:sayurinaja/App/shared/section/auth/social_auth_section.dart';
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends GetView<RegisterController> {
   const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(RegisterController());
 
     return Scaffold(
       backgroundColor: Colors.grey[200],

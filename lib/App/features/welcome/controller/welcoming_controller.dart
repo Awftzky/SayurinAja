@@ -16,18 +16,15 @@ class WelcomingController extends GetxController {
 
   void onPageChanged(int index) {
     currentPageIndex.value = index;
-    debugPrint("Page index changed: $index");
   }
 
   void nextPage() {
-    debugPrint("Current page index: ${currentPageIndex.value}");
     if (currentPageIndex.value < buttonTexts.length - 1) {
       pageController.nextPage(
         duration: const Duration(milliseconds: 400),
         curve: Curves.easeInOut,
       );
     } else {
-      debugPrint("Navigating to Register...");
       Get.offNamed(Routes.AUTHOPTION);
       }
     }

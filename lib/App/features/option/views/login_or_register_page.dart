@@ -58,9 +58,9 @@ class LoginOrRegisterPage extends StatelessWidget {
               height: 50.h,
               child: ElevatedButton(
                   onPressed: () {
-                    Get.toNamed(Routes.HOME);
+                    Get.toNamed(Routes.NAVIGATION);
                   },
-                  child: Text("RUMAH" , )
+                  child: Text("HALAMAN UTAMA" , )
               )
           ),
         ],

@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:sayurinaja/App/routes/app_pages.dart';
+import 'package:sayurinaja/App/shared/widgets/recommendation/recommendation_scrolled_home.dart';
+import 'package:sayurinaja/App/features/recommendation/controllers/recommendation_controller.dart';
+import 'package:sayurinaja/App/features/home/controller/home_controller.dart';
+import 'package:sayurinaja/App/shared/widgets/header/header_feature.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final RecommendationController recController = Get.find<RecommendationController>();
+    final HomeController homeController = Get.find<HomeController>();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      homeController.startTutorial(context);
+    });
+
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: SafeArea(
@@ -13,105 +26,23 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: double.infinity,
-                color: Colors.grey[200],
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Hallo, Aufaa!",
-                                style: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(height: 2.h),
-                              Text(
-                                "Selamat datang di sayurin aja!",
-                                style: TextStyle(
-                                  fontSize: 10.sp,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              SizedBox(height: 21.h),
-                              Row(
-                                children: const [
-                                  Icon(Icons.location_on, color: Colors.red, size: 18),
-                                  SizedBox(width: 4),
-                                  Text(
-                                    "Bandung, Jawa Barat",
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
 
-                        /// TODO : NAVIGASI KE PROFILE NANTI COK
-                        GestureDetector(
-                          onTap: () {},
-                          child: SizedBox(
-                            height: 70.h,
-                            width: 69.w,
-                            child: const CircleAvatar(
-                              backgroundImage: AssetImage("assets/images/diego.png"),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 16),
-
-                    // ✅ Search Bar + Button
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              prefixIcon: const Icon(Icons.search),
-                              hintText: "Cari sayur, buah, daging...",
-                              filled: true,
-                              fillColor: Colors.white,
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-
-                        // TODO: search button cok
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: const EdgeInsets.all(14),
-                          ),
-                          child: const Icon(Icons.arrow_forward),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              /// TODO : UNDER CONSTRUCTION
+              HeaderFeature(
+                username: homeController.username.value,
+                location: homeController.location.value,
+                imagePath: "assets/images/diego.png",
+                onAvatarTap: () {}, /// TODO : PROFILE PAGE
+                showSearchBar: true,
+                searchBarKey: homeController.searchBarKey,
+                searchController: homeController.searchController,
+                onSearchSubmit: () {}, /// TODO : SECARH PAGE
+                usernameKey: homeController.usernameKey,
               ),
 
               const SizedBox(height: 24),
 
+              // ================= REKOMENDASI =================
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
@@ -125,108 +56,47 @@ class HomePage extends StatelessWidget {
                           style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
                         ),
                         TextButton(
-                          onPressed: () {},
-                          child: Text("Lihat semuanya" , style: TextStyle(fontSize: 13.sp),),
+                          onPressed: () {
+                            Get.toNamed(Routes.RECOMMENDATION);
+                          },
+                          child: Text("Lihat semuanya", style: TextStyle(fontSize: 13.sp)),
                         ),
                       ],
                     ),
 
                     const SizedBox(height: 12),
 
-                    // ✅ Produk rekomendasi (scroll horizontal)
-                    SizedBox(
-                      height: 160,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 5,
-                        separatorBuilder: (context, index) => const SizedBox(width: 12),
-                        itemBuilder: (context, index) {
-                          return Container(
-                            width: 140,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(16),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.shopping_basket, size: 60, color: Colors.green),
-                                const SizedBox(height: 8),
-                                const Text("Produk Rekomendasi"),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-
-                    const SizedBox(height: 12),
-
-                    // ✅ Indicator Rekomendasi
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(3, (index) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          width: 10,
-                          height: 10,
-                          decoration: BoxDecoration(
-                            color: index == 0 ? Colors.green : Colors.grey,
-                            shape: BoxShape.circle,
-                          ),
-                        );
-                      }),
+                    RecommendationScrolledHome(
+                      products: recController.recommendationProducts,
                     ),
 
                     const SizedBox(height: 24),
 
-                    // ✅ Banner Kotak Image
-                    Container(
-                      height: 150,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: Colors.green[200],
-                        image: const DecorationImage(
-                          image: AssetImage("assets/banner.png"),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 24),
-
-                    // ✅ Kategori
-                    const Text(
+                    // ================= KATEGORI =================
+                    Text(
                       "Kategori bahan makanan",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        _buildCategory("assets/veggie.png", "Sayuran"),
-                        _buildCategory("assets/fruit.png", "Buah"),
-                        _buildCategory("assets/meat.png", "Daging"),
+                        _buildCategory("assets/veggie.png", "Sayuran", homeController.categoryKey), // ✅ key
+                        _buildCategory("assets/fruit.png", "Buah", null),
+                        _buildCategory("assets/meat.png", "Daging", null),
                       ],
                     ),
 
                     const SizedBox(height: 24),
 
-                    // ✅ Toko Petani
+                    // ================= TOKO PETANI =================
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "Toko Petani",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+                          key: homeController.tokoPetaniKey, // ✅ key
                         ),
                         TextButton(
                           onPressed: () {},
@@ -237,7 +107,6 @@ class HomePage extends StatelessWidget {
 
                     const SizedBox(height: 12),
 
-                    // ✅ Toko Slide Kotak
                     SizedBox(
                       height: 120,
                       child: ListView.separated(
@@ -267,24 +136,6 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 12),
-
-                    // ✅ Indicator Toko
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(3, (index) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          width: 10,
-                          height: 10,
-                          decoration: BoxDecoration(
-                            color: index == 0 ? Colors.green : Colors.grey,
-                            shape: BoxShape.circle,
-                          ),
-                        );
-                      }),
-                    ),
-
                     const SizedBox(height: 80),
                   ],
                 ),
@@ -296,10 +147,11 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  static Widget _buildCategory(String asset, String title) {
+  static Widget _buildCategory(String asset, String title, Key? key) {
     return Column(
       children: [
         CircleAvatar(
+          key: key, // ✅ bisa null kalau bukan target tutorial
           radius: 32,
           backgroundImage: AssetImage(asset),
         ),

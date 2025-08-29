@@ -9,7 +9,7 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
   ]);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => GetMaterialApp(
       title: 'SayurinAja',
       initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
+      getPages: AppPages.routes, // PageView & Binding
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),

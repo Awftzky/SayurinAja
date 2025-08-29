@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnboardingPage1 extends StatefulWidget {
-  static const nameRoute = '/onboardingpage1';
   const OnboardingPage1({super.key});
 
   @override
