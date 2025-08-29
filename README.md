@@ -1,16 +1,42 @@
-# SayurinAja! Mobile App
+# 🌱 SayurinAja! Mobile App
 
-BBB Intern ASE PROJECT , Aplikasi ini bertujuan untuk memberikan kemudahan bagi para petani dalam berkomunikasi serta bertransaksi dalam skala yang lebih luas
+SayurinAja! adalah aplikasi mobile berbasis Flutter yang bertujuan untuk membantu petani terhubung langsung dengan konsumen, menciptakan rantai pasok hasil pertanian yang lebih adil, segar, dan efisien.
 
-## Getting Started
+Dengan aplikasi ini, petani dapat memasarkan produknya secara lebih luas, sementara konsumen bisa mendapatkan sayuran segar dengan harga yang transparan.
 
-This project is a starting point for a Flutter application.
+## ✨ Fitur Utama
 
-A few resources to get you started if this is your first Flutter project:
+👨‍🌾 Profil Petani – Petani dapat membuat dan mengelola profil untuk memperkenalkan diri serta produk yang ditawarkan.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+🥬 Katalog Produk – Daftar hasil pertanian yang bisa dibeli langsung oleh konsumen.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+🔍 Rekomendasi Produk – Rekomendasi sayuran segar berdasarkan preferensi atau tren belanja.
+
+💬 Chat & Transaksi – Mempermudah komunikasi antara petani dan konsumen sebelum melakukan transaksi.
+
+📦 Manajemen Pesanan – Lacak status pesanan mulai dari konfirmasi hingga pengiriman.
+
+## 🚀 Getting Started (Developer Guide)
+Prasyarat
+
+### Pastikan sudah terpasang:
+
+Flutter
+(versi terbaru)
+Dart SDK
+Android Studio / VSCode dengan Flutter plugin
+
+
+### 🛠️ Teknologi yang Digunakan
+
+Flutter
+ – Framework cross-platform
+
+GetX
+ – State management , routing & Dependency Management 
+
+Http
+ – API client
+
+Flutter ScreenUtil
+ – Responsive layout
