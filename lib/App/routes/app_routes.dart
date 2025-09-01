@@ -1,6 +1,5 @@
 part of 'app_pages.dart';
 
-
 abstract class Routes {
   Routes._();
   static const WELCOME = _Paths.welcome;
@@ -11,11 +10,13 @@ abstract class Routes {
   static const RECOMMENDATION = _Paths.recommendation;
   static const NAVIGATION = _Paths.navigation;
   static const CHAT = _Paths.chat;
-
+  static const FIRSTLOADING = _Paths.firstloading;
+  static const WELCOMINGPRESENT = _Paths.welcomingpresent;
 }
 
 abstract class _Paths {
   _Paths._();
+  static const firstloading = '/firstloading';
   static const welcome = '/welcome';
   static const register = '/register';
   static const login = '/login';
@@ -24,5 +25,5 @@ abstract class _Paths {
   static const chat = '/chat';
   static const recommendation = '/recommendation';
   static const navigation = '/navigation';
-
+  static const welcomingpresent = '/welcomingpresent';
 }

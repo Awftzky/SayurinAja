@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:sayurinaja/App/shared/widgets/scaffold/base_scaffold.dart';
+import 'package:sayurinaja/App/features/loading/controller/loading_controller.dart';
 
-class LoadingPage extends StatefulWidget {
+class LoadingPage extends GetView<LoadingController> {
   const LoadingPage({super.key});
 
   @override
-  State<LoadingPage> createState() => _LoadingPageState();
-}
-
-class _LoadingPageState extends State<LoadingPage> {
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-         body: Center(
-           child: Column(
-             children: [
-               SizedBox(
-                 width: 231,
-                 height: 203,
-                 child: Image.asset('assets/images/logo.png'),
-               )
-             ],
-           ),
-         ),
+    return BaseScaffold(
+      useGradient: true,
+      body: Center(
+        child: Obx(() => AnimatedOpacity(
+              opacity: controller.opacity.value,
+              duration: const Duration(seconds: 2),
+              curve: Curves.easeInOut,
+              child: SizedBox(
+                width: 346.w,
+                height: 346.h,
+                child: Image.asset('assets/images/transparentlogo_3.png'),
+              ),
+            )),
       ),
     );
   }
