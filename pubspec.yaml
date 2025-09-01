@@ -1,10 +1,10 @@
 name: sayurinaja
 description: Aplikasi untuk mempermudah petani berkomunikasi dan bertransaksi dalam skala luas.
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.0 <4.0.0'
+  sdk: ">=3.4.0 <4.0.0"
 
 #================== DEPENDENCIES ==================#
 dependencies:
@@ -34,9 +34,26 @@ flutter_launcher_icons:
 flutter:
   uses-material-design: true
 
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Medium.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
+
   assets:
     - assets/images/logo.png
     - assets/images/diego.png
     - assets/images/chili.jpeg
     - assets/images/potato.jpeg
     - assets/images/meat.jpeg
+    - assets/images/logo_2.png
+    - assets/images/logo_3.png
+    - assets/images/transparentlogo.png
+    - assets/images/transparentlogo_2.png
+    - assets/images/transparentlogo_3.png
+    - assets/images/onboarding0_bg.png
+    - assets/images/introduction1_logo.png
+    - assets/images/introduction2_logo.png
+    - assets/images/introduction3_logo.png
+    - assets/images/introduction4_logo.png
