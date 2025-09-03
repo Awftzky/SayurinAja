@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/shared/models/auth/register_request.dart';
 import 'package:sayurinaja/App/core/network/user_service.dart';
 import 'package:sayurinaja/App/shared/models/auth/user_response.dart';
@@ -30,15 +31,15 @@ class RegisterController extends GetxController {
     if (emailController.text.isEmpty ||
         usernameController.text.isEmpty ||
         passwordController.text.isEmpty) {
-      Get.snackbar( // ERROR MESSAGE
-        'Error',
-        "Semua field harus diisi",
+      Get.snackbar(
+          // ERROR MESSAGE
+          'Error',
+          "Semua field harus diisi",
           icon: Icon(Icons.error_outline),
           snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.8),
-        colorText: Colors.white,
-        duration: Duration(seconds: 2)
-      );
+          backgroundColor: Colors.red.withOpacity(0.8),
+          colorText: Colors.white,
+          duration: Duration(seconds: 2));
       return;
     }
 
@@ -54,7 +55,8 @@ class RegisterController extends GetxController {
       UserResponse response = await _userService.registerAPI(request);
 
       if (response.status == "success") {
-        Get.snackbar("Sukses", "Akun berhasil dibuat!");
+        Get.toNamed(
+            Routes.EMAILVERIFICATION); // NAVIGATE TO EMAIL VERIFICATION
       } else {
         Get.snackbar("Gagal", response.status);
       }

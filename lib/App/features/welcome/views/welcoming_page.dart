@@ -5,8 +5,9 @@ import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/shared/widgets/indicator/onboarding_indicator_button.dart';
 import 'package:sayurinaja/App/shared/widgets/scaffold/welcoming_scaffold.dart';
 import 'package:get/get.dart';
+import 'package:sayurinaja/App/features/welcome/controller/welcoming_controller.dart';
 
-class WelcomingPage extends StatelessWidget {
+class WelcomingPage extends GetView<WelcomingController> {
   const WelcomingPage({super.key});
 
   @override

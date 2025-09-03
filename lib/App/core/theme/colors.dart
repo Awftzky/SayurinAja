@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
+  static const Color Black20 = Color(0x33000000); // 20% opacity
   static const Color gray = Color(0xFF808080);
   static const Color lightGray = Color(0xFFD9D9D9);
+  static const Color shadowGrey = Color(0xFFF1F1F1);
 
   // Green App Colors
   static const Color primary = Color(0xFF3EA35D);
@@ -15,7 +17,11 @@ class AppColors {
   // Gradient Colors
   static const Color gradientStart = Color(0xFF225C34);
   static const Color gradientEnd = Color(0xFF153B21);
+
+  // Transparent
+  static const Color transparent = Colors.transparent;
 }
+
 
 class AppGradients {
   static const LinearGradient onboarding = LinearGradient(

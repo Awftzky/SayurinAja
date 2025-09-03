@@ -6,6 +6,7 @@ class NavbarItem extends StatelessWidget {
   final IconData selectedIcon;
   final String label;
   final bool isSelected;
+  final Color selectedIconColor; // ✅ tambahin buat warna icon saat selected
   final Color selectedLabelColor;
   final Color unselectedItemColor;
   final VoidCallback onTap;
@@ -17,6 +18,7 @@ class NavbarItem extends StatelessWidget {
     required this.selectedIcon,
     required this.label,
     required this.isSelected,
+    required this.selectedIconColor, // ✅
     required this.selectedLabelColor,
     required this.unselectedItemColor,
     required this.onTap,
@@ -31,25 +33,22 @@ class NavbarItem extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          // 🔹 ICON dengan kondisi selected / unselected
           AnimatedContainer(
             duration: const Duration(milliseconds: 250),
             width: indicatorSize.w,
             height: indicatorSize.w,
-            decoration: BoxDecoration(
-              color: isSelected
-                  ? Colors.transparent // biar ga ganggu indikator utama
-                  : Colors.transparent,
-              shape: BoxShape.circle,
-            ),
-            child: isSelected
-                ? const SizedBox.shrink() // 🚫 kosong kalau selected
-                : Icon(
-              icon,
-              color: unselectedItemColor,
-              size: 28.w,
+            alignment: Alignment.center,
+            child: Icon(
+              isSelected ? selectedIcon : icon,
+              color: isSelected ? selectedIconColor : unselectedItemColor,
+              size: isSelected ? 28.w : 26.w,
             ),
           ),
+
           SizedBox(height: 4.h),
+
+          // 🔹 LABEL
           AnimatedDefaultTextStyle(
             duration: const Duration(milliseconds: 200),
             style: TextStyle(

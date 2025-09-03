@@ -12,6 +12,13 @@ abstract class Routes {
   static const CHAT = _Paths.chat;
   static const FIRSTLOADING = _Paths.firstloading;
   static const WELCOMINGPRESENT = _Paths.welcomingpresent;
+  static const EMAILVERIFICATION = _Paths.emailverification;
+  static const EMAILVERIFICATIONSUCCESS = _Paths.emailverificationsuccess;
+  static const FORGOTPASSWORDEMAIL = _Paths.forgotpasswordemail;
+  static const FORGOTPASSWORDVERIFICATION = _Paths.forgotpasswordverification;
+  static const FORGOTPASSWORDSETUP = _Paths.forgotpasswordsetup;
+
+
 }
 
 abstract class _Paths {
@@ -26,4 +33,13 @@ abstract class _Paths {
   static const recommendation = '/recommendation';
   static const navigation = '/navigation';
   static const welcomingpresent = '/welcomingpresent';
+  static const emailverification = '/emailverification';
+  static const emailverificationsuccess = '/emailverificationsuccess';
+  static const forgotpasswordemail = '/forgotpasswordemail';
+  static const forgotpasswordverification = '/forgotpasswordverification';
+  static const forgotpasswordsetup = '/forgotpasswordsetup';
+
+
+
+
 }

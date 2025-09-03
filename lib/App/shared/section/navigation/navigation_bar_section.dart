@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sayurinaja/App/core/theme/colors.dart';
 import 'package:sayurinaja/App/features/navigation/controller/navigation_controller.dart';
-import 'package:sayurinaja/App/shared/widgets/navbar/navigation_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sayurinaja/App/shared/widgets/navbar/navigation_bar.dart';
 
 class NavigationBarSection extends StatelessWidget {
   const NavigationBarSection({super.key});
@@ -11,84 +12,148 @@ class NavigationBarSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final NavigationController navController = Get.find();
 
-    final double navBarHeight = 95.h;
-    final double indicatorSize = 48.w;
+    final double navBarHeight = 50.h;
     const Color navBarBackgroundColor = Colors.white;
-    const Color indicatorColor = Colors.green;
-    final Color selectedIconColor = Colors.white;
-    final Color selectedLabelColor = indicatorColor;
+    const Color spotlightColor = Color(0xFF4CAF50);
+    final Color selectedIconColor = AppColors.primary20;
+    final Color selectedLabelColor = spotlightColor;
     final Color unselectedItemColor = Colors.grey;
 
     final screenWidth = MediaQuery.of(context).size.width;
     final itemCount = navController.items.length;
     final itemWidth = screenWidth / itemCount;
 
-    return Obx(() {
-      int selectedIndex = navController.selectedIndex.value;
+    return SafeArea(
+      top: false,
+      child: Obx(() {
+        int selectedIndex = navController.selectedIndex.value;
 
-      return Container(
-        height: navBarHeight + 16.h,
-        color: navBarBackgroundColor,
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 350),
-              curve: Curves.easeInOut,
-              left: (itemWidth * selectedIndex) + (itemWidth - indicatorSize) / 2,
-              bottom: 38.h,
-              child: Container(
-                width: indicatorSize,
-                height: indicatorSize,
-                decoration: BoxDecoration(
-                  color: indicatorColor,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: indicatorColor.withOpacity(0.18),
-                      blurRadius: 10.r,
-                      offset: Offset(0, 4.h),
+        return Container(
+          height: navBarHeight + 16.h,
+          decoration: BoxDecoration(
+            color: navBarBackgroundColor,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, -2),
+              ),
+            ],
+          ),
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              // 🔦 SPOTLIGHT EFFECT
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOutCubic,
+                left: (itemWidth * selectedIndex) + (itemWidth / 2) - 40.w,
+                top: -20.h,
+                child: Container(
+                  width: 80.w,
+                  height: 100.h,
+                  decoration: BoxDecoration(
+                    gradient: RadialGradient(
+                      center: Alignment.topCenter,
+                      radius: 1.5,
+                      colors: [
+                        spotlightColor.withOpacity(0.4),
+                        spotlightColor.withOpacity(0.2),
+                        spotlightColor.withOpacity(0.05),
+                        Colors.transparent,
+                      ],
+                      stops: const [0.0, 0.3, 0.6, 1.0],
                     ),
-                  ],
-                ),
-                child: Center(
-                  child: Icon(
-                    navController.items[selectedIndex].selectedIcon,
-                    color: selectedIconColor,
-                    size: 26.sp,
                   ),
                 ),
               ),
-            ),
 
-
-            // 🔹 item navbar
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: List.generate(itemCount, (index) {
-                final item = navController.items[index];
-                final bool isSelected = selectedIndex == index;
-
-                return Expanded(
-                  child: Center(
-                    child: NavbarItem(
-                      icon: item.icon,
-                      selectedIcon: item.selectedIcon,
-                      label: item.label,
-                      isSelected: isSelected,
-                      selectedLabelColor: selectedLabelColor,
-                      unselectedItemColor: unselectedItemColor,
-                      onTap: () => navController.changePage(index),
-                      indicatorSize: indicatorSize,
-                    ),
+              // 🌟 GLOW EFFECT
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOutCubic,
+                left: (itemWidth * selectedIndex) + (itemWidth / 2) - 30.w,
+                top: 20.h,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: 60.w,
+                  height: 60.w,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: spotlightColor.withOpacity(0.3),
+                        blurRadius: 20.r,
+                        spreadRadius: 5.r,
+                      ),
+                      BoxShadow(
+                        color: spotlightColor.withOpacity(0.2),
+                        blurRadius: 30.r,
+                        spreadRadius: 10.r,
+                      ),
+                    ],
                   ),
-                );
-              }),
-            ),
-          ],
-        ),
-      );
-    });
+                ),
+              ),
+
+              // 🏠 NAVIGATION ITEMS pakai NavbarItem
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: SizedBox(
+                  height: navBarHeight,
+                  child: Row(
+                    children: List.generate(itemCount, (index) {
+                      final item = navController.items[index];
+                      final bool isSelected = selectedIndex == index;
+
+                      return Expanded(
+                        child: NavbarItem(
+                          icon: item.icon,
+                          selectedIcon: item.selectedIcon,
+                          label: item.label,
+                          isSelected: isSelected,
+                          selectedIconColor: selectedIconColor,
+                          selectedLabelColor: selectedLabelColor,
+                          unselectedItemColor: unselectedItemColor,
+                          onTap: () => navController.changePage(index),
+                          indicatorSize: 28, // bisa fleksibel
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+              ),
+
+              // ✨ LIGHT BEAM EFFECT
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOutCubic,
+                left: (itemWidth * selectedIndex) + (itemWidth / 2) - 2.w,
+                top: 0,
+                child: Container(
+                  width: 4.w,
+                  height: 30.h,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        spotlightColor.withOpacity(0.8),
+                        spotlightColor.withOpacity(0.4),
+                        Colors.transparent,
+                      ],
+                      stops: const [0.0, 0.5, 1.0],
+                    ),
+                    borderRadius: BorderRadius.circular(2.r),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      }),
+    );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sayurinaja/App/core/theme/colors.dart';
 
 class HeaderFeature extends StatelessWidget {
   final String username;
@@ -33,7 +34,9 @@ class HeaderFeature extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: Colors.grey[200],
+      decoration: BoxDecoration(
+        gradient: AppGradients.onboarding
+      ),
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,6 +55,7 @@ class HeaderFeature extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
+                        color: AppColors.white
                       ),
                     ),
                     SizedBox(height: 2.h),
@@ -59,18 +63,18 @@ class HeaderFeature extends StatelessWidget {
                       "Selamat datang di sayurin aja!",
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey,
+                        color: AppColors.white,
                       ),
                     ),
-                    SizedBox(height: 21.h),
+                    SizedBox(height: 10.h),
                     Row(
                       children: [
                         const Icon(Icons.location_on,
-                            color: Colors.red, size: 18),
+                            color: AppColors.white, size: 18),
                         const SizedBox(width: 4),
                         Text(
                           location,
-                          style: const TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: 10.sp , color: AppColors.primary),
                         ),
                       ],
                     ),
@@ -93,40 +97,35 @@ class HeaderFeature extends StatelessWidget {
           /// ===== SEARCH BAR =====
           if (showSearchBar) ...[
             SizedBox(height: 20.h),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    key: searchBarKey,
-                    controller: searchController,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search),
-                      hintText: "Cari sayur, buah, daging...",
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 0),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
-                      ),
+            Center( // optional, supaya search bar di tengah
+              child: Container(
+                width: 338.w,
+                height: 32.h,
+                child: TextField(
+                  key: searchBarKey,
+                  controller: searchController,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.search),
+                    hintText: "Cari yang kamu butuhkan di sini ya" ,
+                    hintStyle: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 8.sp,
+                      fontFamily: "Poppins" ,
+                      fontWeight: FontWeight.w300
                     ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: onSearchSubmit,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
+                    filled: true,
+                    fillColor: Colors.white,
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
                     ),
-                    padding: const EdgeInsets.all(14),
                   ),
-                  child: const Icon(Icons.arrow_forward),
                 ),
-              ],
+              ),
             ),
           ],
+
         ],
       ),
     );

@@ -23,13 +23,14 @@ class BaseScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: useGradient ? null : (backgroundColor ?? AppColors.white),
         gradient: useGradient ? AppGradients.onboarding : null,
         image: backgroundImage,
       ),
       child: Scaffold(
-        backgroundColor: Colors.transparent, 
+        backgroundColor: Colors.transparent,
         appBar: appBar,
+        extendBodyBehindAppBar: true,
         floatingActionButton: floatingActionButton,
         body: body,
       ),
