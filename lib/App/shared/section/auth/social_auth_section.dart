@@ -1,30 +1,57 @@
 import 'package:flutter/material.dart';
-import 'package:sayurinaja/App/shared/widgets/button/social_auth_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sayurinaja/App/core/theme/colors.dart'; // pastikan ada AppColors
+
 class SocialAuthSection extends StatelessWidget {
   const SocialAuthSection({super.key});
 
+  Widget _circleButton({
+    required String assetPath,
+    required VoidCallback onPressed,
+  }) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(100),
+      onTap: onPressed,
+      child: Container(
+        width: 53.w,
+        height: 53.h,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          border: Border.all(color: AppColors.shadowGrey),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.Black20,
+              blurRadius: 2.r,
+              offset: const Offset(0, 5),
+            ),
+          ],
+        ),
+        padding: const EdgeInsets.all(10),
+        child: Image.asset(
+          assetPath,
+          fit: BoxFit.contain,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SocialAuthButton(
-          label: "Apple",
-          icon: Icons.apple,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
+        _circleButton(
+          assetPath: "assets/images/google.png",
           onPressed: () {
-            // TODO: handle login with Apple
+            // TODO: Handle login Google
           },
         ),
-        SocialAuthButton(
-          label: "Google",
-          icon: Icons.g_mobiledata,
-          backgroundColor: Colors.white,
-          textColor: Colors.black,
-          borderColor: Colors.grey,
+        const SizedBox(width: 21),
+        _circleButton(
+          assetPath: "assets/images/apple.png",
           onPressed: () {
-            // TODO: handle login with Google
+            // TODO: Handle login Apple
           },
         ),
       ],

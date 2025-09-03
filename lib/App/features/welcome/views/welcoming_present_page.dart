@@ -55,10 +55,10 @@ class WelcomingPresentPage extends GetView<WelcomingController> {
             ),
             child: Column(
               children: [
-                // Area teks - menggunakan Expanded agar fleksibel
+                /// TEXTT
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.all(20.w),
+                    padding: EdgeInsets.all(10.w),
                     child: Obx(() {
                       final index = controller.currentPageIndex.value;
                       return Column(
@@ -90,7 +90,7 @@ class WelcomingPresentPage extends GetView<WelcomingController> {
 
                 // Area button & indicator - posisi tetap di bawah
                 Container(
-                  padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 60.h),
+                  padding: EdgeInsets.fromLTRB(10.w, 0, 10.w, 60.h),
                   child: Column(
                     children: [
                       // Page indicator

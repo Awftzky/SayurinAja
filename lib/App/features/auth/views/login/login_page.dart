@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sayurinaja/App/core/theme/colors.dart';
+import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/shared/section/auth/social_auth_section.dart';
 import 'package:sayurinaja/App/features/auth/controller/login/login_controller.dart';
+import 'package:sayurinaja/App/shared/widgets/button/main_button.dart';
 import 'package:sayurinaja/App/shared/widgets/input/custom_input_auth.dart';
+import 'package:sayurinaja/App/shared/widgets/scaffold/base_scaffold.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[200],
-      extendBodyBehindAppBar: true,
+    return BaseScaffold(
+      useGradient: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 0,
       ),
       body: Stack(
         children: [
@@ -23,12 +25,12 @@ class LoginPage extends GetView<LoginController> {
           Align(
             alignment: Alignment.topCenter,
             child: Padding(
-              padding: EdgeInsets.only(top: 80.h),
+              padding: EdgeInsets.only(top: 10.h),
               child: SizedBox(
-                width: 117.w,
-                height: 105.h,
+                width: 300.w,
+                height: 300.h,
                 child: Image.asset(
-                  'assets/images/logo.png',
+                  'assets/images/transparentlogo_2.png',
                   fit: BoxFit.contain,
                 ),
               ),
@@ -53,107 +55,126 @@ class LoginPage extends GetView<LoginController> {
                 children: [
                   SizedBox(height: 20.h),
                   Text(
-                    "Masuk ke akun anda",
+                    "Selamat datang kembali!",
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: AppColors.primary,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 25.h),
+                  SizedBox(height: 15.h),
+
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      "Senang melihatmu lagi. Yuk, lanjutkan berburu yang segar segar.",
+                      style: TextStyle(fontSize: 13, color: AppColors.black),
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
 
                   // Email
                   CustomInputAuth(
-                    hintText: "Email",
+                    labelText: "Email",
                     controller: controller.emailController,
+                    width: 298,
+                    height: 66,
                   ),
                   SizedBox(height: 15.h),
 
                   // Password
                   CustomInputAuth(
-                    hintText: "Kata sandi",
+                    labelText: "Kata sandi",
                     controller: controller.passwordController,
                     obscureText: true,
+                    width: 298,
+                    height: 66,
+                  ),
+                  SizedBox(height: 5.h),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 30.w),
+                      child: GestureDetector(
+                        onTap: () => Get.toNamed(Routes.FORGOTPASSWORDEMAIL),
+                        /// ROUTE FORGET PASSWORD
+                        child: Text(
+                          "Lupa kata sandi?",
+                          style: TextStyle(
+                              fontSize: 10.sp, color: AppColors.primary),
+                        ),
+                      ),
+                    ),
                   ),
                   SizedBox(height: 20.h),
 
                   // Button Masuk
-                  Obx(
-                        () => SizedBox(
-                      width: double.infinity,
-                      height: 50.h,
-                      child: ElevatedButton(
-                        onPressed: controller.isLoading.value
-                            ? null
-                            : () => controller.login(),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.r),
-                          ),
-                        ),
-                        child: controller.isLoading.value
-                            ? const CircularProgressIndicator(
-                          color: Colors.white,
-                        )
-                            : Text(
-                          "Masuk",
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  Obx(() => MainButton(
+                        text: "Masuk",
+                        width: 208,
+                        height: 42,
+                        isLoading: controller.isLoading.value,
+                        onPressed: () =>
+                            Get.toNamed(Routes.NAVIGATION), // API INTEGRATION
+                      )),
 
-                  SizedBox(height: 10.h),
-
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "Lupa kata sandi?",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 25.h),
 
                   // Divider
                   Row(
                     children: [
                       Expanded(
-                        child: Divider(color: Colors.grey, thickness: 1),
+                        child: Divider(color: AppColors.black, thickness: 0.5),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.w),
                         child: const Text(
-                          "atau masuk dengan",
-                          style: TextStyle(color: Colors.grey),
+                          "Atau masuk dengan",
+                          style: TextStyle(
+                            color: AppColors.black,
+                            fontSize: 13,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
                       ),
                       Expanded(
-                        child: Divider(color: Colors.grey, thickness: 1),
+                        child: Divider(color: AppColors.black, thickness: 0.5),
                       ),
                     ],
                   ),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 12.h),
 
                   const SocialAuthSection(),
 
-                  Align(
-                    alignment: Alignment.center,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "Belum mempunyai akun? Daftar!",
-                        style: TextStyle(color: Colors.black),
+                  SizedBox(height: 31.h),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Belum mempunyai akun?",
+                        style:
+                            TextStyle(color: AppColors.black, fontSize: 13.sp),
                       ),
-                    ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.offAllNamed(Routes.REGISTER); // PAGE BELUM ADA
+                        },
+                        child: Text(
+                          "Masuk",
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: Colors.green,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

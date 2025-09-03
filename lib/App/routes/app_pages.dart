@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:sayurinaja/App/features/auth/bindings/verification/email_verification_binding.dart';
+import 'package:sayurinaja/App/features/auth/views/verification/email_verification_page.dart';
 import 'package:sayurinaja/App/features/loading/binding/loading_binding.dart';
 import 'package:sayurinaja/App/features/loading/views/loading_page.dart';
 import 'package:sayurinaja/App/features/welcome/views/welcoming_present_page.dart';
@@ -17,6 +19,12 @@ import 'package:sayurinaja/App/features/home/bindings/home_binding.dart';
 import 'package:sayurinaja/App/features/recommendation/bindings/recommendation_binding.dart';
 import 'package:sayurinaja/App/features/chat/binding/chat_binding.dart';
 import 'package:sayurinaja/App/features/chat/views/chat_page.dart';
+import 'package:sayurinaja/App/features/auth/views/verification/email_verification_success_page.dart';
+import 'package:sayurinaja/App/features/auth/views/forgot/forgot_password_email_page.dart';
+import 'package:sayurinaja/App/features/auth/bindings/forgot/forgot_password_binding.dart';
+import 'package:sayurinaja/App/features/auth/views/forgot/forgot_password_verification_page.dart';
+import 'package:sayurinaja/App/features/auth/views/forgot/forgot_password_setup_page.dart';
+
 
 part 'app_routes.dart';
 
@@ -66,7 +74,7 @@ class AppPages {
     GetPage(
         name: _Paths.welcomingpresent,
         page: () => const WelcomingPresentPage(),
-        // binding: LoadingBinding(),
+        binding: WelcomingBinding(),
         transition: Transition.fade,
         transitionDuration: Duration(milliseconds: 300)),
 
@@ -78,9 +86,44 @@ class AppPages {
         transitionDuration: Duration(milliseconds: 350)),
 
     GetPage(
+        name: _Paths.emailverification,
+        page: () => const EmailVerificationPage(),
+        binding: EmailVerificationBinding(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 300)),
+
+    GetPage(
+        name: _Paths.emailverificationsuccess,
+        page: () => const EmailVerificationSuccessPage(),
+        // binding: EmailVerificationBinding(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 300)),
+
+    GetPage(
         name: _Paths.login,
         page: () => const LoginPage(),
         binding: LoginBinding(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 350)),
+
+    GetPage(
+        name: _Paths.forgotpasswordemail,
+        page: () => const ForgotPasswordEmailPage(),
+        binding: ForgotPasswordBinding(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 350)),
+
+    GetPage(
+        name: _Paths.forgotpasswordverification,
+        page: () => const ForgotPasswordVerificationPage(),
+        binding: ForgotPasswordBinding(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 350)),
+
+    GetPage(
+        name: _Paths.forgotpasswordsetup,
+        page: () => const ForgotPasswordSetupPage(),
+        binding: ForgotPasswordBinding(),
         transition: Transition.fade,
         transitionDuration: Duration(milliseconds: 350)),
 
