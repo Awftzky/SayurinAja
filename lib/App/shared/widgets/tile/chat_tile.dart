@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChatTile extends StatelessWidget {
   final String username;
@@ -25,26 +26,25 @@ class ChatTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         child: Row(
           children: [
             Stack(
               children: [
                 CircleAvatar(
-                  radius: 28,
+                  radius: 28.r,
                   backgroundColor: Colors.grey[300],
-                  backgroundImage: avatarUrl != null
-                      ? NetworkImage(avatarUrl!)
-                      : null,
+                  backgroundImage:
+                      avatarUrl != null ? NetworkImage(avatarUrl!) : null,
                   child: avatarUrl == null
                       ? Text(
-                    username.isNotEmpty ? username[0].toUpperCase() : '?',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  )
+                          username.isNotEmpty ? username[0].toUpperCase() : '?',
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        )
                       : null,
                 ),
                 if (isOnline)
@@ -52,21 +52,21 @@ class ChatTile extends StatelessWidget {
                     bottom: 0,
                     right: 0,
                     child: Container(
-                      width: 16,
-                      height: 16,
+                      width: 16.w,
+                      height: 16.h,
                       decoration: BoxDecoration(
                         color: Colors.green,
                         shape: BoxShape.circle,
                         border: Border.all(
                           color: Theme.of(context).scaffoldBackgroundColor,
-                          width: 2,
+                          width: 2.w,
                         ),
                       ),
                     ),
                   ),
               ],
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12.w),
 
             // Info chat
             Expanded(
@@ -95,7 +95,7 @@ class ChatTile extends StatelessWidget {
                       Text(
                         time,
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           color: unreadCount > 0
                               ? Theme.of(context).primaryColor
                               : Colors.grey[600],
@@ -106,7 +106,7 @@ class ChatTile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4.h),
                   Row(
                     children: [
                       // Pesan terakhir
@@ -114,7 +114,7 @@ class ChatTile extends StatelessWidget {
                         child: Text(
                           lastMessage,
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             color: unreadCount > 0
                                 ? Colors.black87
                                 : Colors.grey[600],
@@ -129,20 +129,20 @@ class ChatTile extends StatelessWidget {
                       // Badge unread count
                       if (unreadCount > 0)
                         Container(
-                          margin: const EdgeInsets.only(left: 8),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
+                          margin: EdgeInsets.only(left: 8.w),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8.w,
+                            vertical: 4.h,
                           ),
                           decoration: BoxDecoration(
                             color: Theme.of(context).primaryColor,
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12.r),
                           ),
                           child: Text(
                             unreadCount > 99 ? '99+' : unreadCount.toString(),
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

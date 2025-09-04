@@ -8,7 +8,6 @@ import 'package:sayurinaja/App/shared/widgets/button/main_button.dart';
 import 'package:sayurinaja/App/shared/section/auth/verification_email_section.dart';
 import 'package:sayurinaja/App/routes/app_pages.dart';
 
-
 class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
   const ForgotPasswordVerificationPage({super.key});
 
@@ -16,7 +15,9 @@ class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
   Widget build(BuildContext context) {
     return BaseScaffold(
         useGradient: false,
-        appBar: AppBar(backgroundColor: AppColors.transparent,),
+        appBar: AppBar(
+          backgroundColor: AppColors.transparent,
+        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -24,11 +25,11 @@ class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
             SizedBox(
               width: 179.w,
               height: 176.h,
-              child: Image.asset(""), /// IMAGE
+              child: Image.asset("assets/images/forgoticon2.png"),
+
+              /// IMAGE
             ),
             SizedBox(height: 44.h),
-
-
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -41,10 +42,11 @@ class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
                       color: AppColors.primary,
                     ),
                   ),
-                  SizedBox(height: 17.h,),
-
+                  SizedBox(
+                    height: 17.h,
+                  ),
                   Padding(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      padding: EdgeInsets.fromLTRB(20.r, 0, 20.r, 0),
                       child: Text(
                         "Kami telah mengirimkan 6 digit kode melalui email ke ..@gmail.com",
                         textAlign: TextAlign.center,
@@ -52,22 +54,20 @@ class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
                           fontSize: 13.sp,
                           color: AppColors.black,
                         ),
-                      )
+                      )),
+                  SizedBox(
+                    height: 23.h,
                   ),
-                  SizedBox(height: 23.h,),
-
                   VerificationEmailSection(
-                      length: 6,
-                    boxHeight: 46,
-                    boxWidth: 46,
-                    spacing: 10,
+                    length: 6,
+                    boxHeight: 46.h,
+                    boxWidth: 46.w,
+                    spacing: 10.r,
                   ),
-
                   SizedBox(height: 14.h),
-
                   Text("Tidak menerima kode?",
                       style:
-                      TextStyle(fontSize: 13.sp, color: AppColors.black)),
+                          TextStyle(fontSize: 13.sp, color: AppColors.black)),
                   SizedBox(height: 5.h),
                   GestureDetector(
                     onTap: () {
@@ -76,24 +76,23 @@ class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
                     child: Text(
                       "Kirim ulang kode",
                       style:
-                      TextStyle(fontSize: 13.sp, color: AppColors.primary),
+                          TextStyle(fontSize: 13.sp, color: AppColors.primary),
                     ),
                   ),
                   SizedBox(height: 23.h),
-
                   MainButton(
                     text: "Verifikasi",
                     onPressed: () {
-                      Get.offAllNamed(Routes.FORGOTPASSWORDSETUP);// API INTEGRATION
+                      Get.offAllNamed(
+                          Routes.FORGOTPASSWORDSETUP); // API INTEGRATION
                     },
-                    width: 255,
-                    height: 46,
+                    width: 255.w,
+                    height: 46.h,
                   ),
                 ],
               ),
             )
           ],
-        )
-    );
+        ));
   }
 }

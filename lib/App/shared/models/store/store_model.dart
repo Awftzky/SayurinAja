@@ -1,11 +1,11 @@
 
-class FarmerStoreModel { /// ADAPTED VARIABEL
+class StoreModel { /// ADAPTED VARIABEL
   final String imagePath;
   final String storeName;
   final String storeLocation;
   final String starReview;
 
-  FarmerStoreModel(
+  StoreModel(
       this.imagePath,
       this.storeName,
       this.storeLocation,

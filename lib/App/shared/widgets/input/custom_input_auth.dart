@@ -53,7 +53,7 @@ class _CustomInputAuthState extends State<CustomInputAuth> {
         boxShadow: [
           BoxShadow(
             color: AppColors.shadowGrey,
-            blurRadius: 7.5,
+            blurRadius: 7.5.r,
             offset: const Offset(0, 1),
           ),
         ],
@@ -82,11 +82,12 @@ class _CustomInputAuthState extends State<CustomInputAuth> {
           /// ICONN SHOW PASSWORD
           suffixIcon: widget.obscureText && _focusNode.hasFocus
               ? Padding(
-                  padding: const EdgeInsets.only(right: 5),
+                  padding: EdgeInsets.only(right: 5.r),
                   child: IconButton(
                     icon: Icon(
                       _obscure ? Icons.visibility_off : Icons.visibility,
                       color: AppColors.black,
+                      size: 24.r,
                     ),
                     onPressed: () {
                       setState(() {

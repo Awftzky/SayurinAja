@@ -7,7 +7,6 @@ abstract class Routes {
   static const AUTHOPTION = _Paths.authOption;
   static const LOGIN = _Paths.login;
   static const HOME = _Paths.home;
-  static const RECOMMENDATION = _Paths.recommendation;
   static const NAVIGATION = _Paths.navigation;
   static const CHAT = _Paths.chat;
   static const FIRSTLOADING = _Paths.firstloading;
@@ -30,7 +29,6 @@ abstract class _Paths {
   static const authOption = '/login_or_register';
   static const home = '/home';
   static const chat = '/chat';
-  static const recommendation = '/recommendation';
   static const navigation = '/navigation';
   static const welcomingpresent = '/welcomingpresent';
   static const emailverification = '/emailverification';

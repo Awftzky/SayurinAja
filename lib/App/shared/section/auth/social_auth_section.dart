@@ -21,7 +21,7 @@ class SocialAuthSection extends StatelessWidget {
           border: Border.all(color: AppColors.shadowGrey),
           boxShadow: [
             BoxShadow(
-              color: AppColors.Black20,
+              color: AppColors.black20,
               blurRadius: 2.r,
               offset: const Offset(0, 5),
             ),
