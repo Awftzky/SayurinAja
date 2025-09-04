@@ -12,11 +12,9 @@ import 'package:sayurinaja/App/features/option/views/login_or_register_page.dart
 import '../features/auth/views/login/login_page.dart';
 import 'package:sayurinaja/App/features/auth/bindings/login/login_binding.dart';
 import 'package:sayurinaja/App/features/home/views/home_page.dart';
-import 'package:sayurinaja/App/features/recommendation/views/recommendation_page.dart';
 import 'package:sayurinaja/App/features/navigation/views/navigation_page.dart';
 import 'package:sayurinaja/App/features/navigation/bindings/navigation_binding.dart';
 import 'package:sayurinaja/App/features/home/bindings/home_binding.dart';
-import 'package:sayurinaja/App/features/recommendation/bindings/recommendation_binding.dart';
 import 'package:sayurinaja/App/features/chat/binding/chat_binding.dart';
 import 'package:sayurinaja/App/features/chat/views/chat_page.dart';
 import 'package:sayurinaja/App/features/auth/views/verification/email_verification_success_page.dart';
@@ -24,7 +22,7 @@ import 'package:sayurinaja/App/features/auth/views/forgot/forgot_password_email_
 import 'package:sayurinaja/App/features/auth/bindings/forgot/forgot_password_binding.dart';
 import 'package:sayurinaja/App/features/auth/views/forgot/forgot_password_verification_page.dart';
 import 'package:sayurinaja/App/features/auth/views/forgot/forgot_password_setup_page.dart';
-
+import 'package:sayurinaja/App/features/store/binding/store_binding.dart';
 
 part 'app_routes.dart';
 
@@ -47,7 +45,8 @@ class AppPages {
               page: () => const HomePage(),
               bindings: [
                 HomeBinding(),
-                RecommendationBinding(),
+                StoreBinding(),
+                /// ADD BINDING LAIN JIKA INGIN MENAMPILKAN PRODUCT
               ],
               transition: Transition.fade,
               transitionDuration: Duration(milliseconds: 350)),
@@ -132,13 +131,6 @@ class AppPages {
         page: () => const LoginOrRegisterPage(),
         // binding: ,
         transition: Transition.fade,
-        transitionDuration: Duration(milliseconds: 350)),
-
-    GetPage(
-        name: _Paths.recommendation,
-        page: () => const RecommendationPage(),
-        binding: RecommendationBinding(),
-        transition: Transition.rightToLeftWithFade,
         transitionDuration: Duration(milliseconds: 350)),
 
     /// NOTE FIRST LOADING!

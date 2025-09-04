@@ -23,7 +23,7 @@ class BaseScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: useGradient ? null : (backgroundColor ?? AppColors.white),
+        color: useGradient ? null : (backgroundColor ?? AppColors.shadowGrey),
         gradient: useGradient ? AppGradients.onboarding : null,
         image: backgroundImage,
       ),

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sayurinaja/App/core/theme/colors.dart';
+import 'package:sayurinaja/App/shared/section/auth/verification_email_section.dart';
 import 'package:sayurinaja/App/shared/widgets/button/main_button.dart';
 import 'package:sayurinaja/App/shared/widgets/scaffold/base_scaffold.dart';
 import 'package:sayurinaja/App/routes/app_pages.dart';
 
-class EmailVerificationSuccessPage extends StatelessWidget {
-  const EmailVerificationSuccessPage({super.key});
+class EmailVerificationPage extends StatelessWidget {
+  const EmailVerificationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,8 @@ class EmailVerificationSuccessPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: 106.h),
-
+          SizedBox(height: 106.h), // jarak dari atas layar
+          // 🔹 Gambar di atas
           SizedBox(
             width: 91.w,
             height: 91.h,
@@ -45,36 +46,48 @@ class EmailVerificationSuccessPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Pendaftaran Berhasil! Selamat datang di SayurinAja!, ...",
+                    "Masukkan Kode Verifikasi",
                     style: TextStyle(
-                        fontSize: 13.sp,
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.bold),
-
-                    /// TUNGGU WARNA
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 31.h),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    child: SizedBox(
-                      width: 159.w,
-                      height: 139.h,
-                      child: Image.asset(
-                        "assets/images/logo.png",
-                        fit: BoxFit.contain,
-                      ),
-
-                      /// TODO : IMAGE AKAN DIGANTI
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primary,
                     ),
                   ),
-                  SizedBox(height: 50.h),
+                  SizedBox(height: 20.h),
+                  Text(
+                    "Kami telah mengirimkan 4 digit kode ke email anda",
+                    style: TextStyle(fontSize: 13.sp, color: AppColors.black),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 20.h),
+
+                  // 🔹 Input 6 digit
+                  VerificationEmailSection(length: 4),
+
+                  SizedBox(height: 20.h),
+
+                  Text("Tidak menerima kode?",
+                      style:
+                          TextStyle(fontSize: 13.sp, color: AppColors.black)),
+                  SizedBox(height: 5.h),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      "Kirim ulang kode",
+                      style:
+                          TextStyle(fontSize: 13.sp, color: AppColors.primary),
+                    ),
+                  ),
+
+                  SizedBox(height: 40.h),
+
                   MainButton(
-                    text: "Ke halaman masuk",
-                    width: 257.w,
-                    height: 42.h,
+                    text: "Verifikasi",
+                    width: 208.w,
+                    height: 38.h,
                     onPressed: () {
-                      Get.offAllNamed(Routes.LOGIN);
+                      Get.offAllNamed(
+                          Routes.EMAILVERIFICATIONSUCCESS); // CHECK DATA
                     },
                   ),
                 ],
