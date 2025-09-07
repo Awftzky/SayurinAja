@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sayurinaja/App/core/storage/local_storage.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]); // APP HANYA BISA POTRET
+  await LocalStorage().initPrefs(); // Inisialisasi Storage
   runApp(const MyApp());
 }
 

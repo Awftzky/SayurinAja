@@ -7,24 +7,21 @@ class StoreController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-   loadStoreData();
+    loadStoreData();
   }
 
   void loadStoreData() {
     allStore.value = [
-      StoreModel(
-          "",
-          "Toko Angga Jaya!",
-          "Bandung , Jawa barat",
-          "5.0 (1 Review)" /// STAR
-      ),
+      StoreModel("assets/images/farmstore1.jpeg", "Toko Angga Jaya!",
+          "Bandung , Jawa barat", "5.0 (1 Review)"
 
-      StoreModel(
-          "",
-          "Toko Maxim Jaya",
-          "Bandung , Jawa barat",
-          "5.0 (1 Review)"), /// STAR
+          /// STAR
+          ),
+
+      StoreModel("assets/images/farmstore2.jpeg", "Toko Maxim Jaya",
+          "Bandung , Jawa barat", "5.0 (1 Review)"),
+
+      /// STAR
     ];
   }
 }
-

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// TODO: JANGAN LUPA DI IMPLEMENTASI SAAT ADA FINAL DESIGN
 class AppColors {
   // Basic Colors
   static const Color white = Color(0xFFFFFFFF);
@@ -9,6 +8,7 @@ class AppColors {
   static const Color gray = Color(0xFF808080);
   static const Color lightGray = Color(0xFFD9D9D9);
   static const Color shadowGrey = Color(0xFFF1F1F1); // very light gray
+  static const Color darkGray = Color(0xFF434343); // Dark
   // Green App Colors
   static const Color primary = Color(0xFF3EA35D);
   static const Color primary20 = Color(0x333EA35D); // 20% opacity

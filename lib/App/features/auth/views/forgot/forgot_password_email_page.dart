@@ -14,11 +14,16 @@ class ForgotPasswordEmailPage extends GetView<ForgotPasswordController> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-        useGradient: false,
-        appBar: AppBar(
-          backgroundColor: AppColors.transparent,
+      useGradient: false,
+      appBar: AppBar(
+        backgroundColor: AppColors.transparent,
+      ),
+      body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom + 20.h,
         ),
-        body: Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(height: 123.h),
@@ -40,43 +45,40 @@ class ForgotPasswordEmailPage extends GetView<ForgotPasswordController> {
                       color: AppColors.primary,
                     ),
                   ),
-                  SizedBox(
-                    height: 17.h,
-                  ),
+                  SizedBox(height: 17.h),
                   Padding(
-                      padding: EdgeInsets.fromLTRB(20.r, 0, 20.r, 0),
-                      child: Text(
-                        "Tidak masalah. Masukkan email Anda yang terdaftar, kami akan kirimkan kode verifikasi untuk mengatur ulang password Anda.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 13.sp,
-                          color: AppColors.black,
-                        ),
-                      )),
-                  SizedBox(
-                    height: 27.h,
+                    padding: EdgeInsets.fromLTRB(20.r, 0, 20.r, 0),
+                    child: Text(
+                      "Tidak masalah. Masukkan email Anda yang terdaftar, kami akan kirimkan kode verifikasi untuk mengatur ulang password Anda.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        color: AppColors.black,
+                      ),
+                    ),
                   ),
+                  SizedBox(height: 27.h),
                   CustomInputAuth(
-                      width: 278.w,
-                      height: 46.h,
-                      labelText: "Email",
-                      controller: controller.emailController),
-                  SizedBox(
-                    height: 31.h,
+                    width: 278.w,
+                    height: 46.h,
+                    labelText: "Email",
+                    controller: controller.emailController,
                   ),
+                  SizedBox(height: 31.h),
                   MainButton(
                     text: "Kirim kode verifikasi",
                     onPressed: () {
-                      Get.toNamed(
-                          Routes.FORGOTPASSWORDVERIFICATION); // API INTEGRATION
+                      Get.toNamed(Routes.FORGOTPASSWORDVERIFICATION);
                     },
                     width: 294.w,
                     height: 46.h,
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

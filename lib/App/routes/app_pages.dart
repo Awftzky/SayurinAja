@@ -3,6 +3,7 @@ import 'package:sayurinaja/App/features/auth/bindings/verification/email_verific
 import 'package:sayurinaja/App/features/auth/views/verification/email_verification_page.dart';
 import 'package:sayurinaja/App/features/loading/binding/loading_binding.dart';
 import 'package:sayurinaja/App/features/loading/views/loading_page.dart';
+import 'package:sayurinaja/App/features/store/view/allstore_page.dart';
 import 'package:sayurinaja/App/features/welcome/views/welcoming_present_page.dart';
 import '../features/welcome/views/welcoming_page.dart';
 import 'package:sayurinaja/App/features/welcome/bindings/welcome_binding.dart';
@@ -46,6 +47,7 @@ class AppPages {
               bindings: [
                 HomeBinding(),
                 StoreBinding(),
+
                 /// ADD BINDING LAIN JIKA INGIN MENAMPILKAN PRODUCT
               ],
               transition: Transition.fade,
@@ -63,6 +65,8 @@ class AppPages {
           // SETTINGS
         ]),
 
+    /// WELCOMING PAGESS
+
     GetPage(
         name: _Paths.welcome,
         page: () => const WelcomingPage(),
@@ -76,6 +80,8 @@ class AppPages {
         binding: WelcomingBinding(),
         transition: Transition.fade,
         transitionDuration: Duration(milliseconds: 300)),
+
+    /// AUTHENTICATOR PAGES
 
     GetPage(
         name: _Paths.register,
@@ -138,6 +144,15 @@ class AppPages {
         name: _Paths.firstloading,
         page: () => const LoadingPage(),
         binding: LoadingBinding(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 300)),
+
+    /// HOME FEATURE PAGES
+
+    GetPage(
+        name: _Paths.allstore,
+        page: () => const AllStorePage(),
+        binding: StoreBinding(),
         transition: Transition.fade,
         transitionDuration: Duration(milliseconds: 300)),
   ];

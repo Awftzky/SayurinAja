@@ -1,11 +1,12 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:sayurinaja/App/core/storage/local_storage.dart';
 import 'package:sayurinaja/App/shared/animation/tutorial/tutorial_service.dart';
 import 'package:sayurinaja/App/shared/models/caterogy/offer_caterogy_model.dart';
 
 class HomeController extends GetxController {
   /// HEADER STATE VARIABEL
-  var username = "Aufa".obs;
+  var username = LocalStorage().getUsername().obs;
   var location = "Bandung , Jawa Barat".obs;
   var shops = <String>["Toko A", "Toko B", "Toko C"].obs;
 
@@ -35,24 +36,25 @@ class HomeController extends GetxController {
   }
 
   // DATA OFFERED CATEROGY
-  void LoadOfferCaterogy(){
+  void LoadOfferCaterogy() {
     offerCategories.value = [
       OfferCategoryModel(
           discountText: "Diskon 5%",
           categoryText: "Daging di semua toko lagi ada Diskon nih",
-          descriptionText: "Buruan di ambil guys sebelum waktunya habis ya, WAJIB!!",
+          descriptionText:
+              "Buruan di ambil guys sebelum waktunya habis ya, WAJIB!!",
           imagePath: ""),
-
       OfferCategoryModel(
           discountText: "Diskon 3%",
           categoryText: "Buah di semua toko lagi ada Diskon nih",
-          descriptionText: "Buruan di ambil guys sebelum waktunya habis ya, WAJIB!!",
+          descriptionText:
+              "Buruan di ambil guys sebelum waktunya habis ya, WAJIB!!",
           imagePath: ""),
-
       OfferCategoryModel(
           discountText: "Diskon 2.5%",
           categoryText: "Sayuran di semua toko lagi ada Diskon nih",
-          descriptionText: "Buruan di ambil guys sebelum waktunya habis ya, WAJIB!!",
+          descriptionText:
+              "Buruan di ambil guys sebelum waktunya habis ya, WAJIB!!",
           imagePath: ""),
     ];
   }

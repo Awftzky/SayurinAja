@@ -28,11 +28,18 @@ class BaseScaffold extends StatelessWidget {
         image: backgroundImage,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.transparent,
         appBar: appBar,
         extendBodyBehindAppBar: true,
         floatingActionButton: floatingActionButton,
-        body: body,
+        body: body == null
+            ? null
+            : SafeArea(
+                top: false, // biarin notch atas
+                bottom: true, // cuma amanin bawah
+                child: body!,
+              ),
       ),
     );
   }

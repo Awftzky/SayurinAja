@@ -14,11 +14,15 @@ class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-        useGradient: false,
-        appBar: AppBar(
-          backgroundColor: AppColors.transparent,
+      useGradient: false,
+      appBar: AppBar(backgroundColor: AppColors.transparent),
+      body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        padding: EdgeInsets.only(
+          // Tambahkan jarak sesuai tinggi keyboard agar widget tidak ketutupan
+          bottom: MediaQuery.of(context).viewInsets.bottom + 20.h,
         ),
-        body: Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(height: 123.h),
@@ -26,8 +30,6 @@ class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
               width: 179.w,
               height: 176.h,
               child: Image.asset("assets/images/forgoticon2.png"),
-
-              /// IMAGE
             ),
             SizedBox(height: 44.h),
             Center(
@@ -35,43 +37,43 @@ class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Masukkan kode verifikasi ",
+                    "Masukkan kode verifikasi",
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: AppColors.primary,
                     ),
                   ),
-                  SizedBox(
-                    height: 17.h,
-                  ),
+                  SizedBox(height: 17.h),
                   Padding(
-                      padding: EdgeInsets.fromLTRB(20.r, 0, 20.r, 0),
-                      child: Text(
-                        "Kami telah mengirimkan 6 digit kode melalui email ke ..@gmail.com",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 13.sp,
-                          color: AppColors.black,
-                        ),
-                      )),
-                  SizedBox(
-                    height: 23.h,
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: Text(
+                      "Kami telah mengirimkan 6 digit kode melalui email ke ..@gmail.com",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        color: AppColors.black,
+                      ),
+                    ),
                   ),
+                  SizedBox(height: 23.h),
                   VerificationEmailSection(
-                    length: 6,
+                    length:
+                        controller.otpLength, // INISIALISASI 6 DI CONTROLLER
                     boxHeight: 46.h,
                     boxWidth: 46.w,
                     spacing: 10.r,
+                    controller: controller, // LOGIC DI MIXINS
                   ),
                   SizedBox(height: 14.h),
-                  Text("Tidak menerima kode?",
-                      style:
-                          TextStyle(fontSize: 13.sp, color: AppColors.black)),
+                  Text(
+                    "Tidak menerima kode?",
+                    style: TextStyle(fontSize: 13.sp, color: AppColors.black),
+                  ),
                   SizedBox(height: 5.h),
                   GestureDetector(
                     onTap: () {
-                      /// KIRIM ULANG CODE
+                      // Kirim ulang kode
                     },
                     child: Text(
                       "Kirim ulang kode",
@@ -83,16 +85,17 @@ class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
                   MainButton(
                     text: "Verifikasi",
                     onPressed: () {
-                      Get.offAllNamed(
-                          Routes.FORGOTPASSWORDSETUP); // API INTEGRATION
+                      Get.toNamed(Routes.FORGOTPASSWORDSETUP);
                     },
                     width: 255.w,
                     height: 46.h,
                   ),
                 ],
               ),
-            )
+            ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
