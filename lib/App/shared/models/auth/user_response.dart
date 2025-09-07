@@ -1,11 +1,13 @@
 class UserResponse {
-  final String status;
+  final String? succeed;
+  final String? error;
 
-  UserResponse({required this.status});
+  UserResponse({this.succeed, this.error});
 
   factory UserResponse.fromJson(Map<String, dynamic> json) {
     return UserResponse(
-      status: json["status"] ?? "",
+      succeed: json["succeed"],
+      error: json["error"],
     );
   }
 }

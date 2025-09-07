@@ -74,7 +74,7 @@ class EmailVerificationSuccessPage extends StatelessWidget {
                     width: 257.w,
                     height: 42.h,
                     onPressed: () {
-                      Get.offAllNamed(Routes.LOGIN);
+                      Get.offNamed(Routes.LOGIN);
                     },
                   ),
                 ],

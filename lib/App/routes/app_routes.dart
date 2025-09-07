@@ -16,8 +16,7 @@ abstract class Routes {
   static const FORGOTPASSWORDEMAIL = _Paths.forgotpasswordemail;
   static const FORGOTPASSWORDVERIFICATION = _Paths.forgotpasswordverification;
   static const FORGOTPASSWORDSETUP = _Paths.forgotpasswordsetup;
-
-
+  static const ALLSTORE = _Paths.allstore;
 }
 
 abstract class _Paths {
@@ -37,7 +36,6 @@ abstract class _Paths {
   static const forgotpasswordverification = '/forgotpasswordverification';
   static const forgotpasswordsetup = '/forgotpasswordsetup';
 
-
-
-
+  /// HOME FEATURE
+  static const allstore = '/allstore';
 }

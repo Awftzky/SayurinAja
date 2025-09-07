@@ -13,11 +13,11 @@ class NavigationBarSection extends StatelessWidget {
     final NavigationController navController = Get.find();
 
     final double navBarHeight = 50.h;
-    const Color navBarBackgroundColor = Colors.white;
+    const Color navBarBackgroundColor = AppColors.white;
     const Color spotlightColor = Color(0xFF4CAF50);
-    final Color selectedIconColor = AppColors.primary20;
+    final Color selectedIconColor = AppColors.primary;
     final Color selectedLabelColor = spotlightColor;
-    final Color unselectedItemColor = Colors.grey;
+    final Color unselectedItemColor = AppColors.darkGray;
 
     final screenWidth = MediaQuery.of(context).size.width;
     final itemCount = navController.items.length;
@@ -32,13 +32,6 @@ class NavigationBarSection extends StatelessWidget {
           height: navBarHeight + 16.h,
           decoration: BoxDecoration(
             color: navBarBackgroundColor,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 10,
-                offset: const Offset(0, -2),
-              ),
-            ],
           ),
           child: Stack(
             alignment: Alignment.topCenter,
@@ -127,26 +120,29 @@ class NavigationBarSection extends StatelessWidget {
               ),
 
               // ✨ LIGHT BEAM EFFECT
+              // ✨ LIGHT BEAM EFFECT (sinkron dengan spotlight)
               AnimatedPositioned(
                 duration: const Duration(milliseconds: 400),
                 curve: Curves.easeInOutCubic,
-                left: (itemWidth * selectedIndex) + (itemWidth / 2) - 2.w,
+                left: (itemWidth * selectedIndex) +
+                    (itemWidth / 2) -
+                    25.w, // tengahin beam
                 top: 0,
                 child: Container(
-                  width: 4.w,
-                  height: 30.h,
+                  width: 50.w,
+                  height: 40.h, // lebih tinggi biar nyatu ke bawah
                   decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.r),
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        spotlightColor.withOpacity(0.8),
-                        spotlightColor.withOpacity(0.4),
-                        Colors.transparent,
+                        spotlightColor.withOpacity(0.6), // terang di atas
+                        spotlightColor.withOpacity(0.25),
+                        Colors.transparent, // memudar ke bawah
                       ],
-                      stops: const [0.0, 0.5, 1.0],
+                      stops: const [0.0, 0.3, 1.0],
                     ),
-                    borderRadius: BorderRadius.circular(2.r),
                   ),
                 ),
               ),

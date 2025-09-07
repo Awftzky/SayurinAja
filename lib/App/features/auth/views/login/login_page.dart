@@ -14,6 +14,8 @@ class LoginPage extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
+    final double maxFormHeight = MediaQuery.of(context).size.height * 0.75;
+
     return BaseScaffold(
       useGradient: true,
       appBar: AppBar(
@@ -21,7 +23,7 @@ class LoginPage extends GetView<LoginController> {
       ),
       body: Stack(
         children: [
-          // Logo
+          // Logo di atas
           Align(
             alignment: Alignment.topCenter,
             child: Padding(
@@ -37,146 +39,147 @@ class LoginPage extends GetView<LoginController> {
             ),
           ),
 
+          // Form container di bawah
           Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
-              width: double.infinity,
-              height: 595.h,
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40.r),
-                  topRight: Radius.circular(40.r),
+            child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40.r),
+                    topRight: Radius.circular(40.r),
+                  ),
                 ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 20.h),
-                  Text(
-                    "Selamat datang kembali!",
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primary,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 15.h),
-
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
-                    child: Text(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(height: 20.h),
+                    Text(
+                      "Selamat datang kembali!",
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primary,
+                      ),
                       textAlign: TextAlign.center,
-                      "Senang melihatmu lagi. Yuk, lanjutkan berburu yang segar segar.",
-                      style: TextStyle(fontSize: 13, color: AppColors.black),
                     ),
-                  ),
-                  SizedBox(height: 20.h),
+                    SizedBox(height: 15.h),
 
-                  // Email
-                  CustomInputAuth(
-                    labelText: "Email",
-                    controller: controller.emailController,
-                    width: 298,
-                    height: 66,
-                  ),
-                  SizedBox(height: 15.h),
-
-                  // Password
-                  CustomInputAuth(
-                    labelText: "Kata sandi",
-                    controller: controller.passwordController,
-                    obscureText: true,
-                    width: 298,
-                    height: 66,
-                  ),
-                  SizedBox(height: 5.h),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 30.w),
-                      child: GestureDetector(
-                        onTap: () => Get.toNamed(Routes.FORGOTPASSWORDEMAIL),
-                        /// ROUTE FORGET PASSWORD
-                        child: Text(
-                          "Lupa kata sandi?",
-                          style: TextStyle(
-                              fontSize: 10.sp, color: AppColors.primary),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20.h),
-
-                  // Button Masuk
-                  Obx(() => MainButton(
-                        text: "Masuk",
-                        width: 208,
-                        height: 42,
-                        isLoading: controller.isLoading.value,
-                        onPressed: () =>
-                            Get.toNamed(Routes.NAVIGATION), // API INTEGRATION
-                      )),
-
-                  SizedBox(height: 25.h),
-
-                  // Divider
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Divider(color: AppColors.black, thickness: 0.5),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w),
-                        child: const Text(
-                          "Atau masuk dengan",
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: 13,
-                            fontFamily: "Poppins",
-                            fontWeight: FontWeight.w300,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(color: AppColors.black, thickness: 0.5),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 12.h),
-
-                  const SocialAuthSection(),
-
-                  SizedBox(height: 31.h),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Belum mempunyai akun?",
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 50.w),
+                      child: Text(
+                        "Senang melihatmu lagi. Yuk, lanjutkan berburu yang segar segar.",
+                        textAlign: TextAlign.center,
                         style:
-                            TextStyle(color: AppColors.black, fontSize: 13.sp),
+                            TextStyle(fontSize: 13.sp, color: AppColors.black),
                       ),
-                      SizedBox(
-                        width: 5.w,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.offAllNamed(Routes.REGISTER); // PAGE BELUM ADA
-                        },
-                        child: Text(
-                          "Masuk",
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: Colors.green,
+                    ),
+                    SizedBox(height: 20.h),
+
+                    // Email
+                    CustomInputAuth(
+                      labelText: "Email",
+                      controller: controller.emailController,
+                      width: 298,
+                      height: 66,
+                    ),
+                    SizedBox(height: 15.h),
+
+                    // Password
+                    CustomInputAuth(
+                      labelText: "Kata sandi",
+                      controller: controller.passwordController,
+                      obscureText: true,
+                      width: 298,
+                      height: 66,
+                    ),
+                    SizedBox(height: 5.h),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 30.w),
+                        child: GestureDetector(
+                          onTap: () => Get.toNamed(Routes.FORGOTPASSWORDEMAIL),
+                          child: Text(
+                            "Lupa kata sandi?",
+                            style: TextStyle(
+                                fontSize: 10.sp, color: AppColors.primary),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    SizedBox(height: 20.h),
+
+                    // Button Masuk
+                    Obx(() => MainButton(
+                          text: "Masuk",
+                          width: 208,
+                          height: 42,
+                          isLoading: controller.isLoading.value,
+                          onPressed: () => controller.login(),
+                        )),
+
+                    SizedBox(height: 25.h),
+
+                    // Divider
+                    Row(
+                      children: [
+                        Expanded(
+                          child:
+                              Divider(color: AppColors.black, thickness: 0.5),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.w),
+                          child: Text(
+                            "Atau masuk dengan",
+                            style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+                              Divider(color: AppColors.black, thickness: 0.5),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 12.h),
+
+                    const SocialAuthSection(),
+
+                    SizedBox(height: 31.h),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Belum mempunyai akun?",
+                          style: TextStyle(
+                              color: AppColors.black, fontSize: 13.sp),
+                        ),
+                        SizedBox(width: 5.w),
+                        GestureDetector(
+                          onTap: () {
+                            Get.offAllNamed(Routes.REGISTER);
+                          },
+                          child: Text(
+                            "Daftar",
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.green,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

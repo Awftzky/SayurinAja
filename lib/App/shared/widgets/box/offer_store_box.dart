@@ -76,16 +76,15 @@ class OfferProductBox extends StatelessWidget {
                         ),
                         SizedBox(height: 10.50.h),
                         Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 60.w, 0),
-                        child: Text(
-                          descriptionText,
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            color: AppColors.white,
-
+                          padding: EdgeInsets.fromLTRB(0, 0, 60.w, 0),
+                          child: Text(
+                            descriptionText,
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              color: AppColors.white,
+                            ),
                           ),
                         ),
-                      ),
                       ],
                     ),
                   ),
@@ -97,7 +96,8 @@ class OfferProductBox extends StatelessWidget {
                   height: 120,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(product.image), // INISIALISASI DI HOME CONTROLLER
+                      image: AssetImage(
+                          product.image), // INISIALISASI DI HOME CONTROLLER
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -117,8 +117,9 @@ class OfferProductBox extends StatelessWidget {
                   width: 8.w,
                   height: 8.w,
                   decoration: BoxDecoration(
-                    color:
-                        currentPage == index ? AppColors.primary :AppColors.white,
+                    color: currentPage == index
+                        ? AppColors.primary
+                        : AppColors.white,
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),

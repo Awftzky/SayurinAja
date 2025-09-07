@@ -4,6 +4,7 @@ import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/shared/models/auth/register_request.dart';
 import 'package:sayurinaja/App/core/network/user_service.dart';
 import 'package:sayurinaja/App/shared/models/auth/user_response.dart';
+import 'package:sayurinaja/App/core/storage/local_storage.dart';
 
 class RegisterController extends GetxController {
   final emailController = TextEditingController();
@@ -54,11 +55,12 @@ class RegisterController extends GetxController {
 
       UserResponse response = await _userService.registerAPI(request);
 
-      if (response.status == "success") {
-        Get.toNamed(
-            Routes.EMAILVERIFICATION); // NAVIGATE TO EMAIL VERIFICATION
+      if (response.succeed != null && response.succeed!.isNotEmpty) {
+        Get.toNamed(Routes.EMAILVERIFICATION); // NAVIGATE TO EMAIL VERIFICATION
+        await LocalStorage().setUsername(usernameController.toString());
+
       } else {
-        Get.snackbar("Gagal", response.status);
+        Get.snackbar("Gagal", response.error!);
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());

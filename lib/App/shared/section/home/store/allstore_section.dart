@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:sayurinaja/App/features/store/controller/store_controller.dart';
 import 'package:sayurinaja/App/shared/widgets/box/farmer_store_box.dart';
 
-class FarmerStoreSection extends GetView<StoreController> {
-  const FarmerStoreSection({super.key});
+class AllStoreSection extends GetView<StoreController> {
+  const AllStoreSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class FarmerStoreSection extends GetView<StoreController> {
       if (stores.isEmpty) return const SizedBox.shrink();
 
       return SizedBox(
-        height: 130.h, // Tinggi section, sesuaikan dengan StoreCard
+        height: 115.h,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: stores.length,
@@ -28,7 +28,7 @@ class FarmerStoreSection extends GetView<StoreController> {
               storeName: store.storeName,
               location: store.storeLocation,
               starReview: store.starReview,
-              width: 297.w,
+              width: 320.w,
               height: 115.h,
               onButtonPressed: () {
                 // Bisa navigasi ke halaman detail toko
