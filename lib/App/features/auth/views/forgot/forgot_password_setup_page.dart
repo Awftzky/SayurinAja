@@ -31,7 +31,7 @@ class ForgotPasswordSetupPage extends GetView<ForgotPasswordController> {
             SizedBox(
               width: 196.w,
               height: 191.h,
-              child: Image.asset("assets/images/logo.png"),
+              child: Image.asset("assets/images/setuppassword.png"),
             ),
             SizedBox(height: 10.h),
             Center(
@@ -66,23 +66,39 @@ class ForgotPasswordSetupPage extends GetView<ForgotPasswordController> {
                     controller: controller.newPasswordController,
                   ),
                   SizedBox(height: 13.h),
-                  Obx(() => Wrap(
-                        spacing: 8.r,
-                        children: [
-                          ChoiceChip(
-                            label: const Text("≥ 8 karakter"),
-                            selected: controller.hasMinLength,
-                            selectedColor: Colors.green.shade200,
-                            onSelected: null,
-                          ),
-                          ChoiceChip(
-                            label: const Text("Huruf + Angka"),
-                            selected: controller.hasNumberAndLetter,
-                            selectedColor: Colors.green.shade200,
-                            onSelected: null,
-                          ),
-                        ],
-                      )),
+                  Padding(
+                    padding: EdgeInsets.only(left: 0.w),
+                    child: Obx(() => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "* Minimal 8 karakter",
+                              style: TextStyle(
+                                color: controller.newPassword.value.isEmpty
+                                    ? AppColors.black
+                                    : controller.hasMinLength
+                                        ? Colors.green
+                                        : Colors.red,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            SizedBox(height: 6.h),
+                            Text(
+                              "* Gunakan kombinasi huruf dan angka",
+                              style: TextStyle(
+                                color: controller.newPassword.value.isEmpty
+                                    ? AppColors.black
+                                    : controller.hasNumberAndLetter
+                                        ? Colors.green
+                                        : Colors.red,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        )),
+                  ),
                   SizedBox(height: 13.h),
                   CustomInputAuth(
                     width: 278.w,

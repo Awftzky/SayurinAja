@@ -4,6 +4,6 @@ import 'package:sayurinaja/App/features/auth/controller/login/login_controller.d
 class LoginBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<LoginController>(() => LoginController());
+    Get.put(LoginController(), permanent: true);
   }
 }

@@ -17,6 +17,9 @@ dependencies:
   flutter_screenutil: ^5.9.3
   tutorial_coach_mark: ^1.3.1
   shared_preferences: ^2.5.3
+  intl: ^0.20.2
+  font_awesome_flutter: ^10.10.0
+  geolocator: ^14.0.2
 
 #================ DEV DEPENDENCIES ================#
 dev_dependencies:
@@ -49,12 +52,35 @@ flutter:
 
   assets:
     - assets/images/logo.png
-    - assets/images/diego.png
+    - assets/images/paymentmethod.png
+    - assets/images/totalmoney.png
+    - assets/images/forgotemail.png
+    - assets/images/forgototp.png
+    - assets/images/successemail.png
+    - assets/images/notfound.png
+    - assets/images/standarddelivery.png
+    - assets/images/note.png
+    - assets/images/checkoutdelivery.png
+    - assets/images/checkoutpickup.png
+    - assets/images/paypal.png
+    - assets/images/qris.png
+    - assets/images/cashondelivery.png
+    - assets/images/profile.jpeg
     - assets/images/chili.jpeg
     - assets/images/potato.jpeg
     - assets/images/meat.jpeg
+    - assets/images/beef.jpeg
+    - assets/images/orange.jpeg
+    - assets/images/banana.jpeg
+    - assets/images/carrot.jpeg
+    - assets/images/setuppassword.png
+    - assets/images/chicken.jpeg
+    - assets/images/discountfruit.png
+    - assets/images/discountvegetable.png
+    - assets/images/discountmeat.png
     - assets/images/logo_2.png
     - assets/images/logo_3.png
+    - assets/images/comingsoon.png
     - assets/images/transparentlogo.png
     - assets/images/transparentlogo_2.png
     - assets/images/transparentlogo_3.png
@@ -69,8 +95,10 @@ flutter:
     - assets/images/leaf.png
     - assets/images/mail.png
     - assets/images/success.png
-    - assets/images/forgoticon2.png
     - assets/images/homepagebanner.png
     - assets/images/allstorebanner.png
-    - assets/images/farmstore1.jpeg
-    - assets/images/farmstore2.jpeg
+    - assets/images/anggastore.jpeg
+    - assets/images/maximstore.jpeg
+    - assets/images/caterogyvegetable.jpeg
+    - assets/images/caterogymeet.jpeg
+    - assets/images/caterogyfruit.jpeg

@@ -1,45 +1,82 @@
 import 'package:get/get.dart';
 import 'package:sayurinaja/App/shared/models/product/product_model.dart';
 
-class ProductController extends GetxController{
+class ProductController extends GetxController {
+  var allVegetableProducts = <Product>[].obs;
+  var allFruitProducts = <Product>[].obs;
+  var allMeatProducts = <Product>[].obs;
   var allProducts = <Product>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    loadDummyProducts();
+    loadDummyVegetableProducts();
+    loadDummyFruitProducts();
+    loadDummyMeatProducts();
+
+    /// ALL PRODUCT
+    combineAllProducts();
   }
 
-  void loadDummyProducts() {
-    allProducts.value = [
+  void combineAllProducts() {
+    allProducts.clear();
+
+    allProducts.addAll([
+      // MENGGABUNG SEMUA PRODUCT
+      ...allVegetableProducts,
+      ...allFruitProducts,
+      ...allMeatProducts,
+    ]);
+  }
+
+  void loadDummyVegetableProducts() {
+    allVegetableProducts.value = [
       Product(
-        name: 'Daging Sapi',
-        image: 'assets/images/meat.jpeg',
-        price: 27000,
-        category: 'Daging',
-        store: 'Toko Petani 1',
-      ),
+          productName: "Cabe Merah",
+          productImage: "assets/images/chili.jpeg",
+          productDescription:
+              "Cabe merah berkualitas yang segar langsung dari petani sayur",
+          productPrice: 22000),
       Product(
-        name: 'Kentang',
-        image: 'assets/images/potato.jpeg',
-        price: 7000,
-        category: 'Sayur',
-        store: 'Toko Petani 2',
-      ),
+          productName: "Wortel",
+          productImage: "assets/images/carrot.jpeg",
+          productDescription:
+              "Wortel berkualitas yang segar langsung dari petani sayur",
+          productPrice: 18000),
+    ];
+  }
+
+  void loadDummyFruitProducts() {
+    allFruitProducts.value = [
       Product(
-        name: 'Sambal kecil',
-        image: 'assets/images/chili.jpeg',
-        price: 2500,
-        category: 'Sayur',
-        store: 'Toko Petani 1',
-      ),
+          productName: "Jeruk",
+          productImage: "assets/images/orange.jpeg",
+          productDescription:
+              "Jeruk berkualitas yang segar langsung dari petani buah",
+          productPrice: 20000),
       Product(
-        name: 'Apel Merah',
-        image: 'assets/images/apple.jpeg',
-        price: 12000,
-        category: 'Buah',
-        store: 'Toko Petani 3',
-      ),
+          productName: "Pisang",
+          productImage: "assets/images/banana.jpeg",
+          productDescription:
+              "Pisang berkualitas yang segar langsung dari petani buah",
+          productPrice: 19000),
+    ];
+  }
+
+  void loadDummyMeatProducts() {
+    allMeatProducts.value = [
+      Product(
+          productName: "Daging Sapi",
+          productImage: "assets/images/beef.jpeg",
+          productDescription:
+              "Daging Sapi berkualitas yang segar langsung dari peternak hewan",
+          productPrice: 52500),
+      Product(
+          productName: "Daging Ayam",
+          productImage: "assets/images/chicken.jpeg",
+          productDescription:
+              "Daging Ayam berkualitas yang segar langsung dari peternak hewan",
+          productPrice: 45900),
     ];
   }
 }

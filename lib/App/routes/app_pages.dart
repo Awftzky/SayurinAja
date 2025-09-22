@@ -1,9 +1,23 @@
 import 'package:get/get.dart';
 import 'package:sayurinaja/App/features/auth/bindings/verification/email_verification_binding.dart';
 import 'package:sayurinaja/App/features/auth/views/verification/email_verification_page.dart';
+import 'package:sayurinaja/App/features/checkout/bindings/checkout_bindings.dart';
+import 'package:sayurinaja/App/features/checkout/views/checkout_page.dart';
+import 'package:sayurinaja/App/features/coming_soon/views/coming_soon_page.dart';
 import 'package:sayurinaja/App/features/loading/binding/loading_binding.dart';
 import 'package:sayurinaja/App/features/loading/views/loading_page.dart';
+import 'package:sayurinaja/App/features/payment/bindings/payment_binding.dart';
+import 'package:sayurinaja/App/features/payment/views/payment_method_page.dart';
+import 'package:sayurinaja/App/features/product/binding/product_binding.dart';
+import 'package:sayurinaja/App/features/store/binding/search_store_binding.dart';
 import 'package:sayurinaja/App/features/store/view/allstore_page.dart';
+import 'package:sayurinaja/App/features/store/view/best_store_page.dart';
+import 'package:sayurinaja/App/features/store/view/closest_store_page.dart';
+import 'package:sayurinaja/App/features/store/view/search_store_page.dart';
+import 'package:sayurinaja/App/features/store_detail/bindings/search_store_details_binding.dart';
+import 'package:sayurinaja/App/features/store_detail/bindings/store_details_binding.dart';
+import 'package:sayurinaja/App/features/store_detail/views/search_store_details_page.dart';
+import 'package:sayurinaja/App/features/store_detail/views/store_details_page.dart';
 import 'package:sayurinaja/App/features/welcome/views/welcoming_present_page.dart';
 import '../features/welcome/views/welcoming_page.dart';
 import 'package:sayurinaja/App/features/welcome/bindings/welcome_binding.dart';
@@ -81,6 +95,13 @@ class AppPages {
         transition: Transition.fade,
         transitionDuration: Duration(milliseconds: 300)),
 
+    GetPage(
+        name: _Paths.firstloading,
+        page: () => const LoadingPage(),
+        binding: LoadingBinding(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 300)),
+
     /// AUTHENTICATOR PAGES
 
     GetPage(
@@ -139,19 +160,76 @@ class AppPages {
         transition: Transition.fade,
         transitionDuration: Duration(milliseconds: 350)),
 
-    /// NOTE FIRST LOADING!
-    GetPage(
-        name: _Paths.firstloading,
-        page: () => const LoadingPage(),
-        binding: LoadingBinding(),
-        transition: Transition.fade,
-        transitionDuration: Duration(milliseconds: 300)),
-
     /// HOME FEATURE PAGES
 
     GetPage(
         name: _Paths.allstore,
         page: () => const AllStorePage(),
+        binding: StoreBinding(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 300)),
+
+    /// STORE FEATURE
+    GetPage(
+        name: _Paths.searchstore,
+        page: () => const SearchStorePage(),
+        binding: SearchStoreBinding(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 300)),
+
+    GetPage(
+        name: _Paths.beststore,
+        page: () => const BestStorePage(),
+        binding: StoreBinding(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 300)),
+
+    GetPage(
+        name: _Paths.closeststore,
+        page: () => const ClosestStorePage(),
+        binding: StoreBinding(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 300)),
+
+    /// STORE DETAILS
+    GetPage(
+        name: _Paths.storedetails,
+        page: () => const StoreDetailsPage(),
+        bindings: [StoreDetailsBinding(), ProductBinding()],
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 300)),
+
+    GetPage(
+        name: _Paths.searchstoredetails,
+        page: () => const SearchStoreDetailsPage(),
+        bindings: [
+          SearchStoreDetailsBinding(), // UTAMA
+          ProductBinding(),
+          StoreDetailsBinding()
+        ],
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 300)),
+
+    /// CHECKOUT  FEATURE
+    GetPage(
+        name: _Paths.checkout,
+        page: () => const CheckoutPage(),
+        binding: CheckoutBindings(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 300)),
+
+    /// PAYMENT FEATURE
+    GetPage(
+        name: _Paths.payment,
+        page: () => const PaymentMethodPage(),
+        binding: PaymentBinding(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 300)),
+
+    /// COMING SOON FEATURE
+    GetPage(
+        name: _Paths.comingsoon,
+        page: () => const ComingSoonPage(),
         binding: StoreBinding(),
         transition: Transition.fade,
         transitionDuration: Duration(milliseconds: 300)),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sayurinaja/App/core/theme/colors.dart';
-import 'package:sayurinaja/App/shared/section/home/store/allstore_section.dart';
-import 'package:sayurinaja/App/shared/widgets/scaffold/base_scaffold.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sayurinaja/App/core/theme/colors.dart';
+import 'package:sayurinaja/App/routes/app_pages.dart';
+import 'package:sayurinaja/App/shared/section/home/store/allstore_section.dart';
+import 'package:sayurinaja/App/shared/widgets/scaffold/base_scaffold.dart';
+import 'package:sayurinaja/App/shared/widgets/search/fake_search_bar.dart';
 
 class AllStorePage extends StatelessWidget {
   const AllStorePage({super.key});
@@ -13,46 +15,82 @@ class AllStorePage extends StatelessWidget {
     return BaseScaffold(
       useGradient: false,
       appBar: AppBar(
-          backgroundColor: AppColors.transparent,
-          leading: Padding(
-            padding:
-                EdgeInsets.only(left: 23.w), // Tambahkan padding di sisi kiri
-            child: Container(
-              width: 36.w,
-              height: 36.h,
-              decoration: const BoxDecoration(
-                color: AppColors.white,
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                onPressed: () => Get.back(),
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: AppColors.black,
-                  size: 16,
-                ),
-              ),
-            ),
-          )),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          /// Banner
-          Container(
-            width: double.infinity,
-            height: 316.h,
+        backgroundColor: AppColors.transparent,
+        leading: Padding(
+          padding: EdgeInsets.only(left: 16.w),
+          child: Container(
+            width: 45.w,
+            height: 45.h,
             decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20)),
-              image: DecorationImage(
-                image: AssetImage("assets/images/allstorebanner.png"),
-                fit: BoxFit.cover,
+              color: AppColors.white,
+              shape: BoxShape.circle,
+            ),
+            child: IconButton(
+              onPressed: () => Get.back(),
+              icon: const Icon(
+                Icons.arrow_back,
+                color: AppColors.black,
+                size: 26,
               ),
             ),
           ),
+        ),
+        title: Align(
+          alignment: Alignment.topLeft,
+          child: Container(
+            width: double.infinity,
+            height: 23.h,
+            decoration: BoxDecoration(
+              color: AppColors.white,
+            ),
+            child: Text(
+              "Bandung Jawa Barat",
+              style: TextStyle(fontSize: 8.sp),
+            ),
+          ),
+        ),
+      ),
 
-          SizedBox(height: 63.h),
+      /// BODY
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          /// Banner + FakeSearchBar
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              /// Banner
+              Container(
+                width: double.infinity,
+                height: 316.h,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/allstorebanner.png"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+
+              /// Fake Search Bar (menggantung di bawah banner)
+              Positioned(
+                left: 60.w,
+                right: 60.w,
+                bottom: -20.h,
+                child: FakeSearchBar(
+                  onTap: () => Get.toNamed(Routes.SEARCHSTORE),
+                  height: 40.h,
+                  hintText: "Cari toko yang kamu mau tuju disini ya",
+                ),
+              ),
+            ],
+          ),
+
+          /// Spacer agar konten tidak tertimpa FakeSearchBar
+          SizedBox(height: 40.h),
 
           /// Section: Judul + Lihat Semua
           Padding(
@@ -69,9 +107,7 @@ class AllStorePage extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {
-                    // TODO: navigasi ke semua toko
-                  },
+                  onPressed: () => Get.toNamed(Routes.BESTSTORE),
                   child: const Text(
                     "Lihat semuanya",
                     style: TextStyle(
@@ -85,7 +121,7 @@ class AllStorePage extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 15.h),
+          SizedBox(height: 9.h),
 
           /// Section: AllStoreSection (horizontal list)
           const Padding(
@@ -95,6 +131,7 @@ class AllStorePage extends StatelessWidget {
 
           SizedBox(height: 40.h),
 
+          /// Section kedua: Judul + Lihat Semua
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 23.w),
             child: Row(
@@ -109,9 +146,7 @@ class AllStorePage extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {
-                    // TODO: navigasi ke semua toko
-                  },
+                  onPressed: () => Get.toNamed(Routes.CLOSESTSTORE),
                   child: const Text(
                     "Lihat semuanya",
                     style: TextStyle(
@@ -123,6 +158,13 @@ class AllStorePage extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          SizedBox(
+            height: 9.h,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 23), // biar sejajar sama title
+            child: AllStoreSection(),
           ),
         ],
       ),

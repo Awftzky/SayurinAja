@@ -27,9 +27,9 @@ class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
           children: [
             SizedBox(height: 123.h),
             SizedBox(
-              width: 179.w,
-              height: 176.h,
-              child: Image.asset("assets/images/forgoticon2.png"),
+              width: 192.w,
+              height: 201.h,
+              child: Image.asset("assets/images/forgototp.png"),
             ),
             SizedBox(height: 44.h),
             Center(

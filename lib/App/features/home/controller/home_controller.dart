@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:sayurinaja/App/core/network/location_service.dart';
 import 'package:sayurinaja/App/core/storage/local_storage.dart';
 import 'package:sayurinaja/App/shared/animation/tutorial/tutorial_service.dart';
 import 'package:sayurinaja/App/shared/models/caterogy/offer_caterogy_model.dart';
@@ -7,7 +8,7 @@ import 'package:sayurinaja/App/shared/models/caterogy/offer_caterogy_model.dart'
 class HomeController extends GetxController {
   /// HEADER STATE VARIABEL
   var username = LocalStorage().getUsername().obs;
-  var location = "Bandung , Jawa Barat".obs;
+  var location = LocationService().getCurrentLocation().obs;
   var shops = <String>["Toko A", "Toko B", "Toko C"].obs;
 
   /// OFFER CATEROGIES STATE VARIABEL
@@ -43,19 +44,19 @@ class HomeController extends GetxController {
           categoryText: "Daging di semua toko lagi ada Diskon nih",
           descriptionText:
               "Buruan di ambil guys sebelum waktunya habis ya, WAJIB!!",
-          imagePath: ""),
+          imagePath: "assets/images/discountmeat.png"),
       OfferCategoryModel(
           discountText: "Diskon 3%",
           categoryText: "Buah di semua toko lagi ada Diskon nih",
           descriptionText:
               "Buruan di ambil guys sebelum waktunya habis ya, WAJIB!!",
-          imagePath: ""),
+          imagePath: "assets/images/discountfruit.png"),
       OfferCategoryModel(
           discountText: "Diskon 2.5%",
           categoryText: "Sayuran di semua toko lagi ada Diskon nih",
           descriptionText:
               "Buruan di ambil guys sebelum waktunya habis ya, WAJIB!!",
-          imagePath: ""),
+          imagePath: "assets/images/discountvegetable.png"),
     ];
   }
 
@@ -73,16 +74,16 @@ class HomeController extends GetxController {
       key: searchBarKey,
       description: "Cari sayuran segar di sini",
     );
-    tutorialService.addTarget(
-      key: categoryKey,
-      description:
-          "Kolom ini terdapat 3 kategori bahan makanan, kamu bisa memilih yang kamu inginkan dengan mengkliknya saja",
-    );
-    tutorialService.addTarget(
-      key: tokoPetaniKey,
-      description:
-          "Ini adalah kolom toko petani, dimana kamu bisa melihat dan mencari toko yang terbaik menurut . kamu",
-    );
+    // tutorialService.addTarget(
+    //   key: categoryKey,
+    //   description:
+    //       "Kolom ini terdapat 3 kategori bahan makanan, kamu bisa memilih yang kamu inginkan dengan mengkliknya saja",
+    // );
+    // tutorialService.addTarget(
+    //   key: tokoPetaniKey,
+    //   description:
+    //       "Ini adalah kolom toko petani, dimana kamu bisa melihat dan mencari toko yang terbaik menurut . kamu",
+    // );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       tutorialService.showIntro(context);

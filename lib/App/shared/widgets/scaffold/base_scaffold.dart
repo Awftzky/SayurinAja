@@ -7,7 +7,10 @@ class BaseScaffold extends StatelessWidget {
   final Widget? floatingActionButton;
   final bool useGradient;
   final Color? backgroundColor;
-  final DecorationImage? backgroundImage;
+  final DecorationImage? backgroundImage; // WELCOMING SCAFFOLD
+  final bool? isExtend;
+  final Widget? header; // COSTUM HEADER
+  final bool? isFixed;
 
   const BaseScaffold({
     super.key,
@@ -17,6 +20,9 @@ class BaseScaffold extends StatelessWidget {
     this.useGradient = false,
     this.backgroundColor,
     this.backgroundImage,
+    this.isExtend,
+    this.header,
+    this.isFixed,
   });
 
   @override
@@ -31,16 +37,42 @@ class BaseScaffold extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         backgroundColor: Colors.transparent,
         appBar: appBar,
-        extendBodyBehindAppBar: true,
+        extendBodyBehindAppBar: isExtend ?? true,
         floatingActionButton: floatingActionButton,
         body: body == null
             ? null
             : SafeArea(
-                top: false, // biarin notch atas
-                bottom: true, // cuma amanin bawah
-                child: body!,
-              ),
+                top: false, // Notch ATAS
+                bottom: true, // Nav BAWAH
+                child: _buildBodyWithHeader()),
       ),
+    );
+  }
+
+  Widget _buildBodyWithHeader() {
+    if (header == null) {
+      return body ?? const SizedBox.shrink();
+    }
+
+    return Stack(
+      children: [
+        if (isFixed == false)
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: header!,
+          ),
+        body ?? const SizedBox.shrink(),
+
+        if (isFixed == true)
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: header!,
+          ),
+      ],
     );
   }
 }

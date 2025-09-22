@@ -6,11 +6,10 @@ import 'package:sayurinaja/App/shared/models/auth/register_request.dart';
 import 'package:sayurinaja/App/shared/models/auth/user_response.dart';
 
 class UserService {
-  final String baseAndroidUrl = "http://10.0.2.2:8000"; // Android Emulator
+  final String baseAndroidUrl = "http://10.0.2.2:8000";
+  final String baseUrl = "http://localhost:8000";
 
-  final String baseUrl = "http://localhost:8000"; // IOS Emulator
-
-  // REGISTER COK
+  // REGISTER API - Updated
   Future<UserResponse> registerAPI(RegisterRequest request) async {
     try {
       final response = await http.post(
@@ -22,11 +21,13 @@ class UserService {
       debugPrint("Backend response body: ${response.body}");
       debugPrint("Backend status code: ${response.statusCode}");
 
+      final responseData = jsonDecode(response.body);
+
       if (response.statusCode == 200) {
-        // mengembalikan UserResponse yang sudah berisi succeed dan message
-        return UserResponse.fromJson(jsonDecode(response.body));
+        // Success response with OTP
+        return UserResponse.fromJson(responseData);
       } else {
-        throw Exception("Failed register: ${response.body}");
+        return UserResponse.fromJson(responseData);
       }
     } catch (e) {
       debugPrint("Error during register: $e");
@@ -34,7 +35,32 @@ class UserService {
     }
   }
 
-  // LOGIN COKK
+  // Method untuk verify OTP
+  Future<UserResponse> verifyOTP(String otp) async {
+    try {
+      final response = await http.post(
+        Uri.parse("$baseUrl/verify-otp"), 
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"otp": otp}),
+      );
+
+      debugPrint("VerifyOTP response body: ${response.body}");
+      debugPrint("VerifyOTP status code: ${response.statusCode}");
+
+      final responseData = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return UserResponse.fromJson(responseData);
+      } else {
+        return UserResponse.fromJson(responseData);
+      }
+    } catch (e) {
+      debugPrint("Error during OTP verification: $e");
+      throw Exception("Error during OTP verification: $e");
+    }
+  }
+
+  // LOGIN API
   Future<UserResponse> loginAPI(LoginRequest request) async {
     try {
       final response = await http.post(
@@ -43,13 +69,19 @@ class UserService {
         body: jsonEncode(request.toJson()),
       );
 
+      debugPrint("Login response body: ${response.body}");
+      debugPrint("Login status code: ${response.statusCode}");
+
+      final responseData = jsonDecode(response.body);
+
       if (response.statusCode == 200) {
-        return UserResponse.fromJson(jsonDecode(response.body));
+        return UserResponse.fromJson(responseData);
       } else {
-        throw Exception("Failed login: ${response.body}");
+        return UserResponse.fromJson(responseData);
       }
     } catch (e) {
-      throw Exception("Error during login: $e");
+      debugPrint("Error during login: $e");
+      throw Exception("Network error: $e");
     }
   }
 }
