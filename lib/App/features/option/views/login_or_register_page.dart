@@ -68,7 +68,7 @@ class LoginOrRegisterPage extends StatelessWidget {
               ),
               SizedBox(height: 5.h),
               TextButton(
-                onPressed: () => Get.toNamed(Routes.LOGIN),
+                onPressed: () => Get.toNamed(Routes.LOGIN), // TODO : SEMENTARA
                 child: Text(
                   "Masuk disini",
                   style: TextStyle(fontSize: 13.sp, color: AppColors.primary),

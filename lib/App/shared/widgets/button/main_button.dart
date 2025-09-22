@@ -7,9 +7,9 @@ class MainButton extends StatefulWidget {
   final double width;
   final double height;
   final bool isLoading;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final double? textSize;
-  final FontWeight fontWeight; 
+  final FontWeight fontWeight;
 
   const MainButton({
     super.key,
@@ -18,7 +18,7 @@ class MainButton extends StatefulWidget {
     this.height = 50,
     this.isLoading = false,
     this.textSize,
-    this.fontWeight = FontWeight.bold, 
+    this.fontWeight = FontWeight.bold,
     required this.onPressed,
   });
 

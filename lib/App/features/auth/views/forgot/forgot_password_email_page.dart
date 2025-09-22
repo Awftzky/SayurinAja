@@ -30,7 +30,7 @@ class ForgotPasswordEmailPage extends GetView<ForgotPasswordController> {
             SizedBox(
               width: 192.w,
               height: 201.h,
-              child: Image.asset("assets/images/logo.png"),
+              child: Image.asset("assets/images/forgotemail.png"),
             ),
             SizedBox(height: 44.h),
             Center(

@@ -43,16 +43,8 @@ class LoginController extends GetxController {
       final request = LoginRequest(email: email, password: password);
       UserResponse response = await _userService.loginAPI(request);
 
-      if (response.error != null) {
-        Get.snackbar(
-          "Login gagal",
-          "Cek kembali email dan password",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.orange.withOpacity(0.8),
-          colorText: Colors.white,
-          duration: const Duration(seconds: 2),
-        );
-      } else {
+      if (response.isSuccess && response.message != null) {
+        // SUCCESS CASE - Backend returns {"message": "login successfull"}
         Get.snackbar(
           "Sukses",
           "Login berhasil! Selamat datang",
@@ -61,12 +53,30 @@ class LoginController extends GetxController {
           colorText: Colors.white,
           duration: const Duration(seconds: 2),
         );
-        Get.offAllNamed(Routes.NAVIGATION); // NAVIGASI KE HOME JIKA BERHASIL
+        Get.offAllNamed(Routes.NAVIGATION);
+      } else {
+        // ERROR CASE - Backend returns {"error": "Invalid email or password"}
+        Get.snackbar(
+          "Login Gagal",
+          response.errorMessage,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red.withOpacity(0.8),
+          colorText: Colors.white,
+          duration: const Duration(seconds: 2),
+        );
       }
     } catch (e) {
+      // Handle network/parsing errors
+      String errorMsg = e.toString();
+      if (errorMsg.contains("Invalid email or password")) {
+        errorMsg = "Email atau password salah";
+      } else if (errorMsg.contains("Failed login")) {
+        errorMsg = "Gagal login. Coba lagi.";
+      }
+
       Get.snackbar(
         "Error",
-        e.toString(),
+        errorMsg,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red.withOpacity(0.8),
         colorText: Colors.white,

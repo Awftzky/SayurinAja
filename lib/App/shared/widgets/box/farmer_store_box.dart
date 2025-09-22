@@ -54,7 +54,7 @@ class _FarmerStoreBoxState extends State<FarmerStoreBox> {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: AppColors.shadowGrey,
             spreadRadius: 2,
             blurRadius: 5,
             offset: const Offset(0, 3),
@@ -154,7 +154,7 @@ class _FarmerStoreBoxState extends State<FarmerStoreBox> {
                     height: 19.h,
                     textSize: 8,
                     fontWeight: FontWeight.w500,
-                    onPressed: () => widget.onButtonPressed,
+                    onPressed: widget.onButtonPressed,
                   ),
                 ],
               ),

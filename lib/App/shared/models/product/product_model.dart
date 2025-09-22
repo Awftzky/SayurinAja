@@ -1,16 +1,15 @@
-
 class Product {
-  final String name;
-  final String image;
-  final double price;
-  final String category;
-  final String store;
+  final String productName;
+  final String productImage;
+  final String productDescription;
+  final double productPrice;
+  final String? productCaterogy;
 
   Product({
-    required this.name,
-    required this.image,
-    this.price = 0,
-    this.category = '',
-    this.store = '',
+    required this.productName,
+    required this.productImage,
+    required this.productDescription,
+    required this.productPrice,
+    this.productCaterogy = "",
   });
 }

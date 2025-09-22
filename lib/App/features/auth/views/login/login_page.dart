@@ -14,8 +14,6 @@ class LoginPage extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    final double maxFormHeight = MediaQuery.of(context).size.height * 0.75;
-
     return BaseScaffold(
       useGradient: true,
       appBar: AppBar(

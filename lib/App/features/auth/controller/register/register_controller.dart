@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:sayurinaja/App/core/theme/colors.dart';
 import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/shared/models/auth/register_request.dart';
 import 'package:sayurinaja/App/core/network/user_service.dart';
@@ -14,6 +15,7 @@ class RegisterController extends GetxController {
   final UserService _userService = UserService();
 
   var isLoading = false.obs;
+  var otpCode = "".obs;
 
   @override
   void onInit() {
@@ -28,14 +30,12 @@ class RegisterController extends GetxController {
     super.onClose();
   }
 
+  // REGISTER LOGIC - FIXED
   void register() async {
     if (emailController.text.isEmpty ||
         usernameController.text.isEmpty ||
         passwordController.text.isEmpty) {
-      Get.snackbar(
-          // ERROR MESSAGE
-          'Error',
-          "Semua field harus diisi",
+      Get.snackbar('Error', "Semua field harus diisi",
           icon: Icon(Icons.error_outline),
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red.withOpacity(0.8),
@@ -55,12 +55,30 @@ class RegisterController extends GetxController {
 
       UserResponse response = await _userService.registerAPI(request);
 
-      if (response.succeed != null && response.succeed!.isNotEmpty) {
-        Get.toNamed(Routes.EMAILVERIFICATION); // NAVIGATE TO EMAIL VERIFICATION
-        await LocalStorage().setUsername(usernameController.toString());
+      if (response.kode != null && response.kode!.isNotEmpty) {
+        otpCode.value = response.kode!;
 
-      } else {
+        await LocalStorage().setUsername(usernameController.text.trim());
+
+        Get.toNamed(
+          Routes.EMAILVERIFICATION,
+          arguments: {
+            "kode": response.kode, // PASS OTP TO VERIFICATION PAGE
+            "email": emailController.text.trim(),
+          },
+        );
+
+        Get.snackbar(
+          "OTP Terkirim",
+          "Kode verifikasi telah dikirim",
+          backgroundColor: AppColors.primary,
+          colorText: Colors.white,
+        );
+      } else if (response.error != null) {
+        // Handle error from backend
         Get.snackbar("Gagal", response.error!);
+      } else {
+        Get.snackbar("Gagal", "Terjadi kesalahan tidak diketahui");
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());

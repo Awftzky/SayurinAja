@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sayurinaja/App/core/theme/colors.dart';
+import 'package:sayurinaja/App/routes/app_pages.dart';
+import 'package:sayurinaja/App/shared/widgets/search/fake_search_bar.dart';
+import 'package:get/get.dart';
 
 class HeaderFeature extends StatelessWidget {
   final String username;
@@ -72,7 +75,7 @@ class HeaderFeature extends StatelessWidget {
                     Row(
                       children: [
                         const Icon(Icons.location_on,
-                            color: AppColors.white, size: 18),
+                            color: AppColors.white, size: 30),
                         const SizedBox(width: 4),
                         Text(
                           location,
@@ -101,33 +104,15 @@ class HeaderFeature extends StatelessWidget {
           if (showSearchBar) ...[
             SizedBox(height: 20.h),
             Center(
-              // optional, supaya search bar di tengah
-              child: Container(
-                width: 338.w,
-                height: 32.h,
-                child: TextField(
-                  key: searchBarKey,
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search, size: 18),
-                    hintText: "Cari yang kamu butuhkan di sini ya",
-                    hintStyle: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 8.sp,
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.w300),
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 12.w, vertical: 0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.r),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
+              // FAKE SEACH BAR , NAVIGATE KE SEARCH PAGE
+              child: FakeSearchBar(
+                onTap: () => Get.toNamed(Routes.ALLSTORE),
+                hintText: "Cari yang kamu butuhkan disini ya",
+                height: 40.h,
+                width: 347.w,
               ),
             ),
+            SizedBox(height: 10.h)
           ],
         ],
       ),

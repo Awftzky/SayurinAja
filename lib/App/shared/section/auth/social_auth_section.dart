@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sayurinaja/App/core/theme/colors.dart'; // pastikan ada AppColors
+import 'package:get/route_manager.dart';
+import 'package:sayurinaja/App/core/theme/colors.dart';
+import 'package:sayurinaja/App/routes/app_pages.dart'; // pastikan ada AppColors
 
 class SocialAuthSection extends StatelessWidget {
   const SocialAuthSection({super.key});
@@ -44,14 +46,14 @@ class SocialAuthSection extends StatelessWidget {
         _circleButton(
           assetPath: "assets/images/google.png",
           onPressed: () {
-            // TODO: Handle login Google
+            Get.toNamed(Routes.COMINGSOON);
           },
         ),
         const SizedBox(width: 21),
         _circleButton(
           assetPath: "assets/images/apple.png",
           onPressed: () {
-            // TODO: Handle login Apple
+            Get.toNamed(Routes.COMINGSOON);
           },
         ),
       ],

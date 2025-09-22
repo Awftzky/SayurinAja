@@ -60,10 +60,13 @@ class EmailVerificationPage extends GetView<EmailVerificationController> {
                       ),
                     ),
                     SizedBox(height: 20.h),
-                    Text(
-                      "Kami telah mengirimkan 4 digit kode ke email anda",
-                      style: TextStyle(fontSize: 13.sp, color: AppColors.black),
-                      textAlign: TextAlign.center,
+                    Obx(
+                      () => Text(
+                        "Kami telah mengirimkan 4 digit kode ke email anda (${controller.otp.value}) ",
+                        style:
+                            TextStyle(fontSize: 13.sp, color: AppColors.black),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     SizedBox(height: 20.h),
 
@@ -96,7 +99,7 @@ class EmailVerificationPage extends GetView<EmailVerificationController> {
                       width: 208.w,
                       height: 38.h,
                       onPressed: () {
-                        Get.offNamed(Routes.EMAILVERIFICATIONSUCCESS);
+                        controller.verifyOTP(controller.getOtp());
                       },
                     ),
                   ],

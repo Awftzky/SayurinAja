@@ -40,4 +40,13 @@ class AppGradients {
       Color(0xFF447553), // bawah (#447553)
     ],
   );
+
+  static const LinearGradient checkOut = LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    colors: [
+      AppColors.primary, // kiri
+      Color(0xFF184025), // kanan
+    ],
+  );
 }

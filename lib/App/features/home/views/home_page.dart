@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
-import 'package:sayurinaja/App/core/storage/local_storage.dart';
 import 'package:sayurinaja/App/core/theme/colors.dart';
 import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/shared/section/home/offer/offer_caterogy_section.dart';
@@ -32,8 +30,8 @@ class HomePage extends StatelessWidget {
             /// HEADER TETAP
             HeaderFeature(
               username: homeController.username.value,
-              location: homeController.location.value,
-              imagePath: "assets/images/diego.png",
+              location: homeController.location.toString(),
+              imagePath: "assets/images/profile.jpeg",
               onAvatarTap: () {},
               showSearchBar: true,
               searchBarKey: homeController.searchBarKey,
@@ -76,6 +74,7 @@ class HomePage extends StatelessWidget {
                       ),
                       SizedBox(height: 25.h),
                       Row(
+                        key: homeController.tokoPetaniKey,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
@@ -116,15 +115,16 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           CategoryRounded(
-                              assetImage: "assets/images/chili.jpeg",
+                              assetImage:
+                                  "assets/images/caterogyvegetable.jpeg",
                               label: "Sayuran",
                               onTap: () {}),
                           CategoryRounded(
-                              assetImage: "assets/images/potato.jpeg",
+                              assetImage: "assets/images/caterogyfruit.jpeg",
                               label: "Buah",
                               onTap: () {}),
                           CategoryRounded(
-                              assetImage: "assets/images/meat.jpeg",
+                              assetImage: "assets/images/caterogymeet.jpeg",
                               label: "Daging",
                               onTap: () {}),
                         ],
