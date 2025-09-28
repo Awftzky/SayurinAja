@@ -21,6 +21,7 @@ class CheckoutPage extends GetView<CheckoutController> {
   Widget build(BuildContext context) {
     return BaseScaffold(
       useGradient: false,
+      isFixed: true,
       header: CheckoutHeader(),
       appBar: AppBar(
         backgroundColor: AppColors.transparent,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sayurinaja/App/features/coming_soon/views/coming_soon_page.dart';
 import 'package:sayurinaja/App/shared/section/navigation/navigation_bar_section.dart';
 import 'package:sayurinaja/App/features/navigation/controller/navigation_controller.dart';
 import 'package:sayurinaja/App/features/home/views/home_page.dart';
@@ -19,9 +20,9 @@ class NavigationPage extends StatelessWidget {
         onPageChanged: (index) => navController.changeIndex(index),
         children: const [
           HomePage(),
-          Center(child: Text("📂 Aktivitas")), /// TODO : ACTIVITY PAGE
-          ChatPage(),
-          SettingPage()
+          ComingSoonPage(), // ACTIVITY
+          ComingSoonPage(), // ACTIVITY
+          ComingSoonPage() // ACTIVITY
         ],
       ),
       bottomNavigationBar: const NavigationBarSection(),

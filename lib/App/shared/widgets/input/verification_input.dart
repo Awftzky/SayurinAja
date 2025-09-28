@@ -10,6 +10,7 @@ class VerificationInput extends StatelessWidget {
   final FocusNode focusNode;
   final bool focused;
   final bool filled;
+  final bool hasError; // New error parameter
   final Function(String value)? onChanged;
 
   const VerificationInput({
@@ -21,6 +22,7 @@ class VerificationInput extends StatelessWidget {
     required this.focusNode,
     required this.focused,
     required this.filled,
+    required this.hasError, // Required error parameter
     this.onChanged,
   });
 
@@ -29,7 +31,10 @@ class VerificationInput extends StatelessWidget {
     Color backgroundColor;
     Color borderColor;
 
-    if (filled) {
+    if (hasError) {
+      backgroundColor = const Color(0xFFE9C2B5);
+      borderColor = const Color(0xFFFF7575);
+    } else if (filled) {
       backgroundColor = const Color(0xFF3EA35D);
       borderColor = const Color(0xFF50FF86);
     } else if (focused) {

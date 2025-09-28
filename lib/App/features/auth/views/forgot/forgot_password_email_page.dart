@@ -6,7 +6,6 @@ import 'package:sayurinaja/App/features/auth/controller/forgot/forgot_password_c
 import 'package:get/get.dart';
 import 'package:sayurinaja/App/shared/widgets/input/custom_input_auth.dart';
 import 'package:sayurinaja/App/shared/widgets/button/main_button.dart';
-import 'package:sayurinaja/App/routes/app_pages.dart';
 
 class ForgotPasswordEmailPage extends GetView<ForgotPasswordController> {
   const ForgotPasswordEmailPage({super.key});
@@ -68,7 +67,7 @@ class ForgotPasswordEmailPage extends GetView<ForgotPasswordController> {
                   MainButton(
                     text: "Kirim kode verifikasi",
                     onPressed: () {
-                      Get.toNamed(Routes.FORGOTPASSWORDVERIFICATION);
+                      controller.sendForgotPasswordRequest();
                     },
                     width: 294.w,
                     height: 46.h,

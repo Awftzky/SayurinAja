@@ -6,7 +6,6 @@ import 'package:sayurinaja/App/features/auth/controller/forgot/forgot_password_c
 import 'package:get/get.dart';
 import 'package:sayurinaja/App/shared/widgets/input/custom_input_auth.dart';
 import 'package:sayurinaja/App/shared/widgets/button/main_button.dart';
-import 'package:sayurinaja/App/shared/widgets/dialog/setup_dialog.dart';
 
 class ForgotPasswordSetupPage extends GetView<ForgotPasswordController> {
   const ForgotPasswordSetupPage({super.key});
@@ -110,7 +109,7 @@ class ForgotPasswordSetupPage extends GetView<ForgotPasswordController> {
                   MainButton(
                     text: "Simpan kata sandi Baru",
                     onPressed: () {
-                      showCustomDialog();
+                      controller.setNewPassword();
                     },
                     width: 324.w,
                     height: 46.h,

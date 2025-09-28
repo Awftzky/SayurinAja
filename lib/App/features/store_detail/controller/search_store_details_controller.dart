@@ -18,7 +18,6 @@ class SearchStoreDetailsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // TODO: Muat riwayat pencarian dari local storage (misal: GetStorage)
   }
 
   void performSearch(String query) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sayurinaja/App/core/theme/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart'; 
+import 'package:intl/intl.dart';
 import 'package:sayurinaja/App/shared/widgets/button/add_notes.dart';
 import 'package:sayurinaja/App/shared/widgets/button/main_button.dart';
 
@@ -11,6 +11,7 @@ class ProductBox extends StatelessWidget {
   final String productDescription;
   final double productPrice;
   final VoidCallback? onButtonPressed;
+  final String? storeName;
   final VoidCallback? onNotesTap;
   final double width;
   final double height;
@@ -21,6 +22,7 @@ class ProductBox extends StatelessWidget {
     required this.productName,
     required this.productDescription,
     required this.productPrice,
+    this.storeName,
     this.onButtonPressed,
     this.onNotesTap,
     this.width = 312,
@@ -138,8 +140,7 @@ class ProductBox extends StatelessWidget {
                     height: 24.h,
                     textSize: 10.sp,
                     fontWeight: FontWeight.w500,
-                    onPressed: () =>
-                        debugPrint("Menambahkan di keranjang"), // KERANJANG
+                    onPressed: onButtonPressed,
                   ),
                 ],
               ),

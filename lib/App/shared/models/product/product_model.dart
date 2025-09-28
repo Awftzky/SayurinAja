@@ -4,6 +4,7 @@ class Product {
   final String productDescription;
   final double productPrice;
   final String? productCaterogy;
+  final String? storeName;
 
   Product({
     required this.productName,
@@ -11,5 +12,6 @@ class Product {
     required this.productDescription,
     required this.productPrice,
     this.productCaterogy = "",
+    this.storeName = "",
   });
 }

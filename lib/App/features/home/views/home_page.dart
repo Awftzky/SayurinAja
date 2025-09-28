@@ -5,6 +5,7 @@ import 'package:sayurinaja/App/core/theme/colors.dart';
 import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/shared/section/home/offer/offer_caterogy_section.dart';
 import 'package:sayurinaja/App/features/home/controller/home_controller.dart';
+import 'package:sayurinaja/App/shared/widgets/fixed/fixed_cart_widget.dart';
 import 'package:sayurinaja/App/shared/widgets/header/header_feature.dart';
 import 'package:sayurinaja/App/shared/widgets/scaffold/base_scaffold.dart';
 import 'package:sayurinaja/App/shared/section/home/store/farmer_store_section.dart';
@@ -25,7 +26,7 @@ class HomePage extends StatelessWidget {
       useGradient: false,
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             /// HEADER TETAP
             HeaderFeature(
@@ -134,6 +135,9 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            FixedCartContainer(
+              onTap: () => Get.toNamed(Routes.CHECKOUT),
             ),
           ],
         ),

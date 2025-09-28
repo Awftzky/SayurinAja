@@ -9,6 +9,8 @@ class CustomInputAuth extends StatefulWidget {
   final double? width;
   final double? height;
   final Color borderColor;
+  final String? errorText; // NEW: Error text parameter
+  final bool hasError; // NEW: Error state parameter
 
   const CustomInputAuth({
     super.key,
@@ -17,7 +19,9 @@ class CustomInputAuth extends StatefulWidget {
     this.obscureText = false,
     this.width,
     this.height,
-    this.borderColor = Colors.black,
+    this.borderColor = AppColors.black,
+    this.errorText,
+    this.hasError = false,
   });
 
   @override
@@ -46,59 +50,90 @@ class _CustomInputAuthState extends State<CustomInputAuth> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.width?.w ?? double.infinity,
-      height: widget.height?.h ?? 66.h,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadowGrey,
-            blurRadius: 7.5.r,
-            offset: const Offset(0, 1),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: widget.width?.w ?? double.infinity,
+          height: widget.height?.h ?? 66.h,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.shadowGrey,
+                blurRadius: 7.5.r,
+                offset: const Offset(0, 1),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: TextField(
-        focusNode: _focusNode,
-        controller: widget.controller,
-        obscureText: widget.obscureText ? _obscure : false,
-        decoration: InputDecoration(
-          labelText: widget.labelText,
-          labelStyle: TextStyle(
-            fontSize: 13.sp,
-            color: AppColors.black,
+          child: TextField(
+            focusNode: _focusNode,
+            controller: widget.controller,
+            obscureText: widget.obscureText ? _obscure : false,
+            decoration: InputDecoration(
+              labelText: widget.labelText,
+              labelStyle: TextStyle(
+                fontSize: 13.sp,
+                color: AppColors.black,
+              ),
+              filled: true,
+              fillColor: AppColors.white,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.r),
+                borderSide: BorderSide(
+                  color: widget.hasError ? AppColors.error : widget.borderColor,
+                  width: widget.hasError ? 2 : 1,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.r),
+                borderSide: BorderSide(
+                  color: widget.hasError ? AppColors.error : Colors.green,
+                  width: 2,
+                ),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.r),
+                borderSide: const BorderSide(color: AppColors.error, width: 2),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.r),
+                borderSide: const BorderSide(color: AppColors.error, width: 2),
+              ),
+              suffixIcon: widget.obscureText && _focusNode.hasFocus
+                  ? Padding(
+                      padding: EdgeInsets.only(right: 5.r),
+                      child: IconButton(
+                        icon: Icon(
+                          _obscure ? Icons.visibility_off : Icons.visibility,
+                          color: AppColors.black,
+                          size: 24.r,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscure = !_obscure;
+                          });
+                        },
+                      ),
+                    )
+                  : null,
+            ),
           ),
-          filled: true,
-          fillColor: AppColors.white,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
-            borderSide: BorderSide(color: widget.borderColor, width: 1),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
-            borderSide: const BorderSide(color: Colors.green, width: 2),
-          ),
-
-          /// ICONN SHOW PASSWORD
-          suffixIcon: widget.obscureText && _focusNode.hasFocus
-              ? Padding(
-                  padding: EdgeInsets.only(right: 5.r),
-                  child: IconButton(
-                    icon: Icon(
-                      _obscure ? Icons.visibility_off : Icons.visibility,
-                      color: AppColors.black,
-                      size: 24.r,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _obscure = !_obscure;
-                      });
-                    },
-                  ),
-                )
-              : null,
         ),
-      ),
+        // Error text display
+        if (widget.hasError &&
+            widget.errorText != null &&
+            widget.errorText!.isNotEmpty)
+          Padding(
+            padding: EdgeInsets.only(top: 2.h, left: 2.w),
+            child: Text(
+              widget.errorText!,
+              style: TextStyle(
+                color: AppColors.error,
+                fontSize: 10.sp,
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

@@ -183,7 +183,7 @@ class SettingPage extends StatelessWidget {
           alignment: Alignment.centerLeft,
         ),
         onPressed: () {
-          /// TODO: Navigate
+          /// UNRELEASED FINAL DESIGN
         },
         child: Align(
           alignment: Alignment.centerLeft,

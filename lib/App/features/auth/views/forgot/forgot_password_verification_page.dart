@@ -6,7 +6,6 @@ import 'package:sayurinaja/App/features/auth/controller/forgot/forgot_password_c
 import 'package:get/get.dart';
 import 'package:sayurinaja/App/shared/widgets/button/main_button.dart';
 import 'package:sayurinaja/App/shared/section/auth/verification_email_section.dart';
-import 'package:sayurinaja/App/routes/app_pages.dart';
 
 class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
   const ForgotPasswordVerificationPage({super.key});
@@ -47,13 +46,14 @@ class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
                   SizedBox(height: 17.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Text(
-                      "Kami telah mengirimkan 6 digit kode melalui email ke ..@gmail.com",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        color: AppColors.black,
-                      ),
+                    child: Obx(
+                      () => Text(
+                          "Kami telah mengirimkan 6 digit kode melalui email ke ${controller.userEmail.value} , yaitu ${controller.otpCode.value}", // MENAMPILKAN KODE NYA SECARA LANGSUNG (DUMMY)
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            color: AppColors.black,
+                          )),
                     ),
                   ),
                   SizedBox(height: 23.h),
@@ -73,7 +73,7 @@ class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
                   SizedBox(height: 5.h),
                   GestureDetector(
                     onTap: () {
-                      // Kirim ulang kode
+                      controller.sendForgotPasswordRequest();
                     },
                     child: Text(
                       "Kirim ulang kode",
@@ -85,7 +85,7 @@ class ForgotPasswordVerificationPage extends GetView<ForgotPasswordController> {
                   MainButton(
                     text: "Verifikasi",
                     onPressed: () {
-                      Get.toNamed(Routes.FORGOTPASSWORDSETUP);
+                      controller.verifyOtpCode();
                     },
                     width: 255.w,
                     height: 46.h,
