@@ -1,3 +1,4 @@
+// 1. Update LoginController dengan error state
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:sayurinaja/App/shared/models/auth/login_request.dart';
@@ -12,6 +13,16 @@ class LoginController extends GetxController {
   final UserService _userService = UserService();
 
   var isLoading = false.obs;
+  var emailError = "".obs;
+  var passwordError = "".obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Clear errors when user types
+    emailController.addListener(_clearEmailError);
+    passwordController.addListener(_clearPasswordError);
+  }
 
   @override
   void onClose() {
@@ -20,20 +31,34 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
+  void _clearEmailError() {
+    if (emailError.value.isNotEmpty) {
+      emailError.value = "";
+    }
+  }
+
+  void _clearPasswordError() {
+    if (passwordError.value.isNotEmpty) {
+      passwordError.value = "";
+    }
+  }
+
+  void _clearAllErrors() {
+    emailError.value = "";
+    passwordError.value = "";
+  }
+
   Future<void> login() async {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
 
+    // Clear previous errors
+    _clearAllErrors();
+
+    // Validation
     if (email.isEmpty || password.isEmpty) {
-      Get.snackbar(
-        'Error',
-        'Email dan password harus diisi',
-        icon: Icon(Icons.error_outline),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.8),
-        colorText: Colors.white,
-        duration: const Duration(seconds: 2),
-      );
+      if (email.isEmpty) emailError.value = "Email harus diisi";
+      if (password.isEmpty) passwordError.value = "Password harus diisi";
       return;
     }
 
@@ -44,44 +69,28 @@ class LoginController extends GetxController {
       UserResponse response = await _userService.loginAPI(request);
 
       if (response.isSuccess && response.message != null) {
-        // SUCCESS CASE - Backend returns {"message": "login successfull"}
-        Get.snackbar(
-          "Sukses",
-          "Login berhasil! Selamat datang",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green.withOpacity(0.8),
-          colorText: Colors.white,
-          duration: const Duration(seconds: 2),
-        );
-        Get.offAllNamed(Routes.NAVIGATION);
+        Get.offAllNamed(Routes.NAVIGATION); // LOGIN SUCCESS
       } else {
-        // ERROR CASE - Backend returns {"error": "Invalid email or password"}
-        Get.snackbar(
-          "Login Gagal",
-          response.errorMessage,
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red.withOpacity(0.8),
-          colorText: Colors.white,
-          duration: const Duration(seconds: 2),
-        );
+        String errorMsg = response.errorMessage.toLowerCase();
+
+        if (errorMsg.contains("invalid email or password")) {
+          emailError.value = "Email yang kamu masukkan tidak terdaftar";
+          passwordError.value = "Kata sandi kamu salah";
+        } else {
+          passwordError.value = "Terjadi kesalahan, coba lagi";
+        }
       }
     } catch (e) {
-      // Handle network/parsing errors
-      String errorMsg = e.toString();
-      if (errorMsg.contains("Invalid email or password")) {
-        errorMsg = "Email atau password salah";
-      } else if (errorMsg.contains("Failed login")) {
-        errorMsg = "Gagal login. Coba lagi.";
-      }
+      String errorMsg = e.toString().toLowerCase();
 
-      Get.snackbar(
-        "Error",
-        errorMsg,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.8),
-        colorText: Colors.white,
-        duration: const Duration(seconds: 2),
-      );
+      if (errorMsg.contains("invalid email or password")) {
+        emailError.value = "Email yang kamu masukkan tidak terdaftar";
+        passwordError.value = "Kata sandi kamu salah";
+      } else if (errorMsg.contains("network")) {
+        passwordError.value = "Tidak ada koneksi internet";
+      } else {
+        passwordError.value = "Terjadi kesalahan, coba lagi";
+      }
     } finally {
       isLoading.value = false;
     }

@@ -43,7 +43,7 @@ class PaymentTile extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 13.sp,
-            color: isSelected ? Colors.black : Colors.black87,
+            color: isSelected ? AppColors.black : Colors.black87,
           ),
         ),
         trailing: Icon(FontAwesomeIcons.chevronRight));

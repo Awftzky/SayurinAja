@@ -16,7 +16,7 @@ class ChatDeliveryPage extends StatelessWidget {
           time: '12:0${index} PM',
           unreadCount: index == 0 ? 2 : 0,
           onTap: () {
-            /// TODO : ROUTE DETAIL PAGE
+            /// UNRELEASED FINAL DESIGN
           },
         );
       },

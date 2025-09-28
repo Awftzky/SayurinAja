@@ -22,25 +22,44 @@ class VerificationEmailSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: List.generate(length, (index) {
-        return Padding(
-          padding: EdgeInsets.only(
-            right: index == length - 1 ? 0 : spacing.r,
-          ),
-          child: Obx(() => VerificationInput(
-                index: index,
-                width: boxWidth,
-                height: boxHeight,
-                textController: controller.textControllers[index],
-                focusNode: controller.focusNodes[index],
-                focused: controller.isFocused[index].value,
-                filled: controller.isFilled[index].value,
-                onChanged: (value) => controller.onInputChanged(index, value),
-              )),
-        );
-      }),
+    return Column(
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: List.generate(length, (index) {
+            return Padding(
+              padding: EdgeInsets.only(
+                right: index == length - 1 ? 0 : spacing.r,
+              ),
+              child: Obx(() => VerificationInput(
+                    index: index,
+                    width: boxWidth,
+                    height: boxHeight,
+                    textController: controller.textControllers[index],
+                    focusNode: controller.focusNodes[index],
+                    focused: controller.isFocused[index].value,
+                    filled: controller.isFilled[index].value,
+                    hasError: controller.hasError.value, // Pass error state
+                    onChanged: (value) =>
+                        controller.onInputChanged(index, value),
+                  )),
+            );
+          }),
+        ),
+        // Error message
+        Obx(() => controller.hasError.value
+            ? Container(
+                margin: EdgeInsets.only(top: 10.h),
+                child: Text(
+                  "Kode verifikasi salah coba ulangi lagi",
+                  style: TextStyle(
+                    color: const Color(0xFFFF7575),
+                    fontSize: 12.sp,
+                  ),
+                ),
+              )
+            : const SizedBox.shrink()),
+      ],
     );
   }
 }

@@ -79,22 +79,25 @@ class LoginPage extends GetView<LoginController> {
                     SizedBox(height: 20.h),
 
                     // Email
-                    CustomInputAuth(
-                      labelText: "Email",
-                      controller: controller.emailController,
-                      width: 298,
-                      height: 66,
-                    ),
+                    Obx(() => CustomInputAuth(
+                          labelText: "Email",
+                          controller: controller.emailController,
+                          width: 298,
+                          height: 66,
+                          hasError: controller.emailError.value.isNotEmpty,
+                          errorText: controller.emailError.value,
+                        )),
                     SizedBox(height: 15.h),
 
-                    // Password
-                    CustomInputAuth(
-                      labelText: "Kata sandi",
-                      controller: controller.passwordController,
-                      obscureText: true,
-                      width: 298,
-                      height: 66,
-                    ),
+                    Obx(() => CustomInputAuth(
+                          labelText: "Kata sandi",
+                          controller: controller.passwordController,
+                          obscureText: true,
+                          width: 298,
+                          height: 66,
+                          hasError: controller.passwordError.value.isNotEmpty,
+                          errorText: controller.passwordError.value,
+                        )),
                     SizedBox(height: 5.h),
                     Align(
                       alignment: Alignment.centerRight,

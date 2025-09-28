@@ -107,6 +107,5 @@ class SearchStoreController extends GetxController {
 
   void removeFromHistory(String item) {
     searchHistory.remove(item);
-    // TODO: Update local storage
   }
 }

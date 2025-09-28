@@ -66,16 +66,12 @@ class EmailVerificationController extends GetxController
         } else if (errorMessage.contains("expired")) {
           errorMessage = "Kode OTP sudah expired";
         }
-
-        Get.snackbar(
-          "Error",
-          errorMessage,
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red.withOpacity(0.8),
-          colorText: Colors.white,
-        );
+        setErrorState(true);
       }
     } catch (e) {
+      // Set error state on exception
+      setErrorState(true);
+
       Get.snackbar(
         "Error",
         e.toString(),

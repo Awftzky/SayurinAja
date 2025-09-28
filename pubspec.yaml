@@ -58,6 +58,7 @@ flutter:
     - assets/images/forgototp.png
     - assets/images/successemail.png
     - assets/images/notfound.png
+    - assets/images/cart.png
     - assets/images/standarddelivery.png
     - assets/images/note.png
     - assets/images/checkoutdelivery.png

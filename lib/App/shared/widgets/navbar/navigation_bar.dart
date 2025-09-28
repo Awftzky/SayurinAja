@@ -6,7 +6,7 @@ class NavbarItem extends StatelessWidget {
   final IconData selectedIcon;
   final String label;
   final bool isSelected;
-  final Color selectedIconColor; // ✅ tambahin buat warna icon saat selected
+  final Color selectedIconColor;
   final Color selectedLabelColor;
   final Color unselectedItemColor;
   final VoidCallback onTap;
@@ -18,7 +18,7 @@ class NavbarItem extends StatelessWidget {
     required this.selectedIcon,
     required this.label,
     required this.isSelected,
-    required this.selectedIconColor, // ✅
+    required this.selectedIconColor,
     required this.selectedLabelColor,
     required this.unselectedItemColor,
     required this.onTap,
@@ -42,7 +42,7 @@ class NavbarItem extends StatelessWidget {
             child: Icon(
               isSelected ? selectedIcon : icon,
               color: isSelected ? selectedIconColor : unselectedItemColor,
-              size: isSelected ? 28.w : 26.w,
+              size: isSelected ? 28.w : 28.w,
             ),
           ),
 
@@ -52,8 +52,8 @@ class NavbarItem extends StatelessWidget {
           AnimatedDefaultTextStyle(
             duration: const Duration(milliseconds: 200),
             style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+              fontSize: 10.sp,
+              fontWeight: isSelected ? FontWeight.normal : FontWeight.normal,
               color: isSelected ? selectedLabelColor : unselectedItemColor,
             ),
             child: Text(label, textAlign: TextAlign.center),

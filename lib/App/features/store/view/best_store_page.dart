@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sayurinaja/App/core/theme/colors.dart';
 import 'package:sayurinaja/App/features/store/controller/store_controller.dart';
+import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/shared/widgets/box/farmer_store_box.dart';
 import 'package:sayurinaja/App/shared/widgets/scaffold/base_scaffold.dart';
 
@@ -37,7 +38,8 @@ class BestStorePage extends GetView<StoreController> {
                 storeName: store.storeName,
                 location: store.storeLocation,
                 starReview: store.starReview,
-                // onButtonPressed: () => Get.toNamed(Routes.STOREDETAILS),
+                onButtonPressed: () =>
+                    Get.toNamed(Routes.STOREDETAILS, arguments: store),
               ),
             );
           },

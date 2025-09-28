@@ -18,6 +18,10 @@ class AppColors {
   static const Color gradientStart = Color(0xFF225C34);
   static const Color gradientEnd = Color(0xFF153B21);
 
+  // Status Colors
+  static const Color success = Color(0xFF4CAF50); // Green
+  static const Color error = Color(0xFFF44336); // Red
+
   // Transparent
   static const Color transparent = Colors.transparent;
 }

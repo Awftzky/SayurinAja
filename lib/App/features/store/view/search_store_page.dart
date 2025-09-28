@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sayurinaja/App/core/theme/colors.dart';
 import 'package:sayurinaja/App/features/store/controller/search_store_controller.dart'; // Import controller baru
+import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/shared/widgets/box/farmer_store_box.dart';
 import 'package:sayurinaja/App/shared/widgets/scaffold/base_scaffold.dart';
 import 'package:sayurinaja/App/shared/widgets/search/no_search_result_widget.dart';
@@ -10,7 +11,7 @@ import 'package:sayurinaja/App/shared/widgets/search/search_bar_widget.dart';
 import 'package:sayurinaja/App/shared/widgets/search/search_history_widget.dart';
 
 class SearchStorePage extends GetView<SearchStoreController> {
-  const SearchStorePage({Key? key}) : super(key: key);
+  const SearchStorePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +93,9 @@ class SearchStorePage extends GetView<SearchStoreController> {
                                 storeName: store.storeName,
                                 location: store.storeLocation,
                                 starReview: store.starReview,
+                                onButtonPressed: () => Get.toNamed(
+                                    Routes.STOREDETAILS,
+                                    arguments: store),
                               ),
                             );
                           },

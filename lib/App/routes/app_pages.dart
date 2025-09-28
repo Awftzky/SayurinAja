@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sayurinaja/App/features/auth/bindings/verification/email_verification_binding.dart';
 import 'package:sayurinaja/App/features/auth/views/verification/email_verification_page.dart';
+import 'package:sayurinaja/App/features/cart/bindings/cart_bindings.dart';
 import 'package:sayurinaja/App/features/checkout/bindings/checkout_bindings.dart';
 import 'package:sayurinaja/App/features/checkout/views/checkout_page.dart';
 import 'package:sayurinaja/App/features/coming_soon/views/coming_soon_page.dart';
@@ -61,6 +62,7 @@ class AppPages {
               bindings: [
                 HomeBinding(),
                 StoreBinding(),
+                CartBindings()
 
                 /// ADD BINDING LAIN JIKA INGIN MENAMPILKAN PRODUCT
               ],
@@ -195,7 +197,7 @@ class AppPages {
     GetPage(
         name: _Paths.storedetails,
         page: () => const StoreDetailsPage(),
-        bindings: [StoreDetailsBinding(), ProductBinding()],
+        bindings: [StoreDetailsBinding(), ProductBinding(), CartBindings()],
         transition: Transition.fade,
         transitionDuration: Duration(milliseconds: 300)),
 

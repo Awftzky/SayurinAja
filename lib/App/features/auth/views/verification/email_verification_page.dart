@@ -5,7 +5,6 @@ import 'package:sayurinaja/App/core/theme/colors.dart';
 import 'package:sayurinaja/App/shared/section/auth/verification_email_section.dart';
 import 'package:sayurinaja/App/shared/widgets/button/main_button.dart';
 import 'package:sayurinaja/App/shared/widgets/scaffold/base_scaffold.dart';
-import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/features/auth/controller/verification/email_verification_controller.dart';
 
 class EmailVerificationPage extends GetView<EmailVerificationController> {
