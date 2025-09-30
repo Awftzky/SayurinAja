@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:sayurinaja/App/core/theme/colors.dart';
 import 'package:sayurinaja/App/shared/models/cart/cart_model.dart';
 import 'package:sayurinaja/App/shared/widgets_helper/controls/product_quantity_controls.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // Import ini untuk FontAwesomeIcons
 
 class CheckoutProductBox extends StatelessWidget {
   final CartModel cartItem;

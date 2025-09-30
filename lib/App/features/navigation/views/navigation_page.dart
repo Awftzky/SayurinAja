@@ -4,8 +4,6 @@ import 'package:sayurinaja/App/features/coming_soon/views/coming_soon_page.dart'
 import 'package:sayurinaja/App/shared/section/navigation/navigation_bar_section.dart';
 import 'package:sayurinaja/App/features/navigation/controller/navigation_controller.dart';
 import 'package:sayurinaja/App/features/home/views/home_page.dart';
-import 'package:sayurinaja/App/features/chat/views/chat_page.dart';
-import 'package:sayurinaja/App/features/setting/views/setting_page.dart';
 
 class NavigationPage extends StatelessWidget {
   const NavigationPage({super.key});
@@ -21,8 +19,8 @@ class NavigationPage extends StatelessWidget {
         children: const [
           HomePage(),
           ComingSoonPage(), // ACTIVITY
-          ComingSoonPage(), // ACTIVITY
-          ComingSoonPage() // ACTIVITY
+          ComingSoonPage(), // CHAT 
+          ComingSoonPage() // SETTING
         ],
       ),
       bottomNavigationBar: const NavigationBarSection(),

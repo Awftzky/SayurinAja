@@ -1,4 +1,5 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:sayurinaja/App/core/storage/local_storage.dart';
 
 class LocationService {
@@ -24,18 +25,54 @@ class LocationService {
 
     try {
       return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+        ),
       );
     } catch (e) {
       return null;
     }
   }
 
+  Future<String> getAddressFromCoordinates(Position position) async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      );
+
+      if (placemarks.isNotEmpty) {
+        final Placemark place = placemarks.first;
+
+        String city = place.locality ?? place.subAdministrativeArea ?? "";
+        String province = place.administrativeArea ?? "";
+
+        if (city.isNotEmpty && province.isNotEmpty) {
+          return "$city, $province";
+        } else if (city.isNotEmpty) {
+          return city;
+        } else if (province.isNotEmpty) {
+          return province;
+        } else {
+          return place.country ?? "Lokasi tidak diketahui";
+        }
+      } else {
+        return "Alamat tidak ditemukan";
+      }
+    } catch (e) {
+      return "Gagal mendapatkan alamat";
+    }
+  }
+
   Future<void> saveCurrentLocation() async {
-    final position = await getCurrentLocation();
-    if (position != null) {
-      await _localStorage.saveLastKnownLocation(
-          position.latitude, position.longitude);
+    try {
+      final position = await getCurrentLocation();
+      if (position != null) {
+        await _localStorage.saveLastKnownLocation(
+            position.latitude, position.longitude);
+      }
+    } catch (e) {
+      print("Gagal menyimpan lokasi: $e");
     }
   }
 }
