@@ -47,7 +47,7 @@ class _CategoryRoundedState extends State<CategoryRounded> {
     return Column(
       children: [
         Material(
-          color: Colors.transparent,
+          color: AppColors.primary,
           shape: const CircleBorder(),
           child: GestureDetector(
             onTapDown: _onTapDown,
@@ -66,7 +66,6 @@ class _CategoryRoundedState extends State<CategoryRounded> {
                   height: 68.h,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.grey[200],
                   ),
                   child: ClipOval(
                     child: Image.asset(

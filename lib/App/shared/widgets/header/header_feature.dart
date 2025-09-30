@@ -13,24 +13,27 @@ class HeaderFeature extends StatelessWidget {
 
   /// 🔍 Search bar
   final bool showSearchBar;
-  final GlobalKey? searchBarKey;
   final TextEditingController? searchController;
   final VoidCallback? onSearchSubmit;
-
-  /// Username
   final GlobalKey? usernameKey;
+  final GlobalKey? locationKey;
+  final GlobalKey? profilePhotoKey;
+  final GlobalKey? searchBarKey;
 
-  const HeaderFeature(
-      {super.key,
-      required this.username,
-      required this.location,
-      required this.imagePath,
-      this.onAvatarTap,
-      this.showSearchBar = false,
-      this.searchBarKey,
-      this.searchController,
-      this.onSearchSubmit,
-      this.usernameKey});
+  const HeaderFeature({
+    super.key,
+    required this.username,
+    required this.location,
+    required this.imagePath,
+    this.onAvatarTap,
+    this.showSearchBar = false,
+    this.searchController,
+    this.onSearchSubmit,
+    this.usernameKey,
+    this.locationKey,
+    this.profilePhotoKey,
+    this.searchBarKey,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +76,7 @@ class HeaderFeature extends StatelessWidget {
                     ),
                     SizedBox(height: 10.h),
                     Row(
+                      key: locationKey, // ✅ Tutorial key
                       children: [
                         const Icon(Icons.location_on,
                             color: AppColors.white, size: 30),
@@ -89,6 +93,7 @@ class HeaderFeature extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: onAvatarTap,
+                key: profilePhotoKey,
                 child: SizedBox(
                   height: 70.h,
                   width: 69.w,
@@ -106,6 +111,7 @@ class HeaderFeature extends StatelessWidget {
             Center(
               // FAKE SEACH BAR , NAVIGATE KE SEARCH PAGE
               child: FakeSearchBar(
+                key: searchBarKey,
                 onTap: () => Get.toNamed(Routes.ALLSTORE),
                 hintText: "Cari yang kamu butuhkan disini ya",
                 height: 40.h,

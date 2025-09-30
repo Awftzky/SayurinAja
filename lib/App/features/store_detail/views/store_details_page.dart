@@ -21,8 +21,24 @@ class StoreDetailsPage extends GetView<StoreDetailsController> {
   @override
   Widget build(BuildContext context) {
     final store = Get.arguments as StoreModel;
-    // Ambil instance CartController sekali saja di sini
-    final CartController cartController = Get.find<CartController>();
+
+    // TRY CATCH INJECT
+    CartController? cartController;
+    try {
+      cartController = Get.find<CartController>();
+    } catch (e) {
+      debugPrint('CartController not found: $e');
+      // Navigate back or show error
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Get.snackbar(
+          'Error',
+          'Cart tidak tersedia. Silakan restart aplikasi.',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        Get.back();
+      });
+      return const SizedBox.shrink();
+    }
 
     return BaseScaffold(
       isFixed: false,
@@ -78,8 +94,7 @@ class StoreDetailsPage extends GetView<StoreDetailsController> {
                 SizedBox(height: 52.h),
                 Expanded(
                   child: SingleChildScrollView(
-                    padding:
-                        EdgeInsets.only(bottom: 80.h), // Extra space for cart
+                    padding: EdgeInsets.only(bottom: 80.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -87,12 +102,14 @@ class StoreDetailsPage extends GetView<StoreDetailsController> {
                         Text(
                           "Sayuran",
                           style: TextStyle(
-                              fontSize: 13.sp, fontWeight: FontWeight.w500),
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                         SizedBox(height: 15.h),
                         VegetableProductSection(
                           storeName: store.storeName,
-                          cartController: cartController, // Kirim controller
+                          cartController: cartController,
                         ),
                         SizedBox(height: 15.h),
                         const Divider(),
@@ -102,12 +119,14 @@ class StoreDetailsPage extends GetView<StoreDetailsController> {
                         Text(
                           "Buah Buahan",
                           style: TextStyle(
-                              fontSize: 13.sp, fontWeight: FontWeight.w500),
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                         SizedBox(height: 15.h),
                         FruitProductsection(
                           storeName: store.storeName,
-                          cartController: cartController, // Kirim controller
+                          cartController: cartController,
                         ),
                         SizedBox(height: 15.h),
                         const Divider(),
@@ -117,12 +136,14 @@ class StoreDetailsPage extends GetView<StoreDetailsController> {
                         Text(
                           "Daging",
                           style: TextStyle(
-                              fontSize: 13.sp, fontWeight: FontWeight.w500),
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                         SizedBox(height: 15.h),
                         MeatProductSection(
                           storeName: store.storeName,
-                          cartController: cartController, // Kirim controller
+                          cartController: cartController,
                         ),
                         SizedBox(height: 15.h),
                       ],

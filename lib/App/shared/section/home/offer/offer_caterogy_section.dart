@@ -13,16 +13,15 @@ class OfferCategorySection extends GetView<HomeController> {
       final offerCategories = controller.offerCategories;
       if (offerCategories.isEmpty) return const SizedBox.shrink();
 
-      final pageController = PageController(viewportFraction: 1.0);
-
       return SizedBox(
         height: 176.h,
         child: PageView.builder(
           itemCount: offerCategories.length,
-          controller: pageController,
+          controller: controller.offerPageController,
           onPageChanged: (index) {
             controller.offerCurrentPage.value = index;
           },
+          physics: const BouncingScrollPhysics(),
           itemBuilder: (context, index) {
             final offer = offerCategories[index];
 

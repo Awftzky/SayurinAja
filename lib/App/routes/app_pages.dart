@@ -167,7 +167,7 @@ class AppPages {
     GetPage(
         name: _Paths.allstore,
         page: () => const AllStorePage(),
-        binding: StoreBinding(),
+        bindings: [StoreBinding(), HomeBinding()],
         transition: Transition.fade,
         transitionDuration: Duration(milliseconds: 300)),
 

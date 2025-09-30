@@ -20,6 +20,7 @@ dependencies:
   intl: ^0.20.2
   font_awesome_flutter: ^10.10.0
   geolocator: ^14.0.2
+  geocoding: ^4.0.0
 
 #================ DEV DEPENDENCIES ================#
 dev_dependencies:

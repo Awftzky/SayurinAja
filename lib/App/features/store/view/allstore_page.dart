@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sayurinaja/App/core/theme/colors.dart';
+import 'package:sayurinaja/App/features/home/controller/home_controller.dart';
 import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/shared/section/home/store/allstore_section.dart';
 import 'package:sayurinaja/App/shared/widgets/scaffold/base_scaffold.dart';
 import 'package:sayurinaja/App/shared/widgets/search/fake_search_bar.dart';
 
-class AllStorePage extends StatelessWidget {
+class AllStorePage extends GetView<HomeController> {
   const AllStorePage({super.key});
 
   @override
@@ -38,16 +39,33 @@ class AllStorePage extends StatelessWidget {
         title: Align(
           alignment: Alignment.topLeft,
           child: Container(
-            width: double.infinity,
-            height: 23.h,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-            ),
-            child: Text(
-              "Bandung Jawa Barat",
-              style: TextStyle(fontSize: 8.sp),
-            ),
-          ),
+              width: 150.w,
+              height: 23.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.r),
+                color: AppColors.white,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 5.w,
+                  ),
+                  Icon(
+                    Icons.location_pin,
+                    color: AppColors.primary,
+                  ),
+                  SizedBox(
+                    width: 2.w,
+                  ),
+                  Obx(
+                    () => Text(
+                      "${controller.locationName}",
+                      style: TextStyle(fontSize: 8.sp),
+                    ),
+                  ),
+                ],
+              )),
         ),
       ),
 

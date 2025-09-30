@@ -54,7 +54,8 @@ class SettingPage extends StatelessWidget {
 
           /// Profile Tile
           ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
             leading: CircleAvatar(
               radius: 36.r, // w=72/2
               backgroundColor: Colors.blueAccent,
@@ -70,9 +71,7 @@ class SettingPage extends StatelessWidget {
             ),
             trailing: IconButton(
               icon: const Icon(Icons.settings),
-              onPressed: () {
-                /// TODO: Navigate to profile setting page
-              },
+              onPressed: () {},
             ),
           ),
 
@@ -117,9 +116,7 @@ class SettingPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                 ),
-                onPressed: () {
-                  /// TODO: Logout
-                },
+                onPressed: () {},
                 child: Text(
                   "Keluar Dari Akun",
                   style: TextStyle(

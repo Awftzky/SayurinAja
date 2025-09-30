@@ -47,7 +47,7 @@ class EmailVerificationSuccessPage
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Pendaftaran Berhasil! Selamat datang di SayurinAja! ${controller.username ?? ""}",
+                    "Pendaftaran Berhasil! Selamat datang di SayurinAja! ${controller.username}",
                     style: TextStyle(
                         fontSize: 13.sp,
                         color: AppColors.black,

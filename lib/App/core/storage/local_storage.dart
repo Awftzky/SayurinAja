@@ -1,6 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
+  static const String _keyUsername = 'username';
+  static const String _keyTutorialCompleted = 'tutorial_completed';
+
   static final LocalStorage _instance = LocalStorage._internal();
   factory LocalStorage() => _instance;
   LocalStorage._internal();
@@ -33,5 +36,24 @@ class LocalStorage {
       return {'latitude': lat, 'longitude': lng};
     }
     return null;
+  }
+
+  // TUTORIAL
+  Future<bool?> getTutorialCompleted() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_keyTutorialCompleted);
+  }
+
+  /// Set tutorial completion status
+  Future<bool> setTutorialCompleted(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setBool(_keyTutorialCompleted, value);
+  }
+
+  // ========== CLEAR ALL ==========
+
+  Future<bool> clearAll() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.clear();
   }
 }
