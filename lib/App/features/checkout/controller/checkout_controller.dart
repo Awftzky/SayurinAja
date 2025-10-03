@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:sayurinaja/App/features/cart/controller/cart_controller.dart';
+import 'package:sayurinaja/App/features/location/controller/location_controller.dart';
 import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/shared/models/cart/cart_model.dart';
 import 'package:sayurinaja/App/shared/models/checkout/delivery_models.dart';
@@ -9,16 +10,20 @@ import 'package:sayurinaja/App/shared/models/product/product_model.dart';
 /// Checkout Controller - Works independently with dummy data
 /// ✅ Compatible with simple CartController (counter-only)
 class CheckoutController extends GetxController {
-  // ========== DEPENDENCIES ==========
+  // INJECT CONTROLLER
   CartController? cartController;
+  final LocationController globalLocation = Get.find<LocationController>();
 
   // ========== OBSERVABLE VARIABLES ==========
   final RxList<CartModel> cartItems = <CartModel>[].obs;
   final Rx<DeliveryType> selectedDeliveryType = DeliveryType.delivery.obs;
-  final RxString selectedLocation = "Bandung, Jawa Barat".obs;
+  final RxString storeLocation = "Bandung, Jawa Barat".obs;
   final RxString deliveryNotes = "".obs;
+  final RxString productNotes = "".obs;
   final RxString selectedDeliveryOption = "Express".obs;
   final RxString selectedPaymentMethod = "QRIS".obs;
+  final RxString pickupButtonText = "Pesan dan ambil pesananan kamu".obs;
+  final RxString deliveryButtonText = "Pesan dan antar pesananan kamu".obs;
 
   // ========== LOADING STATES ==========
   final RxBool isProcessingOrder = false.obs;
@@ -137,6 +142,14 @@ class CheckoutController extends GetxController {
     return cartItems.fold(0, (sum, item) => sum + item.quantity);
   }
 
+  String get buttonText {
+    if (selectedDeliveryType.value == DeliveryType.pickup) {
+      return pickupButtonText.value; // Kembalikan teks untuk 'Ambil di Toko'
+    } else {
+      return deliveryButtonText.value; // Kembalikan teks untuk 'Pesan Antar'
+    }
+  }
+
   // ========== DELIVERY TYPE ==========
 
   void selectDeliveryType(DeliveryType type) {
@@ -233,7 +246,6 @@ class CheckoutController extends GetxController {
   // ========== LOCATION ==========
 
   void changeLocation() {
-    // TODO: Implement location picker
     Get.toNamed(Routes.COMINGSOON);
   }
 
@@ -260,9 +272,6 @@ class CheckoutController extends GetxController {
     try {
       isProcessingOrder.value = true;
 
-      // Simulate API call
-      await _submitOrderToApi();
-
       // Success
       Get.snackbar(
         "Berhasil!",
@@ -273,11 +282,8 @@ class CheckoutController extends GetxController {
         duration: const Duration(seconds: 2),
       );
 
-      // ✅ Update CartController if available
       if (cartController != null) {
         cartController!.hideCart();
-        // Optional: Clear the counter too
-        // cartController!.clearCart();
       }
 
       // Clear local cart items
@@ -307,7 +313,7 @@ class CheckoutController extends GetxController {
     }
 
     if (selectedDeliveryType.value == DeliveryType.delivery) {
-      if (selectedLocation.value.isEmpty) {
+      if (globalLocation.locationName.value.isEmpty) {
         return 'Silakan pilih lokasi pengiriman';
       }
       if (selectedDeliveryOption.value.isEmpty) {
@@ -320,38 +326,6 @@ class CheckoutController extends GetxController {
     }
 
     return null;
-  }
-
-  /// Submit order to API (simulated)
-  Future<void> _submitOrderToApi() async {
-    await Future.delayed(const Duration(seconds: 2));
-
-    final orderData = {
-      'items': cartItems
-          .map((item) => {
-                'product_name': item.product.productName,
-                'quantity': item.quantity,
-                'price': item.product.productPrice,
-                'notes': item.notes,
-              })
-          .toList(),
-      'delivery_type': selectedDeliveryType.value.toString(),
-      'delivery_option': selectedDeliveryOption.value,
-      'location': selectedLocation.value,
-      'delivery_notes': deliveryNotes.value,
-      'payment_method': selectedPaymentMethod.value,
-      'subtotal': subtotal,
-      'delivery_fee': deliveryFee,
-      'total': total,
-      'timestamp': DateTime.now().toIso8601String(),
-    };
-    Get.snackbar(
-      "Berhasil",
-      "Pesanan anda Telah diproses!",
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.transparent,
-      colorText: Colors.white,
-    );
   }
 
   /// Refresh cart data

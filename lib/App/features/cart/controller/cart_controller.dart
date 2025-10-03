@@ -53,7 +53,6 @@ class CartController extends GetxController {
 
   // ========== REMOVE FROM CART ==========
 
-  /// Remove single item from cart
   void removeItem(double productPrice) {
     if (_totalItems.value > 0) {
       _totalItems.value--;

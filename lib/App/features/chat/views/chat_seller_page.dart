@@ -16,7 +16,7 @@ class ChatSellerPage extends StatelessWidget {
         return ChatTile(
           username: 'Penjual ${index + 1}',
           lastMessage: 'Barang siap dikirim...',
-          time: '09:4${index} AM',
+          time: '09:4$index AM',
           unreadCount: index == 1 ? 5 : 0,
           onTap: () {},
         );

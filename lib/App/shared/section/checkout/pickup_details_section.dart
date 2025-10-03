@@ -25,7 +25,7 @@ class PickupDetailsSection extends GetView<CheckoutController> {
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Text(
-            "Lokasi Pesanan antar kamu",
+            "Lokasi ambil pesanan kamu",
             style: TextStyle(fontSize: 13),
           ),
           SizedBox(height: 13.h),
@@ -36,7 +36,7 @@ class PickupDetailsSection extends GetView<CheckoutController> {
               Icon(Icons.location_on, color: AppColors.primary, size: 28),
               Expanded(
                 child: Obx(() => Text(
-                      controller.selectedLocation.value,
+                      controller.storeLocation.value,
                       style: TextStyle(fontSize: 13),
                     )),
               ),

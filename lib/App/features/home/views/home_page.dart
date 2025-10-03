@@ -73,7 +73,7 @@ class HomePage extends GetView<HomeController> {
   Widget _buildHeader() {
     return Obx(() => HeaderFeature(
           username: controller.username.value,
-          location: controller.locationName.value,
+          location: controller.globalLocation.locationName.value,
           imagePath: "assets/images/profile.jpeg",
           onAvatarTap: () => Get.toNamed(Routes.COMINGSOON),
           showSearchBar: true,
@@ -193,26 +193,21 @@ class HomePage extends GetView<HomeController> {
             CategoryRounded(
               assetImage: "assets/images/caterogyvegetable.jpeg",
               label: "Sayuran",
-              onTap: () => _onCategoryTap('Sayuran'),
+              onTap: () => Get.toNamed(Routes.COMINGSOON),
             ),
             CategoryRounded(
               assetImage: "assets/images/caterogyfruit.jpeg",
               label: "Buah",
-              onTap: () => _onCategoryTap('Buah'),
+              onTap: () => Get.toNamed(Routes.COMINGSOON),
             ),
             CategoryRounded(
               assetImage: "assets/images/caterogymeet.jpeg",
               label: "Daging",
-              onTap: () => _onCategoryTap('Daging'),
+              onTap: () => Get.toNamed(Routes.COMINGSOON),
             ),
           ],
         ),
       ],
     );
-  }
-
-  void _onCategoryTap(String category) {
-    // TODO: Navigate to category page
-    debugPrint('Category tapped: $category');
   }
 }

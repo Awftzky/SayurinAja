@@ -61,12 +61,14 @@ class CheckoutBottomBarWidget extends GetView<CheckoutController> {
                 ],
               )),
           const SizedBox(height: 12),
-          MainButton(
-            textSize: 10,
-            width: 318,
-            height: 36,
-            text: "Pesan dan antar pesanan kamu",
-            onPressed: controller.processOrder,
+          Obx(
+            () => MainButton(
+              textSize: 10,
+              width: 318,
+              height: 36,
+              text: controller.buttonText,
+              onPressed: controller.processOrder,
+            ),
           ),
         ],
       ),

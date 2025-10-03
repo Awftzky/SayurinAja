@@ -4,7 +4,7 @@ import 'package:sayurinaja/App/core/network/location_service.dart';
 
 class LocationController extends GetxController {
   final Rx<Position?> location = Rx<Position?>(null);
-  final RxString locationName = "Mencari lokasi...".obs; // State baru
+  final RxString locationName = "Mencari lokasi...".obs; 
   final RxBool isLoading = true.obs;
 
   final LocationService _locationService = LocationService();
@@ -12,6 +12,7 @@ class LocationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    fetchLocation();
   }
 
   Future<void> fetchLocation() async {

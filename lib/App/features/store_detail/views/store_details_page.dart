@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sayurinaja/App/core/theme/colors.dart';
 import 'package:sayurinaja/App/features/cart/controller/cart_controller.dart';
+import 'package:sayurinaja/App/features/checkout/controller/checkout_controller.dart';
 import 'package:sayurinaja/App/features/store_detail/controller/store_details_controller.dart';
 import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/shared/models/store/store_model.dart';
@@ -28,6 +29,23 @@ class StoreDetailsPage extends GetView<StoreDetailsController> {
       cartController = Get.find<CartController>();
     } catch (e) {
       debugPrint('CartController not found: $e');
+      // Navigate back or show error
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Get.snackbar(
+          'Error',
+          'Cart tidak tersedia. Silakan restart aplikasi.',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        Get.back();
+      });
+      return const SizedBox.shrink();
+    }
+
+    CheckoutController? checkoutController;
+    try {
+      checkoutController = Get.find<CheckoutController>();
+    } catch (e) {
+      debugPrint('CheckoutController not found: $e');
       // Navigate back or show error
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Get.snackbar(
@@ -72,7 +90,8 @@ class StoreDetailsPage extends GetView<StoreDetailsController> {
           padding: EdgeInsets.fromLTRB(0, 0, 20.w, 0),
           child: FakeSearchBar(
             height: 40.h,
-            onTap: () => Get.toNamed(Routes.SEARCHSTOREDETAILS),
+            onTap: () => Get.toNamed(Routes.SEARCHSTOREDETAILS,
+                arguments: store.storeName),
             hintText: "Cari yang kamu butuhkan disini ya",
           ),
         ),
@@ -89,7 +108,8 @@ class StoreDetailsPage extends GetView<StoreDetailsController> {
                   storeName: store.storeName,
                   location: store.storeLocation,
                   starReview: store.starReview,
-                  description: "DESKRIPSI COMING SOON",
+                  description:
+                      "${store.storeName} Berdiri di tahun 2004 dengan penjual berbagai jenis sayur",
                 ),
                 SizedBox(height: 52.h),
                 Expanded(
@@ -110,6 +130,7 @@ class StoreDetailsPage extends GetView<StoreDetailsController> {
                         VegetableProductSection(
                           storeName: store.storeName,
                           cartController: cartController,
+                          checkoutController: checkoutController,
                         ),
                         SizedBox(height: 15.h),
                         const Divider(),
@@ -127,6 +148,7 @@ class StoreDetailsPage extends GetView<StoreDetailsController> {
                         FruitProductsection(
                           storeName: store.storeName,
                           cartController: cartController,
+                          checkoutController: checkoutController,
                         ),
                         SizedBox(height: 15.h),
                         const Divider(),
@@ -144,6 +166,7 @@ class StoreDetailsPage extends GetView<StoreDetailsController> {
                         MeatProductSection(
                           storeName: store.storeName,
                           cartController: cartController,
+                          checkoutController: checkoutController,
                         ),
                         SizedBox(height: 15.h),
                       ],

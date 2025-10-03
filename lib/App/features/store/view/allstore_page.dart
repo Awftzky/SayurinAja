@@ -60,7 +60,7 @@ class AllStorePage extends GetView<HomeController> {
                   ),
                   Obx(
                     () => Text(
-                      "${controller.locationName}",
+                      controller.globalLocation.locationName.value,
                       style: TextStyle(fontSize: 8.sp),
                     ),
                   ),

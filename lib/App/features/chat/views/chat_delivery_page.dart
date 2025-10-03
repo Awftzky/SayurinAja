@@ -13,7 +13,7 @@ class ChatDeliveryPage extends StatelessWidget {
         return ChatTile(
           username: 'Pengantar ${index + 1}',
           lastMessage: 'Status pengiriman...',
-          time: '12:0${index} PM',
+          time: "12:0$index PM",
           unreadCount: index == 0 ? 2 : 0,
           onTap: () {
             /// UNRELEASED FINAL DESIGN

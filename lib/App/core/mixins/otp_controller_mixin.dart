@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 mixin OtpControllerMixin on GetxController {
-  // LENGTH
   int get otpLength;
 
 // CONDITION

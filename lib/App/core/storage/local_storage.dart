@@ -50,8 +50,6 @@ class LocalStorage {
     return prefs.setBool(_keyTutorialCompleted, value);
   }
 
-  // ========== CLEAR ALL ==========
-
   Future<bool> clearAll() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.clear();

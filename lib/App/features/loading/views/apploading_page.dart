@@ -26,5 +26,3 @@
 //     );
 //   }
 // }
-
-/// TUNGGU FINAL DESIGN DARI UI/UX

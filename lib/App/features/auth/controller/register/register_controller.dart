@@ -19,6 +19,7 @@ class RegisterController extends GetxController {
 
   @override
   void onInit() {
+    // ADD LOGIC
     super.onInit();
   }
 
@@ -35,12 +36,6 @@ class RegisterController extends GetxController {
     if (emailController.text.isEmpty ||
         usernameController.text.isEmpty ||
         passwordController.text.isEmpty) {
-      Get.snackbar('Error', "Semua field harus diisi",
-          icon: Icon(Icons.error_outline),
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red.withOpacity(0.8),
-          colorText: Colors.white,
-          duration: Duration(seconds: 2));
       return;
     }
 
@@ -69,13 +64,12 @@ class RegisterController extends GetxController {
         );
 
         Get.snackbar(
-          "OTP Terkirim",
+          "Kode OTP Terkirim",
           "Kode verifikasi telah dikirim",
           backgroundColor: AppColors.primary,
           colorText: Colors.white,
         );
       } else if (response.error != null) {
-        // Handle error from backend
         Get.snackbar("Gagal", response.error!);
       } else {
         Get.snackbar("Gagal", "Terjadi kesalahan tidak diketahui");

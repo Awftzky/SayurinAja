@@ -12,7 +12,7 @@ class SocialAuthSection extends StatelessWidget {
     required VoidCallback onPressed,
   }) {
     return InkWell(
-      borderRadius: BorderRadius.circular(100),
+      borderRadius: BorderRadius.circular(100.r),
       onTap: onPressed,
       child: Container(
         width: 53.w,

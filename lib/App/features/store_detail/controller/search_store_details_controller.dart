@@ -12,12 +12,23 @@ class SearchStoreDetailsController extends GetxController {
 
   final searchResults = <Product>[].obs;
   final searchHistory = <String>[].obs;
-  final isSearching = false.obs; // Condition
-  final searchQuery = ''.obs; // SAVE TEXT
+  final isSearching = false.obs;
+  final searchQuery = ''.obs;
+  final storeName = ''.obs;
 
   @override
   void onInit() {
     super.onInit();
+    if (Get.arguments != null) {
+      storeName.value = Get.arguments as String;
+    }
+  }
+
+  @override
+  void onClose() {
+    searchController.dispose();
+    searchFocusNode.dispose();
+    super.onClose();
   }
 
   void performSearch(String query) {
@@ -33,10 +44,10 @@ class SearchStoreDetailsController extends GetxController {
 
     // Filter dari daftar toko utama di StoreController
     final results = _productController.allProducts.where((product) {
-      final storeName = product.productName.toLowerCase();
+      final productName = product.productName.toLowerCase();
       final searchLower = query.toLowerCase();
 
-      return storeName.contains(searchLower);
+      return productName.contains(searchLower);
     }).toList();
 
     searchResults.value = results;

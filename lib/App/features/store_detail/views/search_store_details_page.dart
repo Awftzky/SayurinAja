@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sayurinaja/App/core/theme/colors.dart';
+import 'package:sayurinaja/App/features/cart/controller/cart_controller.dart';
+import 'package:sayurinaja/App/features/checkout/controller/checkout_controller.dart';
 import 'package:sayurinaja/App/features/store_detail/controller/search_store_details_controller.dart';
+import 'package:sayurinaja/App/shared/widgets/bottom_sheet/main_bottom_sheet.dart';
 import 'package:sayurinaja/App/shared/widgets/box/product_box.dart'; // Import ProductBox
 import 'package:sayurinaja/App/shared/widgets/header/store_details_header.dart';
 import 'package:sayurinaja/App/shared/widgets/scaffold/base_scaffold.dart';
@@ -14,6 +17,9 @@ class SearchStoreDetailsPage extends GetView<SearchStoreDetailsController> {
 
   @override
   Widget build(BuildContext context) {
+    final cartController = Get.find<CartController>();
+    final checkoutController = Get.find<CheckoutController>();
+
     return BaseScaffold(
       useGradient: false,
       header: StoreDetailsHeader(
@@ -85,15 +91,16 @@ class SearchStoreDetailsPage extends GetView<SearchStoreDetailsController> {
                         productDescription: product.productDescription,
                         productPrice: product.productPrice,
                         onButtonPressed: () {
-                          // Logika tambah ke keranjang
-                          debugPrint(
-                              "Tambah ${product.productName} ke keranjang");
+                          cartController.addToCart(
+                              controller.storeName.value, product.productPrice);
                         },
-                        onNotesTap: () {
-                          // Logika tambah catatan
-                          debugPrint(
-                              "Tambah catatan untuk ${product.productName}");
-                        },
+                        onNotesTap: () => Get.bottomSheet(MainBottomSheet(
+                          controller: checkoutController,
+                          buttonText: "Simpan dan tambahkan",
+                          hintText: "Contoh: berikan cabe yang masih bagus",
+                          titleText:
+                              "Tambahkan catatan untuk produk yang mau kamu beli",
+                        )),
                       ),
                     );
                   },
