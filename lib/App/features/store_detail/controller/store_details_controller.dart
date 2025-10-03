@@ -61,10 +61,8 @@ class StoreDetailsController extends GetxController {
       isLoading.value = true;
       hasError.value = false;
 
-      // TODO: Replace with actual API call
       await Future.delayed(const Duration(milliseconds: 500));
 
-      // Load products by category
       vegetableProducts.value = _getVegetableProducts(storeName);
       fruitProducts.value = _getFruitProducts(storeName);
       meatProducts.value = _getMeatProducts(storeName);

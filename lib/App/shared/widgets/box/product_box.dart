@@ -12,7 +12,7 @@ class ProductBox extends StatelessWidget {
   final double productPrice;
   final VoidCallback? onButtonPressed;
   final String? storeName;
-  final VoidCallback? onNotesTap;
+  final VoidCallback onNotesTap;
   final double width;
   final double height;
 
@@ -24,7 +24,7 @@ class ProductBox extends StatelessWidget {
     required this.productPrice,
     this.storeName,
     this.onButtonPressed,
-    this.onNotesTap,
+    required this.onNotesTap,
     this.width = 312,
     this.height = 122,
   });
@@ -130,7 +130,7 @@ class ProductBox extends StatelessWidget {
                   Padding(
                       padding: EdgeInsets.only(right: 100.w),
                       child: AddNotes(
-                          onTap: () => onNotesTap)), // TAMBAHKAN CATATAN
+                        onTap: onNotesTap)), // TAMBAHKAN CATATAN
                   SizedBox(height: 11.h),
 
                   // Baris 4: Tombol "Tambahkan"

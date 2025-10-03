@@ -10,7 +10,7 @@ class AddNotes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onTap,
+      onTap: onTap,
       child: Container(
           decoration: BoxDecoration(
               color: AppColors.shadowGrey,

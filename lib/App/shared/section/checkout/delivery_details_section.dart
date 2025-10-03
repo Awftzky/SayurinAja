@@ -41,7 +41,7 @@ class DeliveryDetailsSection extends GetView<CheckoutController> {
               Icon(Icons.location_on, color: AppColors.primary, size: 28),
               Expanded(
                 child: Obx(() => Text(
-                      controller.selectedLocation.value,
+                      controller.globalLocation.locationName.value,
                       style: TextStyle(fontSize: 13),
                     )),
               ),

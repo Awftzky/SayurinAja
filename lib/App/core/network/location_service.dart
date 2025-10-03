@@ -71,8 +71,9 @@ class LocationService {
         await _localStorage.saveLastKnownLocation(
             position.latitude, position.longitude);
       }
+    // ignore: empty_catches
     } catch (e) {
-      print("Gagal menyimpan lokasi: $e");
+      
     }
   }
 }

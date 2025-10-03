@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sayurinaja/App/core/mixins/otp_controller_mixin.dart';
 import 'package:sayurinaja/App/core/network/user_service.dart';
 import 'package:sayurinaja/App/core/storage/local_storage.dart';
+import 'package:sayurinaja/App/core/theme/colors.dart';
 import 'package:sayurinaja/App/routes/app_pages.dart';
 import 'package:sayurinaja/App/shared/models/auth/user_response.dart';
 
@@ -52,7 +53,7 @@ class EmailVerificationController extends GetxController
           "Berhasil",
           "Akun berhasil dibuat! Silakan login",
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green.withOpacity(0.8),
+          backgroundColor: AppColors.primary,
           colorText: Colors.white,
         );
 
@@ -76,7 +77,7 @@ class EmailVerificationController extends GetxController
         "Error",
         e.toString(),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.8),
+        backgroundColor: AppColors.error,
         colorText: Colors.white,
       );
     } finally {

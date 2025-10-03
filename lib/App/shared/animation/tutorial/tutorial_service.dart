@@ -5,34 +5,30 @@ import 'package:sayurinaja/App/shared/widgets/button/main_button.dart';
 import 'package:sayurinaja/App/shared/widgets/button/skip_button.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
-// Enum untuk mengatur posisi dialog tutorial (di atas atau di bawah target)
-enum ContentAlign {
+enum TutorialAlign {
   top,
   bottom,
 }
 
 class TutorialService {
   final List<TargetFocus> _targets = [];
-
-  // Callback yang akan dipanggil dari luar (misal: HomeController)
   VoidCallback? _onCompleteCallback;
   VoidCallback? _onSkipCallback;
 
-  /// Menambahkan target tutorial baru
-  /// Fitur baru: Otomatis menghitung nomor langkah saat ini.
   void addTarget({
     required GlobalKey key,
     required String description,
-    ContentAlign align = ContentAlign.bottom,
+    TutorialAlign align = TutorialAlign.bottom,
   }) {
-    final int currentStep = _targets.length + 1;
-
     _targets.add(
       TargetFocus(
         identify: key.toString(),
         keyTarget: key,
         contents: [
           TargetContent(
+            align: align == TutorialAlign.bottom
+                ? ContentAlign.bottom
+                : ContentAlign.top,
             builder: (context, controller) {
               return Material(
                 color: Colors.transparent,
@@ -44,65 +40,34 @@ class TutorialService {
                     borderRadius: BorderRadius.circular(10.r),
                   ),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min, // Agar tinggi container pas
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // FITUR BARU: Penanda Langkah ("1 dari 6")
-                      Text(
-                        "$currentStep dari ${_targets.length}",
-                        style: TextStyle(
-                          color: AppColors.black.withOpacity(0.6),
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: 60.h,
+                          maxHeight: 150.h,
                         ),
-                      ),
-                      const SizedBox(height: 10),
-
-                      // Deskripsi fitur
-                      SizedBox(
-                        height: 60.h, // Beri tinggi maksimal agar layout stabil
                         child: SingleChildScrollView(
                           child: Text(
+                            textAlign: TextAlign.center,
                             description,
                             style: TextStyle(
                               color: AppColors.black,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
                       ),
                       const SizedBox(height: 15),
-
-                      // Tombol Aksi (Lewati & Selanjutnya)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          // FITUR BARU: Tombol Lewati di setiap langkah
-                          TextButton(
-                            onPressed: () {
-                              controller.skip();
-                            },
-                            child: Text(
-                              "Lewati Tur",
-                              style: TextStyle(
-                                color: AppColors.black.withOpacity(0.7),
-                                fontSize: 13.sp,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          MainButton(
-                            text: "Selanjutnya",
-                            fontWeight: FontWeight.w700,
-                            width: 120.w,
-                            height: 38.h,
-                            textSize: 13.sp,
-                            onPressed: () {
-                              controller.next();
-                            },
-                          ),
-                        ],
+                      MainButton(
+                        text: "Selanjutnya",
+                        fontWeight: FontWeight.w700,
+                        width: 247.w,
+                        height: 38.h,
+                        textSize: 13.sp,
+                        onPressed: () => controller.next(),
                       ),
                     ],
                   ),
@@ -115,7 +80,6 @@ class TutorialService {
     );
   }
 
-  /// Menampilkan dialog perkenalan di awal
   void showIntro(BuildContext context,
       {required VoidCallback onStart, required VoidCallback onSkip}) {
     showDialog(
@@ -132,7 +96,6 @@ class TutorialService {
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "Selamat datang di halaman utama SayurinAja!",
@@ -153,31 +116,27 @@ class TutorialService {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 20.h),
-                Column(
-                  children: [
-                    MainButton(
-                      text: "Mulai Tur",
-                      fontWeight: FontWeight.w500,
-                      width: 247.w,
-                      height: 38.h,
-                      textSize: 13.sp,
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        onStart(); // Memanggil callback untuk memulai tutorial
-                      },
-                    ),
-                    SizedBox(height: 17.h),
-                    SkipButton(
-                      fontWeight: FontWeight.w500,
-                      width: 247.w,
-                      height: 38.h,
-                      textSize: 13.sp,
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        onSkip(); // Memanggil callback jika pengguna lewati dari awal
-                      },
-                    ),
-                  ],
+                MainButton(
+                  text: "Mulai Tur",
+                  fontWeight: FontWeight.w500,
+                  width: 247.w,
+                  height: 38.h,
+                  textSize: 13.sp,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    onStart();
+                  },
+                ),
+                SizedBox(height: 17.h),
+                SkipButton(
+                  fontWeight: FontWeight.w500,
+                  width: 247.w,
+                  height: 38.h,
+                  textSize: 13.sp,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    onSkip();
+                  },
                 ),
               ],
             ),
@@ -187,7 +146,6 @@ class TutorialService {
     );
   }
 
-  /// Menampilkan dialog penutup di akhir
   void showOutro(BuildContext context) {
     showDialog(
       context: context,
@@ -203,10 +161,9 @@ class TutorialService {
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Pengenalan fitur sudah selesai. Sekarang kamu siap untuk menjelajahi aplikasi!",
+                  "Pengenalan fitur cukup sampai situ saja, kamu seharusnya sudah paham penggunaannya. Apakah siap untuk menggunakan aplikasi?",
                   style: TextStyle(
                     color: AppColors.black,
                     fontSize: 13.sp,
@@ -216,14 +173,13 @@ class TutorialService {
                 ),
                 SizedBox(height: 24.h),
                 MainButton(
-                  text: "Siap!",
+                  text: "Siap dong!",
                   fontWeight: FontWeight.w500,
                   width: 247.w,
                   height: 38.h,
                   textSize: 13.sp,
                   onPressed: () {
                     Navigator.of(context).pop();
-                    // Menandai tutorial selesai
                     _onCompleteCallback?.call();
                   },
                 ),
@@ -235,7 +191,6 @@ class TutorialService {
     );
   }
 
-  /// Fungsi utama untuk menampilkan tutorial
   void showTutorial(
     BuildContext context, {
     required VoidCallback onComplete,
@@ -246,31 +201,55 @@ class TutorialService {
       return;
     }
 
-    // Simpan callback dari controller untuk digunakan di tempat lain
     _onCompleteCallback = onComplete;
     _onSkipCallback = onSkip;
 
     TutorialCoachMark(
-      targets: _targets,
-      textSkip: "", // Kosongkan karena kita punya tombol lewati sendiri
-      paddingFocus: 8,
-      opacityShadow: 0.8,
-      hideSkip: true, // Sembunyikan tombol lewati default dari paket
-      onFinish: () {
-        debugPrint('✅ Tutorial finished');
-        showOutro(
-            context); // Tampilkan dialog akhir setelah semua langkah selesai
-      },
-      onSkip: () {
-        debugPrint('⏭️ Tutorial skipped');
-        _onSkipCallback?.call(); // Panggil callback skip utama
-        return true; // Return true untuk benar-benar menghentikan tur
-      },
-    ).show(context: context);
+            targets: _targets,
+            colorShadow: AppColors.transparent,
+            paddingFocus: 8,
+            opacityShadow: 0.8,
+            onClickTarget: (target) {
+              _scrollToTarget(target.keyTarget);
+            },
+            onFinish: () {
+              showOutro(context);
+              _clearCallbacks();
+            },
+            onSkip: () {
+              _onSkipCallback?.call();
+              _clearCallbacks();
+
+              return true;
+            },
+            focusAnimationDuration: Duration.zero,
+            pulseAnimationDuration: Duration.zero,
+            hideSkip: true,
+            unFocusAnimationDuration: Duration.zero)
+        .show(context: context);
   }
 
-  /// Menghapus semua target (berguna untuk inisialisasi ulang)
+  void _scrollToTarget(GlobalKey? targetKey) {
+    if (targetKey?.currentContext == null) return;
+
+    try {
+      Scrollable.ensureVisible(
+        targetKey!.currentContext!,
+        duration: Duration.zero,
+        alignment: 0.3,
+      );
+    } catch (e) {
+      debugPrint('⚠️ Error scrolling: $e');
+    }
+  }
+
   void clearTargets() {
     _targets.clear();
+  }
+
+  /// CLEANER
+  void _clearCallbacks() {
+    _onCompleteCallback = null;
+    _onSkipCallback = null;
   }
 }

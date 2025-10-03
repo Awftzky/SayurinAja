@@ -197,7 +197,12 @@ class AppPages {
     GetPage(
         name: _Paths.storedetails,
         page: () => const StoreDetailsPage(),
-        bindings: [StoreDetailsBinding(), ProductBinding(), CartBindings()],
+        bindings: [
+          StoreDetailsBinding(),
+          ProductBinding(),
+          CartBindings(),
+          CheckoutBindings()
+        ],
         transition: Transition.fade,
         transitionDuration: Duration(milliseconds: 300)),
 
@@ -207,7 +212,8 @@ class AppPages {
         bindings: [
           SearchStoreDetailsBinding(), // UTAMA
           ProductBinding(),
-          StoreDetailsBinding()
+          StoreDetailsBinding(),
+          CheckoutBindings()
         ],
         transition: Transition.fade,
         transitionDuration: Duration(milliseconds: 300)),
@@ -230,10 +236,10 @@ class AppPages {
 
     /// COMING SOON FEATURE
     GetPage(
-        name: _Paths.comingsoon,
-        page: () => const ComingSoonPage(),
-        binding: StoreBinding(),
-        transition: Transition.fade,
-        transitionDuration: Duration(milliseconds: 300)),
+      name: _Paths.comingsoon,
+      page: () => const ComingSoonPage(),
+      binding: StoreBinding(),
+      transition: Transition.noTransition,
+    )
   ];
 }

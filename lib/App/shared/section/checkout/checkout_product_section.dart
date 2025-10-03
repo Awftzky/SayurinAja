@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sayurinaja/App/core/theme/colors.dart';
 import 'package:sayurinaja/App/features/checkout/controller/checkout_controller.dart';
+import 'package:sayurinaja/App/shared/widgets/bottom_sheet/main_bottom_sheet.dart';
 import 'package:sayurinaja/App/shared/widgets/box/checkout_product_box.dart'; // Ganti nama file jika berbeda
 
 class CheckoutProductSection extends GetView<CheckoutController> {
@@ -42,7 +43,6 @@ class CheckoutProductSection extends GetView<CheckoutController> {
             // Ambil item dari controller berdasarkan index
             final cartItem = controller.cartItems[index];
 
-            // Panggil CheckoutProductBox dan berikan data serta fungsi yang dibutuhkan
             return CheckoutProductBox(
               cartItem: cartItem,
               onAdd: () => controller.updateProductQuantity(
@@ -50,7 +50,13 @@ class CheckoutProductSection extends GetView<CheckoutController> {
               onRemove: () => controller.updateProductQuantity(
                   index, cartItem.quantity - 1),
               onNotesTap: () {
-                // Panggil method di controller untuk menampilkan dialog catatan
+                Get.bottomSheet(MainBottomSheet(
+                  controller: controller,
+                  buttonText: "Simpan dan tambahkan",
+                  hintText: "Contoh: berikan cabe yang masih bagus",
+                  titleText:
+                      "Tambahkan catatan untuk produk yang mau kamu beli",
+                ));
               },
             );
           },

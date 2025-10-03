@@ -8,9 +8,15 @@ import 'package:sayurinaja/App/shared/widgets/button/main_button.dart';
 class MainBottomSheet extends StatelessWidget {
   final CheckoutController controller;
   final String buttonText;
+  final String hintText;
+  final String titleText;
 
   const MainBottomSheet(
-      {super.key, required this.controller, this.buttonText = "Simpan"});
+      {super.key,
+      required this.controller,
+      this.buttonText = "Simpan",
+      this.hintText = "Contoh: Pagar warna hitam, dekat masjid...",
+      this.titleText = "Tambahkan Detail Alamat Kamu"});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +56,7 @@ class MainBottomSheet extends StatelessWidget {
             ),
 
             Text(
-              "Tambahkan Detail Alamat Kamu",
+              titleText,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w500,
@@ -69,7 +75,7 @@ class MainBottomSheet extends StatelessWidget {
               maxLines: 4, // Agar bisa untuk alamat yang panjang
               autofocus: true,
               decoration: InputDecoration(
-                hintText: "Contoh: Pagar warna hitam, dekat masjid...",
+                hintText: hintText,
                 hintStyle: TextStyle(
                   fontSize: 14.sp,
                   color: Colors.grey[400],
@@ -105,7 +111,6 @@ class MainBottomSheet extends StatelessWidget {
                           color: Colors.grey[600],
                         ),
                       ),
-                      // Bungkus dengan Obx agar harga otomatis update
                       Obx(() => Text(
                             "Rp ${controller.total.toStringAsFixed(0)}", // Ambil total dari controller
                             style: TextStyle(
@@ -127,26 +132,12 @@ class MainBottomSheet extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     textSize: 10,
                     onPressed: () {
-                      // Simpan catatan ke controller sebelum menutup
-                      // controller.saveDeliveryNotes();
-                      // Tutup bottom sheet
                       Get.back();
-                      // Tampilkan notifikasi
-                      Get.snackbar(
-                        "Sukses",
-                        "Detail alamat berhasil disimpan!",
-                        snackPosition: SnackPosition.BOTTOM,
-                        backgroundColor: AppColors.primary,
-                        colorText: Colors.white,
-                        duration: const Duration(seconds: 2),
-                        margin: EdgeInsets.all(16.w),
-                      );
                     },
                   ),
                 ),
               ],
             ),
-            // Tambahkan safe area padding di bottom
             SizedBox(height: MediaQuery.of(context).padding.bottom),
           ],
         ),
