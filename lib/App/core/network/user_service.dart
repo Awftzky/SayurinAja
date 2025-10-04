@@ -9,7 +9,8 @@ import 'package:sayurinaja/App/shared/models/auth/user_response.dart';
 
 class UserService {
   final String baseAndroidUrl = "http://10.0.2.2:8000";
-  final String baseUrl = "http://localhost:8000";
+  // final String baseUrl = "http://192.168.18.138:8000"; // MY IPHONE
+  final String baseUrl = "http://localhost:8000"; // BASE URL
 
   // REGISTER API - Updated
   Future<UserResponse> registerAPI(RegisterRequest request) async {

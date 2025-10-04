@@ -39,14 +39,14 @@ class AllStorePage extends GetView<HomeController> {
         title: Align(
           alignment: Alignment.topLeft,
           child: Container(
-              width: 150.w,
-              height: 23.h,
+              padding: EdgeInsets.only(
+                  left: 5.w, right: 15.w, top: 5.h, bottom: 5.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.r),
                 color: AppColors.white,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
                     width: 5.w,

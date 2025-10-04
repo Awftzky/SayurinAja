@@ -12,7 +12,6 @@ import 'package:sayurinaja/App/shared/widgets/scaffold/base_scaffold.dart';
 class RegisterPage extends GetView<RegisterController> {
   const RegisterPage({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
@@ -67,35 +66,47 @@ class RegisterPage extends GetView<RegisterController> {
                   SizedBox(height: 23.h),
 
                   /// USERNAME
-                  CustomInputAuth(
-                    labelText: "Nama Pengguna",
-                    width: 298,
-                    height: 66,
-                    borderColor: AppColors.black,
-                    controller: controller.usernameController,
+                  Obx(
+                    () => CustomInputAuth(
+                      labelText: "Nama Pengguna",
+                      width: 298,
+                      height: 66,
+                      borderColor: AppColors.black,
+                      controller: controller.usernameController,
+                      hasError: controller.usernameError.value.isNotEmpty,
+                      errorText: controller.usernameError.value,
+                    ),
                   ),
 
                   SizedBox(height: 15.h),
 
                   /// EMAIL
-                  CustomInputAuth(
-                    labelText: "Email",
-                    width: 298,
-                    height: 66,
-                    borderColor: AppColors.black,
-                    controller: controller.emailController,
+                  Obx(
+                    () => CustomInputAuth(
+                      labelText: "Email",
+                      width: 298,
+                      height: 66,
+                      borderColor: AppColors.black,
+                      controller: controller.emailController,
+                      hasError: controller.emailError.value.isNotEmpty,
+                      errorText: controller.emailError.value,
+                    ),
                   ),
 
                   SizedBox(height: 15.h),
 
                   /// PASSWORD
-                  CustomInputAuth(
-                    labelText: "Kata Sandi",
-                    width: 298,
-                    height: 66,
-                    borderColor: AppColors.black,
-                    controller: controller.passwordController,
-                    obscureText: true,
+                  Obx(
+                    () => CustomInputAuth(
+                      labelText: "Kata Sandi",
+                      width: 298,
+                      height: 66,
+                      borderColor: AppColors.black,
+                      controller: controller.passwordController,
+                      obscureText: true,
+                      hasError: controller.passwordError.value.isNotEmpty,
+                      errorText: controller.passwordError.value,
+                    ),
                   ),
 
                   SizedBox(height: 17.h),

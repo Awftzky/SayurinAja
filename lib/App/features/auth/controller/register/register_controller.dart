@@ -17,10 +17,17 @@ class RegisterController extends GetxController {
   var isLoading = false.obs;
   var otpCode = "".obs;
 
+  var usernameError = "".obs;
+  var emailError = "".obs;
+  var passwordError = "".obs;
+
   @override
   void onInit() {
-    // ADD LOGIC
     super.onInit();
+    // Clear errors when user types
+    usernameController.addListener(_clearUsernameError);
+    emailController.addListener(_clearEmailError);
+    passwordController.addListener(_clearPasswordError);
   }
 
   @override
@@ -31,11 +38,42 @@ class RegisterController extends GetxController {
     super.onClose();
   }
 
+  void _clearUsernameError() {
+    if (usernameError.value.isNotEmpty) {
+      usernameError.value = "";
+    }
+  }
+
+  void _clearEmailError() {
+    if (emailError.value.isNotEmpty) {
+      emailError.value = "";
+    }
+  }
+
+  void _clearPasswordError() {
+    if (passwordError.value.isNotEmpty) {
+      passwordError.value = "";
+    }
+  }
+
+  void _clearAllErrors() {
+    usernameError.value = "";
+    emailError.value = "";
+    passwordError.value = "";
+  }
+
   // REGISTER LOGIC - FIXED
   void register() async {
-    if (emailController.text.isEmpty ||
-        usernameController.text.isEmpty ||
+    // Clear previous errors
+    _clearAllErrors();
+
+    // Validation
+    if (usernameController.text.isEmpty ||
+        emailController.text.isEmpty ||
         passwordController.text.isEmpty) {
+      if (usernameController.text.isEmpty) usernameError.value = "Nama Pengguna harus diisi";
+      if (emailController.text.isEmpty) emailError.value = "Email harus diisi";
+      if (passwordController.text.isEmpty)passwordError.value = "Kata sandi harus diisi";
       return;
     }
 
