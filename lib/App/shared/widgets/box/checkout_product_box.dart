@@ -78,8 +78,6 @@ class CheckoutProductBox extends StatelessWidget {
                     ),
                   ),
 
-                // Tombol "Ubah Catatan"
-                // Menggunakan GestureDetector untuk custom button style
                 GestureDetector(
                   onTap: onNotesTap, // Terhubung ke callback
                   child: Container(

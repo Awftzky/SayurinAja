@@ -1,7 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
-  static const String _keyUsername = 'username';
   static const String _keyTutorialCompleted = 'tutorial_completed';
 
   static final LocalStorage _instance = LocalStorage._internal();

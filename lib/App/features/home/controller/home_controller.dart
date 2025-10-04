@@ -73,17 +73,15 @@ class HomeController extends GetxController {
   }
 
   // ========== DATA LOADING ==========
-  Future<void> _loadInitialData() async {
-    await Future.wait([
-      _loadUsername(),
-    ]);
+  void _loadInitialData() {
+    _loadUsername();
   }
 
-  Future<void> _loadUsername() async {
+  void _loadUsername() {
     try {
       isLoadingUsername.value = true;
-      final storedUsername = await _localStorage.getUsername();
-      username.value = storedUsername ?? "Pengguna";
+      final storedUsername = _localStorage.getUsername();
+      username.value = storedUsername;
     } catch (e) {
       debugPrint('Error loading username: $e');
       username.value = "Pengguna";
@@ -147,7 +145,11 @@ class HomeController extends GetxController {
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(milliseconds: 500), () {
+      Future.delayed(const Duration(milliseconds: 100), () {
+        if (!context.mounted) {
+          debugPrint('⚠️ Context no longer mounted, skipping tutorial');
+          return;
+        }
         if (_areKeysValid()) {
           _setupTutorialTargets();
 
@@ -295,8 +297,6 @@ class HomeController extends GetxController {
   }
 
   Future<void> refreshData() async {
-    await Future.wait([
-      _loadUsername(),
-    ]);
+    _loadUsername();
   }
 }

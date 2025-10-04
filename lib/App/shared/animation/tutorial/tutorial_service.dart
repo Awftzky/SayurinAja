@@ -209,9 +209,7 @@ class TutorialService {
             colorShadow: AppColors.transparent,
             paddingFocus: 8,
             opacityShadow: 0.8,
-            onClickTarget: (target) {
-              _scrollToTarget(target.keyTarget);
-            },
+            onClickTarget: (target) {},
             onFinish: () {
               showOutro(context);
               _clearCallbacks();
@@ -227,20 +225,6 @@ class TutorialService {
             hideSkip: true,
             unFocusAnimationDuration: Duration.zero)
         .show(context: context);
-  }
-
-  void _scrollToTarget(GlobalKey? targetKey) {
-    if (targetKey?.currentContext == null) return;
-
-    try {
-      Scrollable.ensureVisible(
-        targetKey!.currentContext!,
-        duration: Duration.zero,
-        alignment: 0.3,
-      );
-    } catch (e) {
-      debugPrint('⚠️ Error scrolling: $e');
-    }
   }
 
   void clearTargets() {

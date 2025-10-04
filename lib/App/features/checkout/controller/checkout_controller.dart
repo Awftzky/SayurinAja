@@ -20,6 +20,7 @@ class CheckoutController extends GetxController {
   final RxString storeLocation = "Bandung, Jawa Barat".obs;
   final RxString deliveryNotes = "".obs;
   final RxString productNotes = "".obs;
+  final RxInt editingProductIndex = (-1).obs;
   final RxString selectedDeliveryOption = "Express".obs;
   final RxString selectedPaymentMethod = "QRIS".obs;
   final RxString pickupButtonText = "Pesan dan ambil pesananan kamu".obs;
