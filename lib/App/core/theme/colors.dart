@@ -12,6 +12,8 @@ class AppColors {
   // Green App Colors
   static const Color primary = Color(0xFF3EA35D);
   static const Color primary20 = Color(0x333EA35D); // 20% opacity
+  static const Color primaryTransparent = Color(0x003EA35D); // 0% Opacity
+
   static const Color secondary = Color(0xFFE8FCCF);
 
   // Gradient Colors
@@ -20,6 +22,8 @@ class AppColors {
 
   // Status Colors
   static const Color success = Color(0xFF4CAF50); // Green
+  static const Color successTransparent =
+      Color(0x004CAF50); // Success 0% opacity
   static const Color error = Color(0xFFF44336); // Red
 
   // Transparent

@@ -46,9 +46,15 @@
     <key>UIApplicationSupportsIndirectInputEvents</key>
     <true/>
 
-    <!-- Tambahan untuk izin lokasi -->
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>This app needs access to location when open.</string>
+
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>This app needs access to local network to discover and connect to nearby devices.</string>
+    
+    <key>NSBonjourServices</key>
+    <array>
+    </array>
 
 </dict>
 </plist>
