@@ -14,7 +14,6 @@ class NavigationBarSection extends StatelessWidget {
 
     final double navBarHeight = 50.h;
     const Color navBarBackgroundColor = AppColors.white;
-    const Color spotlightColor = Color(0xFF4CAF50);
     final Color selectedIconColor = AppColors.primary;
     final Color selectedLabelColor = AppColors.darkGray;
     final Color unselectedItemColor = AppColors.darkGray;
@@ -84,8 +83,8 @@ class NavigationBarSection extends StatelessWidget {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              AppColors.primary.withOpacity(0.20),
-                              AppColors.primary.withOpacity(0.0),
+                              AppColors.primary20,
+                              AppColors.primaryTransparent,
                             ],
                           ),
                         ),
@@ -108,7 +107,7 @@ class NavigationBarSection extends StatelessWidget {
                           colors: [
                             AppColors.primary,
                             AppColors.primary,
-                            spotlightColor.withOpacity(0.0)
+                            AppColors.primaryTransparent
                           ],
                           stops: const [0.0, 0.3, 1.0],
                         ),
